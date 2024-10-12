@@ -1,0 +1,55 @@
+\section{Relations}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A \textbf{relation} on a set $X$ is a property of an ordered pair of elements of $X$ which can be true or false.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: $<$ is a relation on the set of natural numbers: if $a$ and $b$ are natural numbers then $a < b$ is either true or false.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Properties of relations}: Let $\sim$ be a relation on a set $X$. \\
+
+    \begin{itemize}
+        \item $\sim$ is called \textbf{symmetric} if for any $x, y \in X$ if $x \sim y$ then $y \sim x$. \\
+
+        \item $\sim$ is called \textbf{reflexive} if for any $x \in X$ we have $x \sim x$. \\
+
+        \item $\sim$ is called \textbf{transitive} if for any $x, y, z \in X$ if $x \sim y$ and $y \sim z$ then $x \sim z$. \\
+
+        \item $\sim$ is called an \textbf{equivalence relation} if it is reflexive, symmetric and transitive.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $\sim$ be an equivalence relation on a set $X$, and let $x \in X$. The \textbf{equivalence class} of $x$, written $[x]$ or $[x]_\sim$, is
+
+    $$[x] = \{ y \in X | y \sim x \}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $\sim$ be an equivalence relation on a set $X$. Then \\
+
+    \begin{itemize}
+        \item Every $x \in X$ belongs to some equivalence class. \\
+
+        \item If two equivalence classes classes are not disjoint, then they are equal.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}

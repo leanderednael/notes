@@ -1,0 +1,42 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[margin=0.75cm]{geometry}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[backend=biber]{biblatex}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{paracol}
+\usepackage{parskip}
+\usepackage{tikz}
+\usepackage{titlesec}
+\usepackage{verbatim}
+\usepackage{xcolor}
+
+\titleformat{\section}[block]{\Large\bfseries\filcenter\color{red}}{\thesection}{1em}{}[\hrule]
+\titleformat{\subsection}[block]{\bfseries\filcenter\color{red}}{\thesubsection}{1em}{}[\hrule]
+
+\setlength{\columnsep}{25pt}
+
+\tikzset{
+    rounded-box/.style = {draw=red, fill=white, thin, rectangle, rounded corners, inner sep=5pt, inner ysep=10pt},
+    rounded-box-title/.style = {fill=red, text=white, font=\bfseries},
+}
+
+\addbibresource{references.bib}
+
+\begin{document}
+\title{Algebra}
+
+\input{section-1-relations}
+\input{section-2-functions} \newpage
+\input{section-3-permutations} \newpage
+\input{section-4-groups} \newpage
+\input{section-5-categories} \newpage
+
+\nocite{*}
+\printbibliography
+
+\end{document}
