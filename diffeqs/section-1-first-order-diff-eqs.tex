@@ -1,0 +1,225 @@
+\section{First-Order Differential Equations}
+
+\subsection{Numerical Methods}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A first-order differential equation $dy/dx = f(x, y)$ with initial conditions $y(x_0) = y_0$ provides the slope $f(x_0, y_0)$ of the tangent line to the solution curve $y = y(x)$ at the point $(x_0, y_0)$. \\
+
+    With a small step size $\triangle x = x_1 - x_0$, the initial condition $(x_0, y_0)$ can be marched forward to $(x_1, y_1)$ along the tangent line using Euler's method:
+
+    $$y_1 = y_0 + \triangle x f(x_0, y_0)$$
+
+    This solution $(x_1, y_1)$ then becomes the initial cndition and is marched forward to $(x_2, y_2)$ along a newly determined tangent line with slope given by $f(x_1, y_1)$. \\
+
+    For small enough $\triangle x$, the numerical solution converges to the unique solution, when such a solution exists.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Euler Method};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The Euler method for solving $dy/dx = f(x, y)$ can be rewritten as a first-order Runge-Kutta method
+
+    $$k_1 = \triangle x f(x_n, y_n), \qquad y_{n+1} = y_n + k_1$$
+
+    or a (more accurate) second-order Runge-Kutta method
+
+    $$k_1 = \triangle x f(x_n, y_n)$$
+    
+    $$k_2 = \triangle x f(x_n + \alpha \triangle x, y_n + \beta k_1)$$
+    
+    $$y_{n+1} = y_n + a k_1 + b k_2$$
+
+    with constraints
+
+    \vspace{-2.5pt}
+
+    $$a + b = 1, \qquad \alpha b = \beta b = \frac{1}{2}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Runge-Kutta Method};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Separable First-Order Equations}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    A first-order differential equation is separable if it can be written as a \textbf{separated equation}
+
+    \vspace{-5pt}
+
+    $$g(y) \, dy = f(x) \, dx, \qquad y(x_0) = y_0$$
+
+    where $g(y)$ is independent of $x$ and $f(x)$ is independent of $y$, and which can therefore be integrated over $y$ and $x$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: $y' + y^2 \sin(x) = 0, \quad y(0) = 1$.
+
+\vspace{-15pt}
+
+$$
+\frac{dy}{dx} = -y^2 \sin(x)  \Rightarrow  \frac{dy}{y^2} = - \sin(x) \, dx
+ \Rightarrow  \int_1^y \frac{dy}{y^2} = - \int_0^x \sin(x) \, dx
+ \Rightarrow  - \frac{1}{y} \Big|_1^y = \cos(x) \Big|_0^x
+ \Rightarrow  1 - \frac{1}{y} = \cos(x) - 1
+ \Rightarrow  y = \frac{1}{2 - \cos(x)}
+$$
+
+\subsection{Linear First-Order Equations}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    A linear first-order differential equation with initial condition can be written in standard form as
+
+    $$\frac{dy}{dx} + p(x) y = g(x), \qquad y(x_0) = y_0$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+All such linear first-order equations can be integrated using an integrating factor $\mu$:
+
+\begin{enumerate}
+    \item Multiply both sides by the yet unknown function $\mu = \mu(x)$ so that $\mu(x) \Big( \frac{dy}{dx} + p(x) y \Big) = \mu(x) g(x)$
+
+    \item Require $\mu(x)$ to satisfy the differential equation $\mu(x) \Big( \frac{dy}{dx} + p(x) y \Big) = \frac{d}{dx}(\mu(x) y)$
+
+    \item Thus, $\frac{d}{dx}(\mu(x) y) = \mu(x) g(x)$. Using $y(x_0) = y_0$ and choosing $\mu(x_0) = 1$,
+
+    \vspace{-10pt}
+
+    $$\int_{x_0}^x \frac{d}{dx}(\mu(x) y) \, dx = \int_{x_0}^x \mu(x) g(x) \, dx \quad \Rightarrow \quad \mu(x) y - y_0 = \int_{x_0}^x \mu(x) g(x) \, dx \quad \Rightarrow \quad y(x) = \frac{1}{\mu(x)} \Big( y_0 + \int_{x_0}^x \mu(x) g(x) \, dx \Big)$$
+
+    \item By the product rule, $\mu \frac{dy}{dx} + \mu p y = \frac{d\mu}{dx} y + \mu \frac{dy}{dx}$, which gives the separable differential equation
+
+    $$\frac{d\mu}{dx} = p(x) \mu, \qquad \mu(x_0) = 1 \qquad \text{which can be integrated to obtain} \qquad \mu(x) = e^{\int_{x_0}^x p(x) \, dx}$$
+
+    \item Combining the previous two steps solves the differential equation.
+\end{enumerate}
+
+\textbf{Example}: Consider the inseparable linear equation $\frac{dy}{dx} + 2 y = e^{-x}, \quad y(0) = \frac{3}{4}$. Let $p(x) = 2, g(x) = e^{-x}$. Then
+
+$$\mu(x) = e^{\int_0^x 2 \, dx} = e^{2x}, \qquad y(x) = e^{-2x} \Big( \frac{3}{4} + \int_0^x e^{2x} e^{-x} \, dx \Big) = e^{-2x} \Big( \frac{3}{4} + (e^x - 1) \Big) = e^{-x} \Big( 1 - \frac{1}{4} e^{-x} \Big)$$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    A nonlinear differential equation can be transformed to a linear differential equation by a \textbf{change of variables}.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: Consider the nonlinear differential equation $\frac{dx}{dt} = x (1-x)$.
+
+\begin{paracol}{2}
+
+Let $z = \frac{1}{x}$. Then
+
+$$x = \frac{1}{z}, \qquad \frac{dx}{dt} = \frac{dx}{dz} \frac{dz}{dt} = - \frac{1}{z^2} \frac{dz}{dt}$$
+
+\switchcolumn
+
+Thus,
+
+\vspace{-10pt}
+
+$$
+\frac{dx}{dt} = x (1-x)
+\quad \Rightarrow \quad
+- \frac{1}{z^2} \frac{dz}{dt} = \frac{1}{z} \Big( 1 - \frac{1}{z}\Big)
+\quad \Rightarrow \quad
+\frac{dz}{dt} + z = 1
+$$
+
+\end{paracol}
+
+\subsection{Applications}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Let $S(t)$ be the value of an investment at time $t$, $r$ the annual interest rate compounded every time interval $\triangle t$, $k$ the annual deposit or withdrawal amount, and suppose that a fixed amount is deposited (or withdrawn) after every time interval $\triangle t$. Then
+
+    $$S(t + \triangle t) = S(t) + (r \triangle t) S(t) + k \triangle t$$
+
+    This gives a differential equation:
+
+    $$\lim_{\triangle t \rightarrow 0} \frac{S(t + \triangle t) - S(t)}{\triangle t} = \frac{dS}{dt} = r S(t) + k$$
+
+    with initial condition $S(0) = S_0$, i.e. the initial capital; and which can be written in standard form $dS/dt - rS = k$, so that the integrating factor is given by
+
+    $$\mu(t) = e^{-rt}$$
+
+    This gives the solution, and shows that compounding results in the exponential growth of an investment:
+
+    $$S(t) = e^{rt} \Big( S_0 + \int_0^t k e^{-rt} \, dt \Big)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Compound Interest};
+\end{tikzpicture}
+
+\subsection{Modelling with Differential Equations}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \begin{enumerate}
+        \item Problem definition
+        \item Model definition, e.g. $dy / dt = f(t, y)$
+        \item Computation, i.e. $y(t) = ...$
+        \item Verification, i.e. as $t \rightarrow \infty$
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Modelling Cycle};
+\end{tikzpicture}
+
+\textbf{Example}: You want to breed rainbowfish to sell to pet stores. You start with a nice big aquarium and 30 fish, half of them male, half of them female. You want to predict the number of fish after a number of days, to see how many you can sell.
+
+In this particular case, we have the balance equation:
+
+$$\triangle P = P(t + \triangle t) - P(t) = 0.7 P(t) \triangle t$$
+
+Which results in the differential equation for the problem:
+
+$$\frac{dP}{dt} = \lim_{\triangle t \rightarrow 0} \frac{\triangle P}{\triangle t} = = 0.7 P(t), \quad P(0) = 30$$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A differential equation is an equation involving a derivative:
+
+    $$\frac{df}{dx} = \lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h} = \lim_{\triangle x \rightarrow 0} \frac{\triangle f}{\triangle x}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+If you use only words to describe the differential equation you would say: "The derivative of the function equals a multiple of the function." So the solution to the differential equation should be a function with this property.
+
+\textbf{Example} continued: Let $P(t) = c e^{kt}$.
+
+Given the differential equation and its initial condition, $k = 0.7$, and $c = 30$. Thus, the solution is $P(t) = 30 e^{0.7 t}$. (This simplified model only considers a birth rate $b = 0.7$ but not a death rate $d$.)
+
+\textbf{Example} continued: A more realistic model is given by a model with \textbf{bounded growth}:
+
+$$\frac{dP}{dt} = 0.7 P \Big(1 - \frac{P}{750} \Big) - 20, P(0) = 30$$
+
+The differential equation for the rainbowfish that we have now, could still be solved by hand. It would give you the analytical solution, which is exact. In practice, for a more complicated model, you would probably use a numerical method like Euler's Method to approximate the solution.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    For the general differential equation $\frac{dy}{dt} = f(t, y)$, the $n^\text{th}$ step of Euler's method is given by
+
+    $$y\big((n+1) \triangle t\big) = y(n \triangle t) + \triangle t f\big(t, y(n \triangle t)\big)$$
+
+    in which $\triangle t$ is some step you have to choose.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}

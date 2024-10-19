@@ -1,0 +1,95 @@
+\section{Inhomogeneous Linear Differential Equations}
+
+We now add an inhomogeneous term to the second-order ode with constant coefficients. The in-homogeneous term may be an exponential, a sine or cosine, or a polynomial. A general solution will be the sum of a homogeneous and particular solution.
+
+\subsection{Theory}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Consider an inhomogeneous linear second-order differential equation
+
+    $$\ddot{x} + p(t) \dot{x} + q(t) x = g(t), \, g(t) \neq 0, \text{ with initial conditions } x(t_0) = x_0, \dot{x}(t_0) = u_0$$
+
+    There is a three-step solution method:
+
+    \begin{enumerate}
+        \item Solve the homogeneous equation $\ddot{x} + p(t) \dot{x} + q(t) x = 0$ for two independent solutions $x = x_1(t), x = x_2(t)$ and form a linear superposition to obtain a \textit{homogeneous solution}
+
+        $$x_h(t) = c_1 x_1(t) + c_2 x_2(t)$$
+
+        \item Find a \textit{particular solution} $x = x_p(t)$ that solves the inhomogeneous equation.
+
+        \item Write the \textit{general solution} of the inhomogeneous equation as the sum of the homogeneous and particular solutions, $x(t) = x_h(t) + x_p(t)$, and apply the initial conditions to determine  $c_1, c_2$.
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+Note: The two free constants in $x_h$ can be used to satisfy the two initial conditions because the sum of the homogeneous and particular soltuions solve the ODE, by linearity:
+
+\begin{align*}
+    \ddot{x} + p \dot{x} + q x & = \frac{d^2}{dt^2}(x_h + x_p) + p \frac{d}{dt}(x_h + x_p) + q (x_h + x_p) \\
+    & = (\ddot{x}_h + p \dot{x}_h + q x_h) + (\ddot{x}_p + p \dot{x}_p + q x_p) \\
+    & = 0 + g = g
+\end{align*}
+
+\subsection{Particular Solutions for Exponential, Sine / Cosine and Polynomial Inhomogeneous Terms}
+
+\begin{paracol}{2}
+
+\textbf{Example}: $\ddot{x} - 3 \dot{x} - 4 x = 3 e^{2t}, x(0) = 1, \dot{x}(0) = 0$
+
+\begin{enumerate}
+    \item The characteristic equation of the homogeneous equation is $r^2 - 3r - 4 = (r-4) (r+1) = 0$ so that $x_h(t) = c_1 e^{4t} + c_2 e^{-t}$.
+    
+    \item For the inhomogeneous solution, an Ansatz such that the exponential function cancels, $x(t) = A e^{2t}$, where $A$ is an undetermined coefficient, gives $4A - 6A - 4A = 3$ and consequently $A = -1/2$. Obtaining a solution for $A$ independent of $t$ justifies the Ansatz.
+    
+    \item Plugging the initial conditions in $x(t) = x_h(t) + x_p(t) = c_1 e^{4t}+ c_2 e^{-t} - \frac{1}{2} e^{2t}, \quad \dot{x}(t) = \dot{x}_h(t) + \dot{x}_p(t) = 4 c_1 e^{4t} - c_2 e^{-t} - e^{2t}$ gives $c_1 + c_2 = 3/2, \quad 4 c_1 - c_2 = 1$ with solution $c_1 = 1/2, c_2 = 1$.
+\end{enumerate}
+
+The solution is
+
+$$x(t) = \frac{1}{2} e^{4t} - \frac{1}{2} e^{2t} - e^{-t} = \frac{1}{2} e^{4t} \big( 1 - e^{-2t} + 2 e^{-5t} \big)$$
+
+\textbf{Example}: $\ddot{x} + \dot{x} - 2x = t^2$
+
+The Ansatz should be a polynomial in $t$ of the same order as the inhomogeneous term, i.e. $x(t) = At^2 + Bt + C$.
+
+This gives $2A + (2At + B) - 2(At^2 + Bt + C) = t^2$, or $-2At^2 + 2(A - B)t + (2A + B - 2C)t^0 = t^2$.
+
+Equating powers of $t$, $-2A = 1, \quad 2(A-B) = 0, \quad 2A + B - 2C = 0$, gives $A = -\frac{1}{2}, \quad B = -\frac{1}{2}, C = -\frac{3}{4}$.
+
+The particular solution is
+
+$$x_p(t) = - \frac{1}{2}t^2 - \frac{1}{2}t - \frac{3}{4}$$
+
+\switchcolumn
+
+\textbf{Example}: $\ddot{x} - 3 \dot{x} - 4x = 2 \sin(t)$
+
+\textbf{Approach 1}: Ansatz $x(t) = A \cos(t) + B \sin(t)$
+
+The cosine term is required because it is the derivative of sine.
+
+Substituting in the differential equation gives $(- A \cos(t)) - 3(-A \sin(t) + B \cos(t)) - 4(A \cos(t) + B \sin(t)) = 2 \sin(t)$.
+
+Regrouping terms gives $-(5A + 3B) \cos(t) + (3A - 5B) \sin(t) = 2 \sin(t)$.
+
+This equation is valid for all $t$, and in particular for $t = 0, t = \pi / 2$ for which the sine and cosine functions vanish. For these two values of $t$, $5A + 3B = 0, \quad 3A - 5B = 2$, which gives $A = 3/17, B = -5/17$.
+
+The particular solution is
+
+$$x_p = \frac{1}{17} (3 \cos(t) - 5 \sin(t))$$
+
+\textbf{Approach 2}: Converting the sine inhomogeneous term to an exponential term, given the relation $e^{it} = \cos(t) + i \sin(t)$.
+
+That is, sine is the imaginary part of complex function $z = z(t)$: $\sin(t) = \text{Im}\{e^{it}\}$. Therefore, $\ddot{z} - 3 \dot{z} - 4 z = 2 e^{it}$, where $x = \text{Im}\{z\}$ satisfies the original differential equation for $x$.
+
+Substituting the Ansatz $z(t) = C e^{it}$, where $C$ is a complex constant, and using the fact that $i^2 = -1$, gives $-C -3iC - 4C = 2$ with solution $C = \frac{-2}{5+3i} = \frac{-5+3i}{17}$.
+
+\begin{align*}
+    x_p = \text{Im}\{z_p\} & = \text{Im}\Big\{ \frac{1}{17} (-5 + 3i) (\cos(t) + i \sin(t)) \Big\} \\
+    & = \frac{1}{17} (3 \cos(t) - 5 \sin(t))
+\end{align*}
+
+\end{paracol}

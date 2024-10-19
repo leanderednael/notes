@@ -1,0 +1,190 @@
+\section{Homogeneous Linear Differential Equations}
+
+\subsection{Numerical Methods}
+
+Most higher-order ODEs are usually solved numerically.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    In physics, \textbf{Newton's dot notation} is used to represent time derivatives, and can be applied to any dependent variable that is a function of time:
+
+    \vspace{-5pt}
+
+    $$x = f(t), \qquad \dot{x} = f(t, x), \qquad \ddot{x} = f(t, x, \dot{x})$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Consider a general second-order ODE given by $\ddot{x} = f(t, x, \dot{x})$. To solve numerically: \\
+
+    1. convert the second-order ODE to a pair of first-order ODEs, by defining $u = \dot{x}$. Then
+
+    \begin{enumerate}
+        \item $\dot{x} = u$ gives the slope of the tangent line to the curve $x = x(t)$.
+
+        \item $\dot{u} = f(t, x, u)$ gives the slope of the tangent line to the curve $u = u(t) = \dot{x}(t)$. \\
+    \end{enumerate}
+
+    2. Beginning at the initial values $(x, u) = (x_0, u_0)$ at time $t = t_0$, move along the tangent lines to determine
+
+    \begin{enumerate}
+        \item $x_1 = x_0 + \triangle t u_0$
+
+        \item $u_1 = u_0 + \triangle t f(t_0, x_0, u_0)$ \\
+    \end{enumerate}
+
+    3. The values $x_1, u_1$ at time $t_1 = t_0 + \triangle t$ are then used as new initial values to march the solution forward to time $t_2 = t_1 + \triangle t$. \\
+
+    When a unique solution of the ODE exists, the numerical solution converges to this unique solution as $\triangle t \rightarrow 0$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Euler Method for Higher-Order ODEs};
+\end{tikzpicture}
+
+\subsection{Theory}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Consider a homogeneous linear second-order ODE
+
+    $$\ddot{x} + p(t) \dot{x} + q(t) x = 0$$
+
+    with solutions $x = x_1(t), x = x_2(t)$. \\
+    
+    Any linear combination of the solutions to the homogeneous linear second-order ODE is also a solution.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Principle of Superposition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\vspace{10pt}
+
+\textbf{Proof}:
+
+\vspace{-15pt}
+
+\begin{align*}
+    \ddot{x} + & p(t) \dot{x} + q(t) x \\
+    & = c_1 \ddot{x}_1 + c_2 \ddot{x}_2 + p(c_1 \dot{x}_1 + c_2 \dot{x}_2) + q(c_1 x_1 + c_2 x_2) \\
+    & = c_1 (\ddot{x}_1 + p \dot{x}_1 + q x_1) + c_2 (\ddot{x}_2 + p \dot{x}_2 + q x_2) \\
+    & = c_1 \times 0 + c_2 \times 0, \text{ since } x_1, x_2 \text{ are solutions} \\
+    & = 0
+\end{align*}
+
+\end{paracol}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Consider a homogeneous linear second-order ODE $\ddot{x} + p(t) \dot{x} + q(t) x = 0$ with general solution $x = c_1 x_1(t) + c_2 x_2(t)$ for solutions $x = x_1(t), \, x = x_2(t)$, and initial conditions $x(t_0) = x_0, \, \dot{x}(t_0) = u_0$ so that
+
+    $$c_1 x_1(t_0) + c_2 x_2(t_0) = x_0, \qquad c_1 \dot{x}_1(t_0) + c_2 \dot{x}_2(t_0) = u_0$$
+
+    There exists a unique solution if the determinant of the resulting linear system, called the \textbf{Wronskian}, is non-zero:
+
+    $$W = \begin{vmatrix}
+        x_1(t_0) & x_2(t_0) \\
+        \dot{x}_1(t_0) & \dot{x}_2(t_0)
+    \end{vmatrix} = x_1(t_0) \dot{x}_2(t_0) - \dot{x}_1(t_0) x_2(t_0) \neq 0$$
+
+    If so, the solutions $x_1(t), \, x_2(t)$ are said to be \textbf{linearly independent}. (They span a two-dimensional vector space.)
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Example}: Given a homogeneous linear second-order ODE with solutions $x_1(t) = \cos(\omega t), \, x_2(t) = \sin(\omega t), \, \omega \neq 0$, the Wronskian $W = (\cos \omega t) (\omega \cos \omega t) - (- \omega \sin \omega t) (\sin \omega t) = \omega \neq 0$ for all $t$.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Consider a homogeneous linear second-order ODE with constant coefficients
+
+    $$a \ddot{x} + b \dot{x} + c x = 0$$
+
+    Because of the differential properties of the exponential function, a natural \textbf{ansatz}, or educated guess, for the form of the solution is $x = e^{rt}, \, \dot{x} = r e^{rt}, \, \ddot{x} = r^2 e^{rt}$, where $r$ is a constant to be determined, and which gives the \textbf{characteristic equation} of the ODE:
+
+    \vspace{-5pt}
+
+    $$a r^2 e^{rt} + b r e^{rt} + c e^{rt} = 0 \qquad \Rightarrow \qquad a r^2 + b r + c = 0, \qquad r = \frac{-b \pm \sqrt{b^2 - 4 a c}}{2a}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    When the roots of the characteristic equation are distinct and real, then the general solution to the second-order ODE can be written as a linear superposition of the two solutions $e^{r_1 t}, e^{r_2 t}$:
+    
+    $$x(t) = c_1 e^{r_1 t} + c_2 e^{r_2 t}$$
+    
+    The unknown constants $c_1, c_2$ can then be determined by the given initial conditions $x(t_0) = x_0, \dot{x}(t_0) = u_0$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Case 1: Distinct Real Roots - $b^2 - 4 a c > 0$};
+\end{tikzpicture}
+
+\textbf{Example}: $\ddot{x} + 5 \dot{x} + 6 x = 0, \, x(0) = 2, \, \dot{x}(0) = 3$
+
+Ansatz $x = e^{rt}$ gives characteristic equation $r^2 + 5r + 6 = 0$ which factors to $(r+3)(r+2) = 0$.
+
+The general solution to the ODE is therefore $x(t) = c_1 e^{-2t} + c_2 e^{-3t}$, and by differentiation $\dot{x}(t) = - 2 c_1 c^{-2t} - 3 c_2 e^{3t}$.
+
+Plugging in the initial conditions gives $c_1 + c_2 = 2, \, -2 c_1 - 3 c_2 = 3$ with solution $c_1 = 9, \, c_2 = -7$.
+
+Therefore, the unique solution that satisfies the ODE and its initial conditions is
+
+$$x(t) = 9 e^{-2t} - 7 e^{-3t} = 9 e^{-2t} \Big( 1 - \frac{7}{9} e^{-t} \Big)$$
+
+\vspace{10pt}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    When the roots of the characteristic equation are complex conjugates, there are real numbers $\lambda, \mu$ s.t.
+    
+    $$r = \lambda + i \mu, \quad \bar{r} = \lambda - i \mu, \text{ or equivalently, } z(t) = e^{\lambda t} e^{i \mu t}, \quad \bar{z}(t) = e^{\lambda t} e^{-i \mu t}$$
+    
+    By the principle of linear superposition, any linear combination of $z, \bar{z}$ is also a solution, i.e.
+    
+    $$x_1(t) = \text{Re}(z) = e^{\lambda t} \cos(\mu t), \quad x_2(t) = \text{Im}(z) = e^{\lambda t} \sin(\mu t), \qquad x(t) = e^{\lambda t} (a \cos(\mu t) + b \sin(\mu t))$$
+    
+    The real part of the roots of the characteristic equation appears in the exponential term, the imaginary part appears in the cosine and sine.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Case 2: Complex-Conjugate Roots - $b^2 - 4 a c < 0$};
+\end{tikzpicture}
+
+\textbf{Example}: $\ddot{x} + \dot{x} + x = 0, \, x(0) = 1, \, \dot{x}(0) = 0$ with characteristic equation $r^2 + r + 1 = 0$ and roots $r = - \frac{1}{2} \pm i \frac{\sqrt{3}}{2}$
+
+The general solution to the ODE is therefore $x(t) = e^{-t/2} \Bigg( a \cos\Big(\frac{\sqrt{3}}{2}t\Big) + b \sin\Big(\frac{\sqrt{3}}{2}t\Big) \Bigg)$.
+
+The derivative is $\dot{x}(t) = -\frac{1}{2} e^{-t/2} \Bigg( a \cos\Big(\frac{\sqrt{3}}{2}t\Big) + b \sin\Big(\frac{\sqrt{3}}{2}t\Big) \Bigg) + \frac{\sqrt{3}}{2} e^{-t/2} \Bigg( -a \sin\Big(\frac{\sqrt{3}}{2}t\Big) + b \cos\Big(\frac{\sqrt{3}}{2}t\Big) \Bigg)$.
+
+Plugging in the initial conditions gives $a = 1, \, -\frac{1}{2} a + \frac{\sqrt{3}}{2} b = 0$ with solution $a = 1, \, b = \sqrt{3} / 3$.
+
+Therefore, the unique solution that satisfies the ODE and its initial conditions is
+
+$$x(t) = e^{-t/2} \Bigg( \cos\Big( \frac{\sqrt{3}}{2}t \Big) + \frac{\sqrt{3}}{3} \sin\Big( \frac{\sqrt{3}}{2}t \Big) \Bigg)$$
+
+\vspace{10pt}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    For the case of repeated roots, the second solution is $t$ times the first solution:
+    
+    $$x(t) = (c_1 + c_2 t) e^{rt}$$
+
+    where $r$ is the repeated root.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Case 3: Repeated Roots - $b^2 - 4 a c = 0$};
+\end{tikzpicture}
+
+\textbf{Example}: $\ddot{x} + 2 \dot{x} + x = 0, \, x(0) = 1, \, \dot{x}(0) = 0$
+
+The characteristic equation $r^2 + 2r + 1 = (r + 1)^2 = 0$ has a repeated root $r = 1$.
+
+The general solution to the ODE is therefore $x(t) = (c_1 + c_2 t) e^{-t}, \, \dot{x}(t) = (c_2 - c_1 - c_2 t) e^{-t}$.
+
+Plugging in the initial conditions gives $c_1 = 1, \, c_2 - c_1 = 0$ with solution $c_1 = c_2 = 1$.
+
+Therefore, the unique solution that satisfies the ODE and its initial conditions is
+
+$$x(t) = (1 + t) e^{-t}$$

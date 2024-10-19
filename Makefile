@@ -1,7 +1,7 @@
 SHELL     := /usr/bin/env bash
 MAKEFLAGS += --silent
 
-TEX_DOCS  := algebra calculus complex
+TARGETS   := algebra calculus complex diffeqs
 
 all: clean compile clean
 
@@ -19,7 +19,7 @@ install: ## Install dependencies
 
 .PHONY: compile
 compile: ## Compile the LaTeX documents
-	for doc in $(TEX_DOCS); do \
+	for doc in $(TARGETS); do \
 		TEXINPUTS=$$doc:$$TEXINPUTS pdflatex -output-directory=$$doc $$doc/$$doc.tex; \
 		biber $$doc/$$doc; \
 		TEXINPUTS=$$doc:$$TEXINPUTS pdflatex -output-directory=$$doc $$doc/$$doc.tex; \

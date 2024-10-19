@@ -1,0 +1,290 @@
+\section{The Laplace Transform and Series Solution Methods}
+
+\subsection{The Laplace Transform Method}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{Laplace transform} of a function $f(t)$, denoted by $F(s) = \mathcal{L}\{ f(t) \}$, is defined by the integral
+
+    $$F(s) = \mathcal{L}\{ f(t) \} = \int_0^\infty e^{-st} f(t) \, dt$$
+
+    The values of $s$ may be restricted to ensure convergence.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The Laplace transform is a linear transformation.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Proof}:
+
+\begin{align*}
+    & \mathcal{L}\{ c_1 f_1(t) + c_2 f_2(t) \} = \int_0^\infty e^{-st} (c_1 f_1(t) + c_2 f_2(t)) \, dt \\
+    & = c_1 \int_0^\infty e^{-st} f_1(t) \, dt + c_2 \int_0^\infty e^{-st} f_2(t) \, dt \\
+    & = c_1 \mathcal{L}\{ f_1(t) \} + c_2 \mathcal{L}\{ f_2(t) \}
+\end{align*}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    There is a one-to-one correspondence between functions and Laplace transforms.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\begin{paracol}{3}
+
+\begin{center}
+\begin{tabular}{c|c}
+    $f(t) = \mathcal{L}^{-1}\{F(s)\}$ & $F(s) = \mathcal{L}\{f(t)\}$ \\[0.25cm]
+    \hline \\
+    $e^{at} f(t)$ & $F(s-a)$ \\[0.5cm]
+    $1$ & $\frac{1}{s}$ \\[0.5cm]
+    $e^{at}$ & $\frac{1}{s-a}$ \\[0.5cm]
+    $t^n$ & $\frac{n!}{s^{n+1}}$ \\[0.5cm]
+    $t^n e^{at}$ & $\frac{n!}{(s-a)^{n+1}}$
+\end{tabular}
+\end{center}
+
+\switchcolumn
+
+\begin{center}
+\begin{tabular}{c|c}
+    $f(t) = \mathcal{L}^{-1}\{F(s)\}$ & $F(s) = \mathcal{L}\{f(t)\}$ \\[0.25cm]
+    \hline \\
+    $\sin(bt)$ & $\frac{b}{s^2 + b^2}$ \\[0.25cm]
+    $\sinh(bt)$ & $\frac{b}{s^2 - b^2}$ \\[0.25cm]
+    $\cos(bt)$ & $\frac{s}{s^2 + b^2}$ \\[0.25cm]
+    $\cosh(bt)$ & $\frac{s}{s^2 - b^2}$ \\[0.25cm]
+    $e^{at} \sin(bt)$ & $\frac{b}{(s-a)^2 + b^2}$ \\[0.25cm]
+    $e^{at} \cos(bt)$ & $\frac{s-a}{(s-a)^2 + b^2}$ \\[0.25cm]
+    $t \sin(bt)$ & $\frac{2bs}{(s^2 + b^2)^2}$ \\[0.25cm]
+    $t \cos(bt)$ & $\frac{s^2 - b^2}{(s^2 + b^2)^2}$
+\end{tabular}
+\end{center}
+
+\switchcolumn
+
+\begin{center}
+\begin{tabular}{c|c}
+    $f(t) = \mathcal{L}^{-1}\{F(s)\}$ & $F(s) = \mathcal{L}\{f(t)\}$ \\[0.25cm]
+    \hline \\
+    $u_c(t)$ & $\frac{e^{-cs}}{s}$ \\[0.5cm]
+    $u_c(t) f(t-c)$ & $e^{-cs} F(s)$ \\[0.5cm]
+    $\delta(t-c)$ & $e^{-cs}$ \\[0.5cm]
+    $\dot{x}(t)$ & $sX(s) - x(0)$ \\[0.5cm]
+     & $s^2 X(s)$ \\
+    $\ddot{x}(t)$ & $- s x(0)$ \\
+     & $- \dot{x}(0)$
+\end{tabular}
+\end{center}
+
+\end{paracol}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Consider the inhomogeneous constant-coefficient second-order differential equation
+
+    $$a \ddot{x} + b \dot{x} + c x = g(t), \quad x(0) = x_0, \quad \dot{x}(0) = u_0$$
+
+    which by linearity can be Laplace transformed s.t.
+
+    $$a \mathcal{L}\{\ddot{x}\} + b \mathcal{L}\{\dot{x}\} + c \mathcal{L}\{x\} = \mathcal{L}\{g\}$$
+
+    Let $X(s) = \mathcal{L}\{x(t)\}, G(s) = \mathcal{L}\{g(t)\}$. Then, by parts,
+
+    $$\int_0^\infty e^{-st} \dot{x} \, dt = x e^{-st} \Big|_0^\infty + s \int_0^\infty e^{-st} x \, dt = s X(s) - x_0$$
+
+    $$\int_0^\infty e^{-st} \ddot{x} \, dt = \dot{x} e^{-st} \Big|_0^\infty + s \int_0^\infty e^{-st} \dot{x} \, dt = -u_0 + s(s X(s) - x_0) = s^2 X(s) - s x_0 - u_0$$
+
+    The resulting expression for the differential equation
+
+    $$a(s^2 X - s x_0 - u_0) + b(s X - x_0) + c X = G$$
+
+    is of a form that can then be solved by taking the inverse Laplace transform of $X = X(s)$ to obtain $x = x(t)$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Laplace Transform Method for a Constant-Coefficient ODE};
+\end{tikzpicture}
+
+\textbf{Example}: $\ddot{x} + x = \sin{2 t}, x(0) = 2, \dot{x}(0) = 1$
+
+Taking the Laplace transform of both sides, $s^2 X(s) - 2 s - 1 + X(s) = \frac{2}{s^2 + 4}$. Thus, $X(s) = \frac{2 s + 1}{s^2 + 1} + \frac{2}{(s^2 + 1) (s^2 + 4)}$.
+
+To determine the inverse Laplace transform from the table, perform a partial fraction expansion of: $\frac{2}{(s^2 + 1) (s^2 + 4)} = \frac{a s + b}{s^2 + 1} + \frac{c s + d}{s^2 + 4}$.
+
+Therefore, $a = c = 0, b = 2 / 3, d = - b$, and $X(s) = \frac{2 s + 1}{s^2 + 1} + \frac{2 / 3}{x^2 + 1} - \frac{2 / 3}{s^2 + 4} = \frac{2 s}{s^2 + 1} + \frac{5 / 3}{s^2 + 1} - \frac{2 / 3}{s^2 + 4}$.
+
+Taking the inverse Laplace transforms of the three terms separately, where the values in the table are $b = 1$ in the first two terms, and $b = 2$ in the third term:
+
+\vspace{-10pt}
+
+$$x(t) = 2 \cos{t} + \frac{5}{3} \sin{t} - \frac{1}{3} \sin{2 t}$$
+
+\subsection{The Heaviside Step Function and Dirac Delta Function}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The Heaviside or unit step function, denoted here by $u_c(t)$, is zero for $t < c$ and one for $t \geq c$:
+
+    $$u_c(t) = \begin{cases}
+        0, & t < c \\
+        1, & t \geq c
+    \end{cases}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The Laplace transform of the Heaviside function is determined by integration:
+
+    $$\mathcal{L}\{ u_c(t) \} = \int_0^\infty e^{-st} u_c(t) \, dt = \frac{e^{-cs}}{s}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The Heaviside function be used to represent a translation of a function $f(t)$ a distance $c$ in the positive $t$ direction:
+
+    $$u_c(t) f(t - c) = \begin{cases}
+        0, & t < c \\
+        f(t - c), & t \geq c
+    \end{cases}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The Laplace transform is
+
+    $$\mathcal{L}\{ u_c(t) f(t - c) \} = \int_0^\infty e^{-st} u_c(t) f(t - c) \, dt = e^{-cs} F(s)$$
+
+    That is, the translation of $f(t)$ a distance $c$ in the positive $t$ direction corresponds to the multiplication of $F(s)$ by the exponential $e^{-cs}$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Piecewise-defined inhomogeneous terms can be modelled using Heaviside functions.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Example}: Consider the general case of a piecewise function defined on two intervals:
+
+$$f(t) = \begin{cases}
+    f_1(t), & \text{if } t < c \\
+    f_2(t), & \text{if } t \geq c
+\end{cases}$$
+
+Using the Heaviside function $u_c$, the function $f(t)$ can be written in a single line as
+
+$$f(t) = f_1(t) + \big( f_2(t) - f_1(t) \big) u_c(t)$$
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The Dirac delta function, denoted as $\delta(t)$, is zero everywhere except at $t = 0$, at which it is infinite in such a way that the integral is one; s.t. for any function $f(t)$,
+
+    $$\int_{-\infty}^\infty f(t) \delta(t) \, dt = f(0)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The shifted Dirac delta function can be written as a limit:
+
+    $$\delta(t - c) = \lim_{\epsilon \rightarrow 0} \frac{1}{2 \epsilon} \big(u_{c - \epsilon}(t) - u_{c+\epsilon}(t)\big)$$
+
+    The integral of this function is one, independent of the value of $\epsilon$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    The Laplace transform of the Dirac delta function is found by integration using the definition of the delta function. With $c > 0$,
+
+    $$\mathcal{L}\{ \delta(t - c) \} = \int_0^\infty e^{-st} \delta(t - c) \, dt = e^{-cs}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Example}: Solution of a discontinuous inhomogeneous term: $\ddot{x} + 3 \dot{x} + 2 x = 1 - u_1(t), x(0) = \dot{x}(0) = 0$
+
+The inhomogeneous term is a step-down function, from one to zero.
+
+Taking the Laplace transform, $s^2 X(s) + 3 s X(s) + 2 X(s) = \frac{1}{s} (1 - e^{-s})$ with solution for $X = X(s)$ given by $X(s) = \frac{1 - e^{-s}}{s(s+1)(s+2)}$.
+
+Defining $F(s) = \frac{1}{s(s+1)(s+2)}$, the inverse Laplace transform of $X(s)$ can be written as $x(t) = f(t) - u_1(t) f(t - 1)$, where $f(t)$ is the inverse Laplace transform of $F(s)$.
+
+To determine $f(t)$, the partial fraction expansion of $F(s)$ is $\frac{1}{s(s+1)(s+2)} = \frac{a}{s} + \frac{b}{s+1} + \frac{c}{s+2}$ with $a = 1 / 2, b = -1, c -= 1 / 2$.
+
+$$\mathcal{L}^{-1}\{ F(s) \} = \frac{1}{2} \mathcal{L}^{-1} \Big\{ \frac{1}{s} \Big\} - \mathcal{L}^{-1} \Big\{ \frac{1}{s+1} \Big\} + \frac{1}{2} \mathcal{L}^{-1} \Big\{ \frac{1}{s+2} \Big\} = \frac{1}{2} - e^{-t} + \frac{1}{2} e^{-2t}$$
+
+$$x(t) = \frac{1}{2} - e^{-t} + \frac{1}{2} e^{-2t} - u_1(t) \Big( \frac{1}{2} - e^{-(t-1)} + \frac{1}{2} e^{-2(t-1)} \Big)$$
+
+\subsection{The Series Solution Method}
+
+\textbf{Example}: $y'' + y = 0$
+
+$$
+y(x) = \sum_{n=0}^\infty a_n x^n
+\qquad
+y'(x) = \sum_{n=1}^\infty n a_n x^{n-1}
+\qquad
+y''(x) = \sum_{n=2}^\infty n (n-1) a_n x^{n-2}
+$$
+
+$$\sum_{n=2}^\infty n (n-1) a_n x^{n-2} + \sum_{n=1}^\infty n a_n x^{n-1} = 0$$
+
+$$\sum_{n=0}^\infty (n+2)(n+1) a_{n+2} x^n + \sum_{n=1}^\infty n a_n x^{n-1} = 0$$
+
+$$\sum_{n=0}^\infty \big( (n+2) (n+1) a_{n+2} + a_n \big) x^n = 0$$
+
+For the equality to hold, the coefficient of each power of $x$ must vanish separately. Therefore,
+
+$$a_{n+2} = - \frac{a_n}{(n+2)(n+1)}, n = 0, 1, 2, \dots$$
+
+Even and odd coefficients decouple. Thus, there are two independent sequences:
+
+$$a_0, \quad a_2 = - \frac{1}{2}a_0, \quad a_4 = - \frac{1}{d \cdot 3} a_2 = \frac{1}{4!} a_0, \quad \dots$$
+
+$$a_1, \quad a_3 = - \frac{1}{3 \cdot 2} a_1, \quad a_5 = - \frac{1}{5 \cdot 4} a_3 = \frac{1}{5!} a_1, \quad \dots$$
+
+By the principle of superposition, the general is
+
+\begin{align*}
+    y(x) & = a_0 \Big( 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \dots \Big) + a_1 \Big( x - \frac{x^3}{3!} + \frac{x^5}{5!} - \dots \Big) \\
+    & = a_0 \cos{x} + a_1 \sin{x}
+\end{align*}

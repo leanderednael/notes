@@ -1,0 +1,317 @@
+\section{Systems of Differential Equations}
+
+More than one dependent variables $x_1, x_2, \dots$ give rise to a system of differential equations.
+
+\subsection{Eigenvalues and Eigenvectors}
+
+The eigenvalue problem for an $n \times n$ matrix $A$ is given by
+
+$$A \mathbf{x} = \lambda x \quad \iff \quad (A - \lambda I) \mathbf{x} = \mathbf{0}$$
+
+where the scalar $\lambda$ is called the eigenvalue and the $n \times 1$ column vector $x$ is called the eigenvector.
+
+When $A$ is a $2 \times 2$ matrix, then
+
+$$A - \lambda I = \begin{pmatrix}
+    a_{11} - \lambda & a_{12} \\
+    a_{21} & a_{22} - \lambda
+\end{pmatrix}$$
+
+A solution other than $\mathbf{x} = \mathbf{0}$ of the eigenvalue equation exists provided
+
+$$\det(A - \lambda I) = 0$$
+
+This equation is called the characteristic equation of $A$, and is given by
+
+$$\lambda^2 - (a_{11} + a_{22}) \lambda + (a_{11} a_{22} - a_{12} a_{21}) = 0$$
+
+$$\lambda^2 - \text{Tr}(A) \lambda + \det(A) = 0$$
+
+The eigenvalues can be real and distinct, complex conjugates, or repeated.
+
+After determining an eigenvalue, say $\lambda = \lambda_1$, the corresponding eigenvector $\mathbf{v}_1$ can be found by solving
+
+$$(A - \lambda_1 I) \mathbf{v}_1 = \mathbf{0}$$
+
+\subsection{Systems of First-Order Linear Ordinary Differential Equations}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A system of homogeneous linear differential equations with constant coefficients
+
+    $$\dot{x}_1 = a x_1 + b x_2, \quad \dot{x}_2 = c x_1 + d x_2$$
+
+    can be written in matrix form as
+
+    $$\frac{d}{dt}\begin{pmatrix}
+        x_1 \\ x_2
+    \end{pmatrix} = \begin{pmatrix}
+        a & b \\
+        c & d
+    \end{pmatrix} \begin{pmatrix}
+        x_1 \\ x_2
+    \end{pmatrix}, \text{ or } \dot{\mathbf{x}} = A \mathbf{x}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    An ansatz $\mathbf{x}(t) = \mathbf{v} e^{\lambda t}$, where $\mathbf{v}$ and $\lambda$ are independent of $t$ and $\mathbf{v}$ is a column matrix, s.t. $\lambda \mathbf{v} e^{\lambda t} = A \mathbf{v} e^{\lambda t}$ gives the eigenvalue problem
+
+    \vspace{-10pt}
+
+    $$A \mathbf{v} = \lambda \mathbf{v}$$
+
+    with characteristic equation $\det(A - \lambda I) = \lambda^2 - (a + d) \lambda + (ad - bc) = 0$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\textbf{Example}: $\dot{x}_1 = x_1 + x_2, \dot{x}_2 = 4 x_1 + x_2$
+
+With the ansatz $\mathbf{x}(t) = \mathbf{v} e^{\lambda t}$,
+
+$$\det(A - \lambda I) = \lambda^2 - 2 \lambda - 3 = (\lambda -3) (\lambda + 1) = 0$$
+
+and the eigenvalues and eigenvectors are
+
+$$\lambda_1 = -1, \quad \mathbf{v} = \begin{pmatrix}
+    1 \\ -2
+\end{pmatrix}, \quad \lambda_2 = 3, \quad \mathbf{v}_2 = \begin{pmatrix}
+    1 \\ 2
+\end{pmatrix}$$
+
+By the principle of superposition,
+
+$$x(t) = c_1 v_1 e^{\lambda_1 t} + c_2 v_2 e^{\lambda_2 t}$$
+
+or explicitly writing out the components,
+
+$$x_1(t) = c_1 e^{-t} + c_2 e^{3t}, \quad x_2(t) = -2 c_1 e^{-t} + 2 c_2 e^{3t}$$
+
+\switchcolumn
+
+\textbf{Example}: $\dot{x}_1 = - \frac{1}{2} x_1 + x_2, \dot{x}_2 = - x_1 - \frac{1}{2} x_2$
+
+With the ansatz $\mathbf{x}(t) = \mathbf{v} e^{\lambda t}$, the characteristic equation is $\det(A - \lambda I) = \lambda^2 + \lambda + \frac{5}{4} = 0$, which has \textbf{complex-conjugate roots}: $\lambda = - \frac{1}{2} + i, \quad \bar{\lambda} = - \frac{1}{2} - i$.
+
+We can form a linear combination of the two complex eigenvectors $\mathbf{v} e^{\lambda t}, \bar{\mathbf{v}} e^{\lambda t}$ to construct two independent real solutions:
+
+$$\text{Re}\{ \mathbf{v} e^{\lambda t} \} = \text{Re}\{ \begin{pmatrix}
+    1 \\ i
+\end{pmatrix} e^{(-\frac{1}{2} + i)t} \} = e^{-t / 2} \begin{pmatrix}
+    \cos{t} & - \sin{t}
+\end{pmatrix}$$
+
+$$\text{Im}\{ \mathbf{v} e^{\lambda t} \} = \text{Im}\{ \begin{pmatrix}
+    1 \\ i
+\end{pmatrix} e^{(-\frac{1}{2} + i)t} \} = e^{-t / 2} \begin{pmatrix}
+    \sin{t} & \cos{t}
+\end{pmatrix}$$
+
+Taking a linear superposition of these two real solutions,
+
+$$\mathbf{x}(t) = e^{-t / 2} \Bigg( A \begin{pmatrix}
+    \cos{t} \\ - \sin{t}
+\end{pmatrix} + B \begin{pmatrix}
+    \sin{t} \\ \cos{t}
+\end{pmatrix} \Bigg)$$
+
+\end{paracol}
+
+\subsection{Phase Portraits}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The solution of two first-order differential equations for $x_1$ and $x_2$ can be visualised by drawing a \textbf{phase portrait}, with x-axis $x_1$ and y-axis $x_2$. \\
+
+    Each curve drawn on the phase portrait corresponds to a different initial condition, and can be viewed as the trajectory of a particle at position $(x_1, x_2)$ moving with a velocity given by $(\dot{x}_1, \dot{x}_2)$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    For a $2 \times 2$ system $\dot{\mathbf{x}} = A \mathbf{x}$, the point $\mathbf{x} = (0, 0)$ is called an \textbf{equilibrium point}, or fixed point, of the system. \\
+
+    If $\mathbf{x}$ is at the fixed point initially, then $\mathbf{x}$ remains there for all time because $\dot{\mathbf{x}} = \mathbf{0}$ at the fixed point.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If there are two distinct real eigenvalues of the same sign, the fixed point is a \textbf{node}.
+
+    \begin{enumerate}
+        \item When the eigenvalues are both negative, the fixed point is a stable node.
+        \item When the eigenvalues are both positive, the fixed point is an unstable node.
+        \item If the eigenvalues have opposite sign, the fixed point is a saddle point.
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If there are complex-conjugate eigenvalues, the fixed point is a \textbf{spiral}.
+
+    \begin{enumerate}
+        \item If the real part of the eigenvalues is negative, the solution decays exponentially and the fixed point corresponds to a stable spiral.
+        \item If the real part of the eigenvalues is positive, the solution grows exponentially and the fixed point corresponds to an unstable spiral.
+        \item Alternatively, a spiral may wind around the fixed point clockwise or anticlockwise.
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\textbf{Example}: Consider the differential equations given by $\dot{x}_1 = -3 x_1 + \sqrt{2} x_2, \dot{x}_2 = \sqrt{2} x_1 - 2 x_2$. This system has eigenvalues and eigenvectors $\lambda_1 = -4, \mathbf{v}_1 = \begin{pmatrix}
+    1 \\ - \sqrt{2} / 2
+\end{pmatrix}, \lambda_2 = -1, \mathbf{v}_2 = \begin{pmatrix}
+    1 \\ \sqrt{2}
+\end{pmatrix}$.
+
+Because $\lambda_1, 
+\lambda_2 < 0$, both exponential solutions for $\mathbf{x} = \mathbf{x}(t)$ decay in time and $\mathbf{x} \rightarrow (0, 0)$ as $t \rightarrow \infty$.
+
+The node is stable.
+
+\textbf{Example}: Consider the differential equations given by $\dot{x}_1 = x_1 + x_2, \dot{x}_2 = 4 x_1 + x_2$. This system has eigenvalues and eigenvectors $\lambda_1 = -1, \mathbf{v}_1 = \begin{pmatrix}
+    1 \\ - 2
+\end{pmatrix}, \lambda_2 = 3, \mathbf{v}_2 = \begin{pmatrix}
+    1 \\ 2
+\end{pmatrix}$.
+
+Because $\lambda_1 < 0$, trajectories approach the fixed point along the direction of the first eigenvector, and because $\lambda_2 > 0$, trajectories move away from the fixed point along the direction of the second eigenvector.
+
+Ultimately, a saddle point is an unstable equilibrium because for any initial conditions such that $c_2 \neq 0, |x(t)| \rightarrow \infty$ as $t \rightarrow \infty$.
+
+The node is stable.
+
+\switchcolumn
+
+\textbf{Example}: Consider the system of differential equations given by $x_1 = - \frac{1}{2} x_1 + x_2, \quad x_2 = - x_1 - \frac{1}{2} x_2$. This system has complex eigenvalue and eigenvector
+
+$$\lambda = - \frac{1}{2} + i, \mathbf{v} = \begin{pmatrix}
+    1 \\ i
+\end{pmatrix},$$
+
+and their complex conjugates.
+
+The general solution is written as
+
+$$\mathbf{x}(t) = e^{-t / 2} \Bigg[ A \begin{pmatrix}
+    \cos{t} \\ - \sin{t}
+\end{pmatrix} + B \begin{pmatrix}
+    \sin{t} \\ \cos{t}
+\end{pmatrix} \Bigg]$$
+
+The trajectories in the phase portrait are spirals centred at the fixed point.
+
+If $\text{Re}(\lambda) > 0$, the trajectories spiral out; if $\text{Re}(\lambda) < 0$, they spiral in.
+
+The spirals around the fixed point may be clockwise or counterclockwise, depending on the governing equations.
+
+Here, since $\text{Re}(\lambda) = -1/2 < 0$, the trajectories spiral into the origin.
+
+To determine whether the spiral is
+clockwise or counterclockwise, examine the time derivatives at the point $(x_1, x_2) = (0, 1)$.
+
+At this point in the phase space, $(x_1, x_2) = (1, - 1/2)$, and a particle on this trajectory moves to the right and downward, indicating a clockwise spiral. 
+
+\end{paracol}
+
+\subsection{Normal Modes}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Description}: Text
+    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\newpage
+
+\subsection{Modelling with Differential Equations}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A solution $P(t) = P_e$ which neither increases nor decreases is an \textbf{equilibrium solution} of the differential equation. Because an equilibrium solution does not change, it has the property
+    
+    $$\frac{dP}{dt} = 0$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+In other words, the equilibrium solution is constant in time.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    We call an equilibrium point \textbf{stable} if any initial value close to the equilibrium point gives solutions that always remain close to the equilibrium point. \\
+    
+    Any equilibrium point which is not stable we call \textbf{unstable}, so there is at least one initial value close to the equilibrium which will give a solution that moves away from the equilibrium point.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    For the general differential equation $\frac{d\vec{X}}{dt} = \vec{F}(t, \vec{X})$, the $n^\text{th}$ step of Euler's method is given by
+
+    $$\vec{X}\big((n+1) \triangle t\big) = \vec{X}(n \triangle t) + \triangle t \vec{F}\big(t, \vec{X}(n \triangle t)\big)$$
+
+    in which $\triangle t$ is some step you have to choose.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    An equilibrium point of a system of differential equations $\frac{d\vec{X}}{dt} = \vec{F}(t, \vec{X})$ is a point $\vec{X}_0$ where
+
+    $$\frac{d\vec{X}_0}{dt} = \vec{F}(t, \vec{X}_0) = \vec{0}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{itemize}
+    \item An equilibrium point $\vec{X}_0$ is called a saddle point if the Jacobian matrix $J(\vec{X}_0)$ has one negative and one positive eigenvalue.
+
+    \item An equilibrium point $\vec{X}_0$ is called a stable node if the Jacobian matrix $J(\vec{X}_0)$ has two negative eigenvalues: all solutions that start near the equilibrium point stay near the equilibrium point.
+
+    \item An equilibrium point $\vec{X}_0$ is called an unstable node if the Jacobian matrix $J(\vec{X}_0)$ has two positive eigenvalues: all solutions that start near the equilibrium point stay near the equilibrium point.
+
+    \item An equilibrium point $\vec{X}_0$ is called a stable spiral point if the Jacobian matrix $J(\vec{X}_0)$ has two complex eigenvalues $\lambda = a \pm bi$ with negative real parts: $a < 0$.
+
+    \item An equilibrium point $\vec{X}_0$ is called an unstable spiral point if the Jacobian matrix $J(\vec{X}_0)$ has two complex eigenvalues $\lambda = a \pm bi$ with positive real parts: $a > 0$.
+
+    \item An equilibrium point $\vec{X}_0$ is called a circle point if the Jacobian matrix $J(\vec{X}_0)$ has two complex eigenvalues with zero real parts:  $\lambda = \pm bi$.
+\end{itemize}
+
+\end{paracol}
