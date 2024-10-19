@@ -1,0 +1,165 @@
+\section{Complex Numbers}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Complex numbers have a real part and an imaginary part:
+
+    $$z = a + bi,$$
+
+    $$\text{Re}\{z\} = a, \text{Im}\{z\} = b, i = \sqrt{-1}, i^2 = -1$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The set of complex numbers is defined as:
+
+    $$\mathbb{C} = \{ a + bi \quad | \quad a, b \in \mathbb{R} \}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{complex conjugate} of a complex number $z = a + bi$ is defined as:
+
+    $$\bar{z} = a - bi$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Properties of complex conjugates}:
+
+    \begin{enumerate}
+        \item $\bar{\bar{z}} = z$
+        \item $\overline{z + w} = \bar{z} + \bar{w}$
+        \item $\overline{zw} = \bar{wz}$
+        \item If $z \neq 0$, then $\bar{w / z} = \bar{w} / \bar{z}$
+        \item $z$ is real if and only if $\bar{z} = z$.
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{absolute value} (or \textbf{modulus}) of a complex number $z = a + bi$ is its distance from the origin: $|z| = \sqrt{a^2 + b^2}$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Properties of absolute values}:
+
+    \begin{enumerate}
+        \item $|z| = 0$ if and only if $z = 0$.
+        \item $|z| = |\bar{z}|$
+        \item $|zw| = |z| |w|$
+        \item If $|z| \neq 0$, then $|\frac{1}{z}| = \frac{1}{|z|}$
+        \item $|z + w| = |z| + |w|$
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Polar form}:
+
+    \begin{enumerate}
+        \item $z = |z| \angle \varphi_z = r \angle \varphi_z = r (\cos(\varphi_z) + i \sin(\varphi_z))$
+        \begin{itemize}
+            \item $\text{Re}\{z\} = r \cos(\varphi_z)$
+            \item $\text{Im}\{z\} = r \sin(\varphi_z)$ \\
+        \end{itemize}
+        \item Magnitude $|z| = \sqrt{\bar{z}z} = \sqrt{a^2 + b^2}$
+        \item Phase / argument $\varphi_z = \tan^{-1}(b/a)$
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The principal argument of $z$, $\arg(z)$ satisfies $- \pi < \varphi \leq \pi$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The polar form of complex numbers can be used to give \textbf{geometric interpretations} of multiplication and division:
+
+    \vspace{-5pt}
+
+    $$z_1 z_2 = r_1 r_2 ( \cos(\varphi_1 \varphi_2) + i \sin(\varphi_1 \varphi_2) )$$
+
+    $$\frac{z_1}{z_2} = \frac{r_1}{r_2} ( \cos(\varphi_1 \varphi_2) + i \sin(\varphi_1 \varphi_2) ), \text{ if } z \neq 0$$
+
+    Therefore,
+
+    $$\Big| \frac{z_1}{z_2} \Big| = \frac{|z_1|}{|z_2|} \text{ and } \arg(\frac{z_1}{z_2}) = \arg(z_1) - \arg(z_2)$$
+
+    If $z = r ( \cos(\varphi) + i \sin(\varphi))$ is non-zero, then
+
+    $$\frac{1}{z} = \frac{1}{r} ( \cos(\varphi) - i \sin(\varphi) )$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $z = r ( \cos(\varphi) + i \sin(\varphi) )$, and $n$ is a positive integer, then $z^n = r^n ( \cos(n \varphi) + i \sin(n \varphi) )$.
+    
+    Therefore, $| z^n | = |z|^n$ and $\arg(z^n) = n \arg(z)$.
+
+    Then $z$ has exactly $n$ distinct $n^{th}$ roots, given by:
+
+    $$r^\frac{1}{n} \Big( \cos \big( \frac{\varphi + 2 \pi k}{n} \big) + i \sin \big( \frac{\varphi + 2 \pi k}{n} \big) \Big)$$
+
+    for $k = 0, 1, 2, \dots, n - 1$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {de Moivre's Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+de Moivre's Formula, $e^{i \theta} \cdot \dots \cdot e^{i \theta} = e^{i (\theta + \dots + \theta)} = (e^{i \theta})^n = e^{i \cdot n \theta}$ can be used to derive equations for the sine and cosine:
+
+$$
+(\cos{\theta} + i \sin{\theta})^n = \cos{n \theta} + i \sin{n \theta}
+$$
+
+\textbf{Example}:
+
+$\cos{2 \theta} + i \sin{2 \theta} = (\cos{\theta} + i \sin{\theta})^2 = \cos^2{\theta} + 2 i \sin{\theta} \cos{\theta} + (-1) \sin^2{\theta} = (\cos^2{\theta} - \sin^2{\theta}) + 2 i \sin{\theta} \cos{\theta}$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    For any real number $\theta$, $e^{i \theta} = \cos(\theta) + i \sin(\theta) \quad \text{s.t. } | e^{i \theta} | = 1, \, \overline{e^{i \theta}} = e^{-i \theta}, \frac{1}{e^{i \theta}} = e^{- i \theta}, \, e^{i (\theta + \omega)} = e^{i \theta} \cdot e^{i \omega}$, and,
+
+    $$z = r (\cos(\varphi) + i \sin(\varphi)) = r e^{i \varphi}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Euler's Formula};
+\end{tikzpicture}
+
+\textbf{Proof}: The exponential form of a complex number can be determined from a Taylor series:
+
+$$
+    e^{i \varphi} = 1 + (i \varphi) + \frac{(i \varphi)^2}{2!} + \frac{(i \varphi)^3}{3!} + \dots = \Big( 1 - \frac{\varphi^2}{2!} + \frac{\varphi^4}{4!} - \dots \Big) + i \Big( \varphi - \frac{\varphi^3}{3!} + \frac{\varphi^5}{5!} + \dots \Big) = \cos(\varphi) + i \sin(\varphi)
+$$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    $$e^{i \varphi} + 1 = 0$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Euler's Identity};
+\end{tikzpicture}

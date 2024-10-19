@@ -1,0 +1,137 @@
+\section{Topology in the Complex Plane}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Distance}:
+    
+    $d = \sqrt{(x - x_0)^2 + (y - y_0)^2} = | (x - x_0) + i (y - y_0) | = | z - z_0 |$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Disk of radius $r$ centred at $z_0$: $B_r(z_0) = \{ z \in \mathbb{C} \, : \, z \text{ has distance less than } r \text{ from } z_0 \} = \{ z \in \mathbb{C} \, : \, | z - z_0 | < r \}$ \\
+
+    Circle of radius $r$ centred at $z_0$: $K_r(z_0) = \{ z \in \mathbb{C} \, : \, z \text{ has distance } r \text{ from } z_0 \} = \{ z \in \mathbb{C} \, : \, | z - z_0 | = r \}$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $E \subset \mathbb{C}$. A point $z_0$ is an \textbf{interior point} of $E$ if there is some $r > 0$ such that $B_r(z_0) \in E$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $E \in \mathbb{C}$. A point $b$ is a \textbf{boundary point} of $E$ if every disk around $b$ contains a point in $E$ and a point not in $E$. \\
+
+    The boundary of the set $E \subset \mathbb{C}$, $\partial E$, is the set of all boundary points of $E$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A \textbf{set} $U \subset \mathbb{C}$ is \textbf{open} if every one of its points is an interior point; and \textbf{closed} if it contains all of its boundary points.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Examples}:
+
+\begin{itemize}
+    \item $\{ z \in \mathbb{C} \, : \, | z - z_0 | < r \}$ and $\{ z \in \mathbb{C} \, : \, | z - z_0 | > r \}$ are open.
+
+    \item $\mathbb{C}$ and $\empty$ are open.
+
+    \item $\{ z \in \mathbb{C} \, : \, | z - z_0 | \leq r \}$ and $\{ z \in \mathbb{C} \, : \, | z - z_0 | = r \}$ are closed.
+
+    \item $\mathbb{C}$ and $\empty$ are closed.
+
+    \item $\{ z \in \mathbb{C} \, : \, | z - z_0 | < r \} \cup \{ z \in \mathbb{C} \, : \, | z - z_0 | = r \text{ and Im}(z - z_0) > 0 \}$ is neither open nor closed.
+\end{itemize}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $E$ be a set in $\mathbb{C}$.
+
+    \begin{itemize}
+        \item The \textbf{closure} of $E$ is the set $E$ together with all of its boundary points: $\bar{E} = E \cup \partial E$.
+
+        \item The \textbf{interior} of $E$, $\overset{\circ}{E}$, is the set of all interior points of $E$.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Examples}:
+
+\begin{itemize}
+    \item $\overline{B_r(z_0)} = B_r(z_0) \cup K_r(z_0) = \{ z \in \mathbb{C} \, : \, | z - z_0 | \leq r$.
+
+    \item $\overline{K_r(z_0)} = K_r(z_0)$.
+
+    \item $\overline{B_r(z_0) \backslash \{ z_0 \}} = \{ z \in \mathbb{C} \, : \, | z - z_0 | \leq r \}$.
+
+    \item With $E = \{ z \in \mathbb{C} \, : \, | z - z_0 | \leq r \}$, $\overset{\circ}{E} = B_r(z_0)$.
+
+    \item With $E = K_r(z_0)$, $\overset{\circ}{E} = \empty$.
+\end{itemize}
+
+A set is connected if it is "in one piece".
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Two sets $X, Y \in \mathbb{C}$ are \textbf{separated} if there are disjoint open sets $U, V$ so that $X \subset U$ and $Y \subset V$. \\
+    
+    A set $W \in \mathbb{C}$ is \textbf{connected} if it is impossible to find two separated non-empty sets whose union equals $W$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: $X = [0, 1), Y = (1, 2]$ are separated: For example, choose $U = B_1(0)$ and $V = B_1(2)$. Thus, $X \cup Y = [0, 2] \backslash \{ 1 \}$ is not connected. It is hard to check whether a set is connected!
+
+For open sets, there is a much easier-to-check criterion:
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $G$ be an \textbf{open set} in $\mathbb{C}$. Then $G$ is connected if and only if any two points in $G$ can be joined in $G$ by successive line segments.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A set $A \in \mathbb{C}$ is \textbf{bounded} if there exists a number $R > 0$ such that $A \subset B_R(0)$. If no such $R$ exists, then $A$ is called unbounded.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The point at infinity:
+
+    \begin{itemize}
+        \item In $\mathbb{R}$, there are two directions that give rise to $\pm \infty$.
+
+        \item In $\mathbb{C}$, there is only one $\infty$ which can be attained in many directions: $$\begin{array}{c}
+            1, 2, 3, \dots \\
+            -1, -2, -3, \dots \\
+            i, 2i, 3i, \dots \\
+            1, 2i, -3, -4i, 5, 6i, -7, \dots \\
+            \vdots
+        \end{array}$$
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}

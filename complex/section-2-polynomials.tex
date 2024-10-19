@@ -1,0 +1,93 @@
+\section{Polynomials}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A polynomial is a function $p$ of a single variable $x$ that can be written in the form
+
+    $$p(x) = a_0 + a_1 x + a_2 x^2 + \dots + a_n x^n$$
+
+    where $a_0, a_1, \dots, a_n \in \mathbb{R}, a_n \neq 0$ are called the \textbf{coefficients} of $p$. \\
+
+    The integer $n$ is called the \textbf{degree} of $p$, which is denoted by writing $\deg(p) = n$. \\
+    
+    A polynomial of degree zero is called a constant polynomial.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Two polynomials are equal if the coefficients of corresponding powers of $x$ are all equal. \\
+    
+    In particular, equal polynomials must have the same degree.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    For two polynomials $p, q$,
+
+    $$\deg(pq) = \deg(p) + \deg(q)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $f$ be a polynomial and let $a$ be a constant. Then $a$ is a zero of $f$ if and only if $x - a$ is a factor of $f(x)$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Factor Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $f(x) = a_0 + a_1 x + a_2 x^2 + \dots + a_n x^n$ be a polynomial with integer coefficients and let $a / b$ be rational number written in lowest terms. If $a / b$ is a zero of $f$, then $a_0$ is a multiple of $a$ and $a_n$ is a multiple of $b$. \\
+
+    If $f(x)$ is a quadratic polynomial,
+
+    $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Rational Roots Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $p$ be a polynomial with real coefficients that has $k$ sign changes. Then the number of positive zeros of $p$ (counting multiplicities) is at most $k$. \\
+
+    (That is, a real polynomial cannot have more positive zeros than it has sign changes.) \\
+
+    Let $p$ be a polynomial with real coefficients. Then the number of negative zeros of $p$ is at most the number of sign changes of $p(-x)$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Descartes' Rule of Signs};
+\end{tikzpicture}
+
+\end{paracol}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Every polynomial of degree $n$ with real or complex coefficients has exactly $n$ roots (counting multiplicities) in $\mathbb{C}$:
+
+    $$
+    a_n z^n + a_{n-1} z^{n-1} + \dots + a_1 z + a_0 = a_n (z - z_1) (z - z_2) \dots (z - z_n), \quad a_n \neq 0
+    $$
+
+    The complex roots of a polynomial with real coefficients occur in conjugate pairs.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Fundamental Theorem of Algebra};
+\end{tikzpicture}
+
+\textbf{Example}: Consider the polynomial $p(x) = x^2 + 1$ in $\mathbb{R}$. It has no real roots. But in $\mathbb{C}$ it can be factored: $z^2 + 1 = (z + i) (z - i)$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    The $n^\text{th}$ roots of $1$ are called the $n^\text{th}$ \textbf{roots of unity}.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: Since $1 = 1 e^{i \cdot 0}$, $1^{1/n} = \sqrt[n]{1} \cdot e^{i (\frac{0}{n} + \frac{2k \pi}{n})}, \, k = 0, 1, \dots, n - 1 = e^{i (\frac{2k \pi}{n})}, \, k = 0, 1, \dots, n - 1$
