@@ -1,0 +1,45 @@
+\section{Methods of Proof}
+
+\begin{itemize}
+    \item A \textbf{direct proof} proceeds by establishing a chain of implications $P \Rightarrow P_1 \Rightarrow \dots \Rightarrow P_n \Rightarrow Q$ leading directly from $P$ to $Q$. \\
+
+    \item A \textbf{proof by contradiction} assumes that the hypothesis $P$ is true, just as in a direct proof, but then supposes that the conclusion $Q$ is false. \\
+
+    \item Closely related to the method of proof by contradiction is \textbf{proof by contrapositive}: The negative of a statement $P$ is the statement "it is not the case that $P$", abbreviated symbolically as $\neg P$ and pronounced "not $P$".
+\end{itemize}
+
+\subsection{Mathematical Induction}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $S(n)$ be a statement about the positive integer $n$. If \\
+
+    \begin{enumerate}
+        \item the \textbf{basis step} holds: $S(1)$ is true, and \\
+        \item the \textbf{induction step} holds: for all $k \geq 1$, the truth of \textbf{induction hypothesis} $S(k)$ implies the truth of $S(k+1)$, \\
+    \end{enumerate}
+
+    then $S(n)$ is true for all $n \geq 1$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {First Principle of Mathematical Induction};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $S(n)$ be a statement about the positive integer $n$. If \\
+
+    \begin{enumerate}
+        \item the \textbf{basis step} holds: $S(1)$ is true, and \\
+        \item the \textbf{induction step} holds: the truth of all \textbf{induction hypotheses} $S(1), S(2), \dots, S(k)$ implies the truth of $S(k+1)$, \\
+    \end{enumerate}
+
+    then $S(n)$ is true for all $n \geq 1$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Second Principle of Math. Ind. (Strong Induction)};
+\end{tikzpicture}
+
+\end{paracol}

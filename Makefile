@@ -1,7 +1,7 @@
 SHELL     := /usr/bin/env bash
 MAKEFLAGS += --silent
 
-TARGETS   := algebra calculus complex diffeqs
+TARGETS   := algebra calculus complex diffeqs discrete
 
 all: clean compile clean
 

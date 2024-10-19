@@ -1,0 +1,46 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[margin=0.75cm]{geometry}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{biblatex}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{paracol}
+\usepackage{parskip}
+\usepackage{tikz}
+\usepackage{titlesec}
+\usepackage{verbatim}
+\usepackage{xcolor}
+
+\titleformat{\section}[block]{\Large\bfseries\filcenter\color{black}}{\thesection}{1em}{}
+\titleformat{\subsection}[block]{\bfseries\filcenter\color{black}}{\thesubsection}{1em}{}
+
+\setlength{\columnsep}{25pt}
+
+\tikzset{
+    rounded-box/.style = {draw=teal, fill=white, thin, rectangle, rounded corners, inner sep=5pt, inner ysep=10pt},
+    rounded-box-title/.style = {fill=teal, text=white, font=\bfseries},
+}
+
+\addbibresource{references.bib}
+
+\begin{document}
+\title{Discrete Mathematics}
+
+\input{section-1-mathematical-proofs}
+\input{section-2-combinatorics} \newpage
+\input{section-3-asymptotics} \newpage
+\input{section-4-graphs} \newpage
+\input{section-5-connectivity-trees-cycles} \newpage
+\input{section-6-eulerian-hamiltonian-cycles} \newpage
+\input{section-7-spanning-trees} \newpage
+\input{section-8-max-flow-min-cut} \newpage
+\input{section-9-matchings-in-bipartite-graphs} \newpage
+
+\nocite{*}
+\printbibliography
+
+\end{document}
