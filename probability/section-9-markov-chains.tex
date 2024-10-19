@@ -1,0 +1,251 @@
+\section{Markov Chains}
+
+A stochastic process is a sequence of random variables that evolve over time or space. The key idea is that the outcome at any given point depends on chance (i.e., is random).
+
+A Markov chain adds an additional layer to this concept. It has the Markov property, which states that the probability of transitioning to the next state depends only on the current state, and not on any previous states. In simpler terms, the future depends only on the present, and the past is irrelevant. This "memoryless" property is what distinguishes Markov chains from more general stochastic processes.
+
+So, all Markov chains are stochastic processes, but not all stochastic processes are Markov chains.
+
+\subsection{Markov Chains}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A \textbf{Markov chain} is a sequence of random variables $X_0, X_1, X_2, \dots$ taking values in a countable state space such that
+
+    \begin{align*}
+        P( & X_{n+1} = j | X_n = i, X_{n-1} = i_{n-1}, \dots, X_0= i_0) \\
+        & = P(X_{n+1} = j | X_n = i)
+    \end{align*}
+
+    for all integers $n > 0$ and states $j, i, i_0, \dots, i_{n-1}$. \\
+
+    $P_{i,j} := P(X_{n+1} = j | X_n = i)$ is the \textbf{transition probability} from state $i$ to state $j$, for which the probability axioms hold:
+
+    \begin{enumerate}
+        \item $P_{i,j} \geq 0$
+        \item $\sum_j{P_{i,j}} = 1$
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Note}: It follows that
+
+\vspace{-20pt}
+
+\begin{align*}
+    P(& X_n = i_n, X_{n-1} = i_{n-1}, \dots, X_1 = i_1 | X_0 = i_0) \\
+    & = P_{i_0, i_1} P_{i_1, i_2} \dots P_{i_{n-1}, i_n}
+\end{align*}
+
+\vspace{-10pt}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Markov chain \textbf{transition matrices} are square matrices with all non-negative entries whose rows sum to one.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $P_{i,j}^{(n)} = P(X_{m+n} = j | X_m = i)$ denote the $n$-step transition probability from state $i$ to state $j$. Then for any $r < n$:
+
+    $$P_{i,j}^{(n)} = \sum_k{P_{i,k}^{(r)} P_{k,j}^{(n-r)}} \text{ , or equivalently, } P^{(n)} = P^{(r)} P^{(n-r)}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Chapman-Kolmogorov Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    By induction, $P^{(n)} = P^n$ for all $n \geq 1$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Corollary};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X_0, X_1, X_2, \dots$ be a Markov chain with transition matrix $P$. Let $P$ be such that there exists an integer $n$ with $P_{i,j}^n > 0$ for all states $i, j$. Then there exists a unique distribution $\pi_j$ such that the transition probabilities are convergent:
+
+    \vspace{-15pt}
+
+    $$\lim_{n \rightarrow \infty} P_{i,j}^n = \pi_j$$
+
+    A convergent Markov chain is called \textbf{ergodic}, and its unique solution is the row vector $\pi$ such that
+
+    $$\pi = \pi P \iff \pi^T = P^T \pi^T, \text{ and } \sum_j{\pi_j} = 1$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+When looking at the long-term behaviour of a Markov chain, the initial value does not matter - if there is a power of $P$ which does not contain zeros. So \textit{if there is a number of steps} $n$ \textit{such that you can go from any state to any state in that amount of steps, then this power of} $P$ \textit{will converge}.
+
+The long-term probabilities $\pi$ are such that multiplying $P$ again by $\pi$ doesn't change anything. Therefore, the row vector $\pi$ can be computed as the eigenvector of the transposed matrix $P^T$ for which the sum of the entries is equal to one.
+
+\textbf{Example}:
+
+\vspace{-5pt}
+
+$$
+P = \begin{bmatrix}
+    0.5 & 0.3 & 0.2 \\
+    0.2 & 0.4 & 0.4 \\
+    0.4 & 0.3 & 0.3
+\end{bmatrix}, P^2 = \begin{bmatrix}
+    0.39 & 0.33 & 0.28 \\
+    0.34 & 0.34 & 0.32 \\
+    0.38 & 0.33 & 0.29
+\end{bmatrix},
+$$
+
+\vspace{-5pt}
+
+$$
+P^5 = \begin{bmatrix}
+    0.37 & 0.33 & 0.3 \\
+    0.37 & 0.33 & 0.3 \\
+    0.37 & 0.33 & 0.3
+\end{bmatrix}, P^{100} = \begin{bmatrix}
+    0.37 & 0.33 & 0.3 \\
+    0.37 & 0.33 & 0.3 \\
+    0.37 & 0.33 & 0.3
+\end{bmatrix},
+$$
+
+\vspace{-5pt}
+
+$$
+\pi P^{100} = \begin{bmatrix}
+    0.37 & 0.33 & 0.3
+\end{bmatrix} P^{100} = \begin{bmatrix}
+    0.37 & 0.33 & 0.3
+\end{bmatrix} = \pi
+$$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X_0, X_1, X_2, \dots$ be a Markov chain with transition matrix $P$. \\
+    
+    A state $j$ is \textbf{accessible} from the state $i$ if there exists an integer $n$ such that $P_{i,j}^n > 0$. \\
+
+    Two states $i$ and $j$ are \textbf{communicating} if they are each accessible to another: $i \leftrightarrow j$. \\
+    
+    A set of communicating states is an \textbf{equivalence class}. \\
+
+    A Markov chain in which all states are communicating is called \textbf{irreducible}.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Communicating states have the following properties:
+
+    \begin{itemize}
+        \item Reflexivity: $i \leftrightarrow i$ (the 0-step)
+        \item Symmetry: If $i \leftrightarrow j$ then $j \leftrightarrow i$.
+        \item Transitivity: If $i \leftrightarrow k$ and $k \leftrightarrow j$ then $i \leftrightarrow j$.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $i$ be a state of a Markov chain with transition matrix $P$. The period $d(i)$ of the state $i$ is the greatest common divisor of all integers $n \geq 1$ with positive return probabilities $P_{i,j}^n$:
+
+    $$d(i) := \text{gcd}(\{ n \geq 1 : P_{i,j}^n > 0 \})$$
+
+    \textbf{Periodicity}: State $i$ is called periodic if $d(i) > 1$ or aperiodic if $d(1) = 1$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $i \leftrightarrow i$ be two communicating states. Then $d(i) = d(j)$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $i$ be a state of a Markov chain. Let $\rho_i$ be the probability that the Markov chain returns to the state $i$ in a finite non-zero number of steps:
+
+    $$\rho_i = P(X_n = i \text{ for some } n > m | X_m = i)$$
+
+    If $\rho_i = 1$, the state $i$ is \textbf{recurrent}.
+
+    If $\rho_i < 1$, it is \textbf{transient}.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\newpage
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $i \leftrightarrow j$ be two communicating states. Then $i$ is recurrent if and only if $j$ is recurrent.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+It can be shown that the sum of $n$-step probabilities diverges if a state is recurrent - a useful check for recurrence in more complicated chains:
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A state $i$ is recurrent if and only if $\sum_{n=1}^\infty{P_{i,j}^n} = \infty$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Example}: Consider a random walk with $r = 1 - p - q = 0$ and
+
+\begin{itemize}
+    \item $P(X_{n+1} = x_n + 1 | X_n = x_n) = p > 0$
+    \item $P(X_{n+1} = x_n - 1 | X_n = x_n) = q = 1 - p > 0$
+\end{itemize}
+
+If $p \neq q$, the random walk is transient as there is a non-zero probability that the chain converges to $\infty$ or $-\infty$.
+
+Each state is recurrent if and only if $p = q$.
+
+\end{paracol}
+
+\subsection{Finite-State Markov Chains}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Description}: Text
+    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
+\end{tikzpicture}
+
+\subsection{Steady-State Behaviour of Markov Chains}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Description}: Text
+    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
+\end{tikzpicture}
+
+\subsection{Absorption Probabilities and Expected Time to Absorption}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Description}: Text
+    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
+\end{tikzpicture}

@@ -1,0 +1,270 @@
+\section{Bayesian Inference}
+
+\subsection{Information Theory}
+
+The variance is one way of measuring uncertainty. \\
+
+Information theory provides perhaps the cleanest derivations for measuring uncertainty and randomness in some of the learning algorithms we will derive! \\
+
+In this section, we answer the following questions in terms of bits:
+
+
+\begin{enumerate}
+    \item How do we measure how random an event is?
+    \item How do we measure how random a random variable or a distribution is?
+    \item How do we measure how different two distributions are?
+    \item How much information do two random variables share?
+\end{enumerate}
+
+Information theory is often used to show what the best possible performance we should even hope an inference algorithm can achieve such as fundamental limits to how accurate we can make a prediction. And if you can show that your inference algorithm's performance meets the fundamental limit, then that certifies that your inference algorithm is optimal! Inference and information theory are heavily intertwined!
+
+\subsubsection{Shannon Information Content}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    The Shannon Information Content is a measure of how random an event is in terms of bits: How many yes / no questions do I have to ask to get the answer?
+
+    $$\log_2\Big( \frac{1}{P(A)} \Big)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: The number of bits needed to store an event $A$, e.g. an integer from $0, 1, \dots, 63$ is $\log_2(64) = 6$ bits.
+
+We don't a priori know which of the $64$ possible outcomes is going to be stored, and so each outcome is equally likely with probability $\frac{1}{64}$. Then the number of bits needed to store such an event $A$ is given by its Shannon Information Content:
+
+$$\log_2\Big( \frac{1}{P(\text{integer is } x)} \Big) = \log_2 \Big( \frac{1}{1 / 64} \Big) = \log_2(64) = 6 \text{ bits}$$
+
+\subsubsection{Shannon Entropy}
+
+Whereas variance measures how far a random variable is expected to deviate from its expected value, $\text{Var}(X) = E[(X - E[X])^2]$, entropy measures how many bits are needed on average to store each i.i.d. sample of a random variable $X$.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    The entropy of a random variable is the expectation of its Shannon information content:
+
+    $$H(X) = E \Big[ \log_2 \Big( \frac{1}{p_X(x)} \Big) \Big] = \sum_x p_X(x) \log_2 \Big( \frac{1}{p_X(x)} \Big)$$
+
+    That is, on avergae, the number of bits needed to encode each i.i.d. sample of a random variable $X$ is $H(X)$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: If $X$ is a fair coin toss, then
+
+$$H(X) = p_X(H) \log_2 \frac{1}{p_X(H)} + p_X(T) \log_2 \frac{1}{p_X(T)} = \frac{1}{2} \log_2 \frac{1}{1/2} + \frac{1}{2} \log_2 \frac{1}{1/2} = 1 \text{ bits}$$
+
+If $X$ is a biased coin toss where heads occurs with probability one, then
+
+$$H(X) = p_X(H) \log_2 \frac{1}{p_X(H)} + p_X(T) \log_2 \frac{1}{p_X(H)} = 1 \log_2 \frac{1}{1} + 0 \log_2 \frac{1}{0} = 0 \text{ bits}$$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Given a $n$ i.i.d. random samples from $p_X$,
+
+    \begin{enumerate}
+        \item there is an algorithm that is able to store these $n$ samples in $n H(X)$ bits, and
+        \item this is a lower bound - it is not possible to store the sequence in fewer than $n H(X)$ bits.
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\subsubsection{Kullback-Leibler / Information Divergence (Relative Entropy)}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    KL / Information Divergence (or relative entropy) is a measure of how different two distributions $p$ and $q$ are (over the same alphabet) by the number of bits needed to encode a sample from $p$ using information content according to $q$ instead of according to $p$:
+
+    \begin{align*}
+        D(p || q) & = E_{X \sim p} \Big[ \log_2 \frac{1}{q(X)} \Big] - E_{X \sim p} \Big[ \log_2 \frac{1}{p(X)} \Big] \\
+        & = \sum_x p(x) \log_2 \frac{1}{q(x)} - \sum_x p(x) \log_2 \frac{1}{p(x)} \\
+        & = \sum_x p(x) \Big( \log_2 \frac{1}{q(x)} - \log_2 \frac{1}{p(x)} \Big) \\
+        & = \sum_x p(x) \log_2 \frac{p(x)}{q(x)}
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    For any two distributions $p, q$ defined over the same alphabet,
+
+    $$D(p || q) \geq 0$$
+
+    where equality holds if and only if $p, q$ are the same distribution, i.e. $p(x) = q(x)$ for all $x$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Gibbs' Inequality};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Gibbs' Inequality makes information divergence seem a bit like a distance. However, it is not like a distance, as it is not symmetric: in general,
+
+    $$D(p || q) \neq D(q || p)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Example}: Suppose $p$ is the distribution for a fair coin flip, while $q$ is the distribution for a biased coin that always comes up heads. Then
+
+\begin{align*}
+    D(p || q) & = p(H) \log_2 \frac{p(H)}{q(H)} + p(T) \log_2 \frac{p(T)}{q(T)} \\
+    & = \frac{1}{2} \log_2 \frac{\frac{1}{2}}{1} + \frac{1}{2} \log_2 \frac{\frac{1}{2}}{0} \\
+    & = \infty \text{ bits}
+\end{align*}
+
+\begin{align*}
+    D(q || p) & = q(H) \log_2 \frac{q(H)}{p(H)} + q(T) \log_2 \frac{q(T)}{p(T)} \\
+    & = 1 \log_2 \frac{1}{\frac{1}{2}} + 0 \log_2 \frac{0}{\frac{1}{2}} \\
+    & = 1 \text{ bit}
+\end{align*}
+
+\subsubsection{Mutual Information}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    For two discrete random variables $X, Y$, the mutual information between $X$ and $Y$, denoted as $I(X; Y)$, measures how much information they share. Specifically,
+
+    $$I(X; Y) \triangleq D(p_{X, Y} || p_X p_Y)$$
+
+    where $p_X p_Y$ is the distribution we get if $X$ and $Y$ were actually independent (i.e., if $X$ and $Y$ were actually independent, then we know that the joint probability table would satisfy $P(X = x, Y = y) = p_X(x) p_Y(y)$).
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+Mutual information can be thought of as how far $X$ and $Y$ are from being independent, since if indeed they were independent, then $I(X; Y) = 0$.
+
+On the other hand, if $X$ and $Y$ are the same, then the number of bits they share is exactly the average number of bits needed to store $X$ (or $Y$), namely $H(X)$ bits:
+
+\begin{align*}
+    I(X; Y) & = D(p_{X, Y} || p_X p_Y) \\
+    & = \sum_x \sum_y p_{X, Y}(x, y) \log_2 \frac{1}{p_X(x) p_Y(y)} - \sum_x \sum_y p_{X, Y}(x, y) \log_2 \frac{1}{p_{X, Y}(x, y)} \\
+    & = \sum_x \sum_y p_X(x) \mathbf{1}\{x = y\} \log_2 \frac{1}{p_X(x) p_Y(y)} - \sum_x \sum_y p_X(x) \mathbf{1}\{x = y\} \log_2 \frac{1}{p_X(x) \mathbf{1}\{x = y\}} \\
+    & = \sum_x p_X(x) \log_2 \Big( \frac{1}{p_X(x)} \Big)^2 - \sum_x p_X(x) \log_2 \frac{1}{p_X(x)} \\
+    & = 2 \sum_x p_X(x) \log_2 \frac{1}{p_X(x)} - \sum_x p_X(x) \log_2 \frac{1}{p_X(x)} \\
+    & = \sum_x p_X(x) \log_2 \frac{1}{p_X(x)} \\
+    & = H(X)
+\end{align*}
+
+\subsection{Graphical Models}
+
+Inference with graphical models is a specialized technique within Bayesian inference that takes advantage of the graphical structure for efficient computations in problems with complex variable dependencies.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    An \textbf{undirected pairwise graphical model} for random variables $X_1, \dots, X_n$ consists of an undirected graph with vertices $V = \{1, \dots, n\}$ and edges $E$, and tables $\phi_i$'s and $\varphi_{i,j}$'s that have non-negative entries. The joint probability table of $X_1, \dots, X_n$ is given by
+
+    $$p_{X_1, \dots, X_n}(x_1, \dots, x_n) = \frac{1}{Z} \prod_{i \in V} \phi_i(x_i) \prod_{(i, j) \in E} \varphi_{i,j}(x_i, x_j), \text{ where}$$
+
+    \begin{itemize}
+        \item $Z$ is the normalisation constant that ensures that the probability distribution actually sums to $1$
+
+        \item each table $\phi_i$ depends only on random variable $X_i$ and is called the \textbf{node potential function} or node potential of node $i$
+
+        \item each table $\varphi_{i, }$ depends only on random variables $X_i$ and $X_j$ and is called the \textbf{pairwise function} or pairwise potential or edge potential of nodes $i$ and $j$
+
+        \item the potential tables need to consist of non-negative entries but each potential table does not have to sum to 1; the constant $Z$ will ensure that the joint probability table actually sums to 1
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    A \textbf{tree} is a graph for which there are no loops, and we can reach from any node to any other node (moving along edges in the graph).
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    For any graph that has $n$ nodes, if the graph is a tree, then it will always have exactly $n - 1$ edges.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Proof} by induction:
+
+Base case $n = 1$: there is only 1 node and so there are no edges, so the claim clearly holds.
+
+Inductive step: suppose the claim holds for every tree of size (i.e. number of nodes) up to $k$. Thus, every tree of size $k$ nodes has $k - 1$ edges. Now consider a tree $T$ with $k + 1$ nodes. Take a leaf node $v$ from $T$ and note that the tree $T$ with $v$ removed is a tree $T'$ of size $k$, which by the inductive hypothesis has $k - 1$ edges. Since $v$ is a leaf node though, it has exactly 1 neighbour, which means that the tree $T$ has 1 more edge than the tree $T'$, i.e. $T$ has $k$ edges.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Given a graphical model with graph $G = (V, E)$ and its associated node and edge potentials, the two fundamental inference tasks we focus on are as follows: \\
+
+    \begin{itemize}
+        \item \textbf{Marginalisation}: Compute marginal probability table $p_{X_i}$ for every $i \in V$. \\
+
+        \item \textbf{Most probable configuration}: Compute the most probable configuration $(\hat{x}_1, \hat{x}_2, \dots, \hat{x}_n)$ such that
+
+        $$(\hat{x}_1, \hat{x}_2, \dots, \hat{x}_n) = \arg \max_{x_1, x_2, \dots, x_n} p_{X_1, X_2, \dots, X_n}(x_1, x_2, \dots, x_n)$$
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+The most probable configuration given observation(s) is precisely the MAP estimate!
+
+\subsubsection{Maximum A Posteriori (MAP) Estimation}
+
+Often times, we want to report which particular value of $X$ achieves the highest posterior probability $p_{X|Y}(\cdot | y)$, i.e. the most probable value $x$ that $X$ can take on given that we have observed $Y = y$.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    The value that $X$ can take on that maximises the posterior distribution is called the \textbf{maximum a posteriori (MAP) estimate} of $X$ given $Y = y$:
+
+    $$\hat{x}_{MAP}(y) = \arg \max_x p_{X|Y}(x|y)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\subsection{Learning Probabilistic Models}
+
+Thus far in the course, we've been given a probabilistic model of the uncertain world, from which we produced predictions given observations. But where do these probabilistic models come from? We now turn to the problem of learning such models (also referred to as \textbf{model selection} since we are selecting which model to use).
+
+There are two levels of learning we consider:
+
+\begin{itemize}
+     \item \textbf{Parameter learning}: Suppose we know what the edges are in an undirected graphical model but we don't know what the table entries should be for the potentials – how do we estimate these entries?
+     \item \textbf{Structure learning}: What if we know neither the parameters nor which edges are present in an undirected graphical model? In this case, we could first figure out what edges are present. After we decide on which edges are present, then the problem reduces to the first problem of parameter learning. 
+\end{itemize}
+
+In both cases, the high-level setup is the same: there is some underlying probability distribution $p$ that we don't know details for but want to learn. The distribution $p$ has some parameter (or a set of parameters) $\theta$. We will assume that we can collect $n$ independent samples $X^{(1)}, \dots, X^{(n)}$ from the distribution $p$ (these $n$ samples are often referred to as “training data"). Given these samples, we aim to estimate $\theta$ using what's called \textbf{maximum likelihood}, which tries to learn a model that in some sense best fits the training data we have available.
+
+\subsubsection{Parameter Learning}
+
+\textbf{Maximum Likelihood Estimation (MLE)}:
+
+Consider a random variable $X$, that for simplicity can be thought of as a (possibly biased) coin flip, taking on values in the set $\chi = \{ \text{heads}, \text{tails} \}$. The probability of heads, $\theta$, is unknown, and we'd like to estimate (or "learn") this probability. The probability that $X = x$ is denoted as $p_X(x; \theta)$.
+
+We assume we have flipped the coin $n$ times to get outcomes $X^{(1)}, X^{(2)}, \dots, X^{(n)}$ which are i.i.d. samples from the same distribution as $X$. The \textbf{likelihood} of the data is defined as the probability of seeing the observed data as a function of the unknown parameter $\theta$ (where the observed data are treated as fixed constants):
+
+$$
+p_{X^{(1)}, X^{(2)}, \dots, X^{(n)}}(x^{(1)}, x^{(2)}, \dots, x^{(n)}; \theta) = \prod_{i=1}^n p_X(x^{(i)}; \theta) \text{, for example} = \theta \cdot (1 - \theta) \cdot \dots \cdot \theta
+$$
+
+Maximum likelihood estimation maximises the likelihood function $L$ over possible values of the parameter $\theta$:
+
+$$
+\hat{\theta} = \arg \max_{\theta \in [0, 1]} \prod_{i=1}^n p_X(x^{(i)}; \theta)
+$$
+
+Note that the value of $\theta$ that maximises the likelihood is the same as the value of $\theta$ that maximises the log of the likelihood, because the log function is strictly increasing; and mathematically it's often (not always!) easier to work with the log of the likelihood.
+
+$$
+\hat{\theta} = \arg \max_{\theta \in [0, 1]} L(\theta) = \arg \max_{\theta \in [0, 1]} \log(L(\theta)) = \arg \max_{\theta \in [0, 1]} l(\theta)
+$$
+
+\textbf{Naive Bayes Classification}:
+
+Naive Bayes classifiers are a family of simple probabilistic classifiers based on applying Bayes' theorem with strong (naive) independence assumptions between the features.
+
+Laplace smoothing or additive smoothing can be applied for labels that didn't appear in the train set, to avoid zero probability for these labels.
+
+\subsubsection{Structure Learning}
+
+At this point we've covered parameter learning for undirected trees, where we assume we know the tree structure. But what if we don't know what tree to even use? We now look at an algorithm called the Chow-Liu algorithm that learns which tree to use from training data, again using maximum likelihood. Once more, information measures appear, where mutual information plays a pivotal role. Recall that mutual information tells us how far two random variables are from being independent. A key idea here is that to determine whether an edge between two random variables should be present in a graphical model, we can look at mutual information.
+
+\textbf{Trees}: The Chow-Liu Algorithm

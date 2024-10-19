@@ -1,0 +1,331 @@
+\section{Multivariate Random Variables}
+
+\subsection{Joint Distributions}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X$ and $Y$ be two discrete random variables. The \textbf{joint probability mass function} $p$ of $X$ and $Y$ is the function $p : \mathbb{R}^2 \rightarrow [0, 1]$ defined by
+
+    $$p_{X, Y}(x, y) = P(X = x, Y = y) \text{ for all } x, y$$
+
+    Their \textbf{joint cumulative distribution function} is the function $F_{X, Y} : \mathbb{R}^2 \rightarrow [0, 1]$ defined by
+
+    $$F_{X, Y}(x, y) = P(X \leq x, Y \leq y) \text{ for all } x, y$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $p_{X, Y}(x, y)$ be the joint probability mass function of $(X, Y)$. Then the \textbf{marginal probability mass functions} of $X$ and $Y$ are given by
+
+    $$p_X(x) = P(X = x) = \sum_y{p_{X, Y}(x, y)}$$
+    
+    $$p_Y(y) = P(Y = y) = \sum_x{p_{X, Y}(x, y)}$$
+
+    This generalises to multiple random variables, e.g. $p_{X, Y}(x, y) = \sum_z p_{X, Y, Z}(x, y, z)$, etc.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+NB: The inverse is not true: In general, \textit{the joint distribution cannot be computed based on the knowledge of marginal distributions}. Intuitively, we would be missing key information about the dependencies between $X$ and $Y$.
+
+\textbf{Example}: Consider random variables $(S, T)$ and $(U, V)$, where $S$ and $U$ have the same distribution, and $T$ and $V$ have the same distribution. However, $(S, T)$ and $(U, V)$ do not necessarily have the same joint distribution:
+
+\begin{center}
+\begin{tabular}{c|c|c}
+S / T & 1 & 0 \\
+\hline
+sunny & 1 / 2 & 0 \\
+\hline
+rainy & 0 & 1 / 6 \\
+\hline
+snowy & 0 & 1 / 3
+\end{tabular}
+\quad
+\begin{tabular}{c|c|c}
+U / V & 1 & 0 \\
+\hline
+sunny & 1 / 4 & 1 / 4 \\
+\hline
+rainy & 1 / 12 & 1 / 12 \\
+\hline
+snowy & 1 / 6 & 1 / 6
+\end{tabular}
+\end{center}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X$ and $Y$ be two discrete random variables with joint probability mass function $p_{X, Y}(x, y)$. The \textbf{expectation} of the joint random vector $(X, Y)$ is the vector
+
+    $$E[(X, Y)] = \sum_{x, y}{(x, y) p_{X, Y}(x, y)}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $g$ be a function of two variables. Then
+
+    $$E[g(X, Y)] = \sum_{x, y}{g(x, y) p_{X, Y}(x, y)}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X$ and $Y$ be two continuous random variables. The \textbf{joint probability density function} $f_{X, Y}(x, y)$ must satisfy the probability axioms:
+
+    \begin{enumerate}
+        \item It is a non-negative function.
+        \item The volume below its graph is 1.
+    \end{enumerate}
+
+    \vspace{5pt}
+
+    Thus, the \textbf{joint cumulative distribution function} is
+
+    \vspace{-7.5pt}
+
+    $$F_{X, Y}(x, y) = P(X \leq x, Y \leq y) = \int_{-\infty}^x \int_{-\infty}^y f_{X, Y}(x, y) \,dy\,dx$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $f_{X, Y}(x, y)$ be the joint probability density function of $(X, Y)$. Then the \textbf{marginal probability density functions} of $X$ and $Y$ are given by
+
+    $$f_X(x) = P(X = x) = \int_{-\infty}^\infty f_{X, Y}(x, y) \,dy$$
+    
+    $$f_Y(y) = P(Y = y) = \int_{-\infty}^\infty f_{X, Y}(x, y) \,dx$$
+
+    The \textbf{marginal cumulative distribution functions} of $X$ and $Y$ are thus derived as follows:
+
+    \vspace{-20pt}
+
+    \begin{align*}
+        P(X \leq x) & = P(X \leq x, Y < \infty)
+        = \int_{-\infty}^x \int_{-\infty}^\infty f_{X, Y}(x, y) \,dy\,dx \\
+        & = \int_{-\infty}^x f_X(x) \,dx
+        = F_X(x)
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+For two continuous jointly-distributed $X, Y$,
+
+\vspace{-15pt}
+
+$$P(a \leq X \leq b, c \leq Y \leq d) = \int_a^b \int_c^d f_{X, Y}(x, y) \,dy\,dx$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $X$ and $Y$ are two continuous random variables with joint probability density function $f_{X, Y}$, then
+
+    $$E[g(X, Y)] = \int_{-\infty}^\infty \int_{-\infty}^\infty g(x, y) f_{X, Y}(x, y) \,dx\,dy$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The distribution of the \textbf{sum of two random variables} is
+
+    \vspace{-10pt}
+
+    $$F_{X + Y}(a) = \int_{-\infty}^\infty F_X(a - y) f_Y(y) \, dy$$
+
+    and its density is
+
+    $$f_{X + Y}(a) = \int_{-\infty}^\infty f_X(a - y) f_Y(y) \, dy$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+In particular, the sums of random variables following the following discrete and continuous distributions are defined as:
+
+\vspace{-20pt}
+
+$$
+\sum_{i=1}^n \text{Ber}(p) = \text{Bin}(n, p)
+\qquad
+\sum_{i=1}^n \text{Geom}(p) = \text{NegBin}(n, p)
+\qquad
+\sum_{i=1}^n \text{Poisson}(\lambda_i) = \text{Poisson}\Big(\sum_{i=1}^n \lambda_i \Big) = \text{Poisson}\Big(\lambda_1 + \dots + \lambda_n \Big)
+$$
+
+$$
+\sum_{i=1}^n \text{Exp}(\lambda) = \Gamma(n, \lambda)
+\qquad \qquad
+\sum_{i=1}^n \mathcal{N}(\mu_i, \sigma_i^2) = \mathcal{N}\Big(\sum_{i=1}^n \mu_i, \sum_{i=1}^n \sigma_i^2\Big) = \mathcal{N}\Big(\mu_1 + \dots + \mu_n, \sigma_1^2 + \dots + \sigma_n^2\Big)
+$$
+
+\newpage
+
+\subsection{Covariance and Correlation}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X$ and $Y$ be two random variables. The \textbf{covariance} of $X$ and $Y$ is given by the expectation of the product of the deviations $X, Y$ from the mean
+
+    \vspace{-10pt}
+
+    \begin{align*}
+        \text{Cov}(X, Y) & = E[(X - E[X]) (Y - E[Y])] \\
+        & = E[XY - X E[Y] - Y E[X] + E[X] E[Y]] \\
+        & = E[XY] - E[Y] E[X] - E[X] E[Y] + E[X] E[Y] \\
+        & = E[XY] - E[X] E[Y] \\
+        & (\text{where } E[XY] = \int_{-\infty}^\infty xy \, f_{X, Y}(x, y) \, dx \, dy )
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\vspace{5pt}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The variance can thus be interpreted as the covariance of a random variable with itself:
+
+    \vspace{-10pt}
+
+    \begin{align*}
+        \text{Cov}(X, X) & = E[X^2] - (E[X])^2 \\
+        & = \text{Var}(X)
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Corollary};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{change-of-unit formula} for the covariance is
+
+    \vspace{-7.5pt}
+
+    \begin{align*}
+        \text{Cov}(rX + s, tY + u) & = E[rtXY + ruX + stY + su] \\
+        & \quad - (r E[X] + s)(t E[Y] + u) \\
+        & = rt E[XY] + ru E[X] + st E[Y] + su \\
+        & \quad - (rt E[X] E[Y] + ru E[X] \\
+        & \qquad + st E[Y] + su) \\
+        & = rt \text{Cov}(X, Y)
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X$ and $Y$ be two random variables. The \textbf{correlation}
+
+    $$\rho(X, Y) = \frac{\text{Cov}(X, Y)}{\sqrt{\text{Var}(X) \text{Var}(Y)}}$$
+
+    such that
+
+    \begin{enumerate}
+        \item $-1 \leq \rho(X, Y) \leq 1$ (i.e. it does not depend on units)
+        \item $\rho(rX + s, tY + u) = \rho(X, Y)$ if $rt > 0$
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Independent Random Variables}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X$ and $Y$ be two discrete random variables. $X$ and $Y$ are \textbf{independent} random variables if their joint probability mass function $p_{X, Y}$ is the product of the two marginal mass functions $p_X$ and $p_Y$:
+
+    $$p_{X, Y}(x, y) = p_X(x) p_Y(y)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X$ and $Y$ be two continuous random variables. $X$ and $Y$ are \textbf{independent} random variables if their joint probability density function $f_{X, Y}$ is the product of the two marginal density functions $f_X$ and $f_Y$:
+
+    $$f_{X, Y}(x, y) = f_X(x) f_Y(y)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+This has important implications for conditional probabilities:
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $X$ and $Y$ are independent random variables, \textbf{events} concerning $X$ and $Y$ are also independent.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $X$ and $Y$ are independent random variables, then they are \textbf{uncorrelated}:
+
+    $$E[XY] = E[X] E[Y] \text{ and } \text{Cov}(X, Y) = 0 = \rho(X, Y)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+NB: The converse is not necessarily true; if two random variables are uncorrelated, they are not necessarily independent.
+
+\end{paracol}
+
+\subsection{The Bivariate Normal Distribution}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Let $X$ and $Y$ be two continuous random variables with joint probability density function
+
+    $$f_{X, Y}(x, y) = \frac{1}{2 \pi \sigma_X \sigma_Y \sqrt{1 - \rho^2}} e^{-\frac{1}{2(1-\rho^2)}\big( (\frac{x-\mu_X}{\sigma_X})^2 + (\frac{y-\mu_Y}{\sigma_Y})^2 - 2 \rho (\frac{x-\mu_X}{\sigma_X}) (\frac{x-\mu_X}{\sigma_X}) \big)}$$
+
+    where $\mu_X, \mu_Y \in \mathbb{R}, \sigma_X$ and $\sigma_Y$ are positive, and $-1 < \rho < 1$. Then $(X, Y)$ follow a \textbf{bivariate normal distribution}.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+The \textbf{marginal distributions} are the standard normal ones. $\rho$ models the effect of two random variables on each other:
+
+\vspace{-10pt}
+
+$$\rho(X, Y) = \frac{E[XY] - E[X] E[Y]}{\sqrt{\text{Var}(X) \text{Var}(Y)}} = \frac{\int_{-\infty}^\infty \int_{-\infty}^\infty xy f_{X, Y}(x, y) \,dx\,dy - \mu_X \mu_Y}{\sigma_X \sigma_Y}$$
+
+\vspace{-10pt}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+     While this is not generally true; for a bivariate normal distribution it can be shown that if $\rho = 0$, then $X$ and $Y$ are independent:
+
+    $$
+    f_{X, Y}(x, y) = \frac{1}{2 \pi \sigma_X \sigma_Y} e^{-\frac{1}{2}\big( (\frac{x-\mu_X}{\sigma_X})^2 + (\frac{y-\mu_Y}{\sigma_Y})^2 \big)} 
+    = \frac{1}{\sqrt{2 \pi} \sigma_X} e^{- \frac{1}{2} (\frac{x-\mu_X}{\sigma_X})^2} \cdot \frac{1}{\sqrt{2 \pi} \sigma_Y} e^{- \frac{1}{2} (\frac{y-\mu_Y}{\sigma_Y})^2}
+    = f_X(x) f_Y(y)
+    $$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}

@@ -1,0 +1,109 @@
+\section{Conditional Distributions}
+
+\subsection{Discrete Conditional Distributions}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X$ and $Y$ be two discrete random variables. Then $X | Y = y$ is a \textbf{conditional random variable}. \\
+    
+    Its \textbf{discrete conditional pmf} is
+
+    $$P(X = x | Y = y) = \frac{P(X = x \cap Y = y)}{P(Y = y)}$$
+
+    or
+
+    $$p_{X | Y}(x | y) = \frac{p_{X, Y}(x, y)}{p_Y(y)}$$
+
+    for all $x$, provided $P(Y = y) \neq 0$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X$ and $Y$ be two discrete random variables such that
+
+    $$P(X = x | Y = y) = \frac{P(X = x \cap Y = y)}{P(Y = y)}$$
+
+    Then the marginal distribution can be calculated from just one conditional and one joint probability:
+
+    $$P(Y = y) = \frac{P(X = x \cap Y = y)}{P(X = x | Y = y)}$$
+
+    for any $x$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+Furthermore, Bayes' Rule can be derived from this definition:
+
+$$P(X = x \cap Y = y) = P(Y = y) P(X = x | Y = y) = P(X = x) P(Y = y | X = x)$$
+
+$$P(Y = y | X = x) = P(X = x | Y = y) \frac{P(Y = y)}{P(X = x)}$$
+
+\subsection{Continuous Conditional Distributions}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X$ and $Y$ be two continuous random variables with joint density function $f_{X,Y}(x, y)$. Let $y$ be such that $f_Y(y) > 0$. Then the \textbf{conditional pdf} $f_{X | Y}$ is
+
+    $$f_{X | Y}(x | y) = \frac{f_{X, Y}(x, y)}{f_Y(y)} = \frac{f_{X, Y}(x, y)}{\int f_{X, Y}(x, y) \,dx}$$
+
+    and if $X, Y$ are independent:
+
+    $$f_{X | Y}(x | y) = f_X(x)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+Furthermore, as with any regular density function:
+
+$$P(X \in A | Y = y) = \int_A f_{X | Y}(x | y) \,dx$$
+
+$$F_{X | Y}(a | y) = P(X \leq a | Y = y) = \int_{-\infty}^a f_{X | Y}(x | y) \,dx$$
+
+\end{paracol}
+
+\subsection{Conditional Expectation and Variance}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X$ and $Y$ be two continuous random variables and let $y$ be such that $f_Y(y) > 0$. Then
+
+    $$E[X | (Y = y)] = \int x f_{X | Y}(x | y) \,dx$$
+
+    $$\text{Var}[X | (Y = y)] = \int (x - E[X | (Y = y)])^2 f_{X | Y}(x | y) \,dx$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $g(x, y)$ be a function.
+
+    $$E[g(X, Y) | (Y = y)] = \int f(x, y) f_{X | Y}(x | y) \,dx$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$X | (Y = y) \sim N \Big( \mu_X + \rho \frac{\sigma_X}{\sigma_Y}(y - \mu_Y), (1 - \rho^2) \sigma_X^2 \Big)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}

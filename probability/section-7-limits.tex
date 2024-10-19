@@ -1,0 +1,164 @@
+\section{Limits}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    For any random variable $X$ and positive constant $a > 0$,
+
+    $$P( X \geq a) \leq \frac{E[X]}{a}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Markov Inequality};
+\end{tikzpicture}
+
+\textbf{Proof}: Since
+
+$$E[X] = \int_0^\infty x \, f(x) \, dx \geq \int_a^\infty x \, f(x) \, dx,$$
+
+it follows that
+
+$$P( X \geq a) = \int_a^\infty f(x) \, dx \leq \frac{1}{a} \int_a^\infty x \, f(x) \, dx = \frac{E[X]}{a}$$
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The probability that a random variable $X$ is more than a distance $a > 0$ from its expectation is
+
+    $$P( | X - E[X] | \geq a) \leq \frac{\text{Var}(X)}{a^2}$$
+
+    $$\text{If } a = k \sigma, \quad P(|X-\mu| \geq k \sigma) \leq \frac{1}{k^2}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Chebyshev's Inequality};
+\end{tikzpicture}
+
+\textbf{Proof}:
+
+\vspace{-20pt}
+
+\begin{align*}
+    \text{Var}(X) & = E[(X-\mu)^2] = \int_{-\infty}^\infty (x-\mu)^2 f(x) \,dx \\
+    & \geq \int_{|x-\mu| \geq a} (x-\mu)^2 f(x) \,dx \geq \int_{|x-\mu| \geq a} a^2 f(x) \,dx \\
+    & = a^2 P(|X - \mu| \geq a)
+\end{align*}
+
+\switchcolumn
+
+\subsection{The Law of Large Numbers (LLN)}
+
+Convergence in probability is about the convergence of a given estimator $\bar{\theta}_n$ itself.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $X_1, X_2, \dots, X_n$ are independent and all have the same distribution, then they constitute a \textbf{random sample}.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+The larger the sample size, the lower the variance.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Consider a random sample $X_1, X_2, \dots, X_n$ with $E[X_i]=\mu, \text{Var}(X_i)=\sigma^2$.
+
+    \vspace{-20pt}
+
+    \begin{align*}
+        E[\bar{X}_n] & = E[\frac{1}{n} (X_1 + X_2 + \dots + X_n)] \\
+        & = \frac{1}{n} E[X_1 + X_2 + \dots + X_n] \\
+        & = \frac{1}{n} n \mu \\
+        & = \mu
+    \end{align*}
+
+    \vspace{-20pt}
+
+    \begin{align*}
+        \text{Var}(\bar{X}_n) & = \text{Var}\Big( \frac{1}{n} (X_1 + X_2 + \dots + X_n) \Big) \\
+        & = \frac{1}{n^2} \text{Var}(X_1 + X_2 + \dots + X_n) \\
+        & = \frac{1}{n^2} n \sigma^2 \qquad \text{(by independence)} \\
+        & = \frac{\sigma^2}{n}
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+By Chebyshev's inequality:
+
+\vspace{-20pt}
+
+$$P( | \bar{X}_n - E[\bar{X}_n] | \geq a) \leq \frac{\text{Var}(\bar{X}_n)}{a^2} = \frac{\text{Var}(X_i)}{a^2n}$$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $X_1, X_2, \dots, X_n$ are independent, identically distributed random variables with $E[X_i] = \mu, \text{Var}(X_i) = \sigma^2$ for all $i$, then for any $a > 0$,
+
+    $$\lim_{n \rightarrow \infty} P( | \bar{X}_n - \mu | \geq a) = 0$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {LLN};
+\end{tikzpicture}
+
+\textbf{Counter-example}: If the variance is infinite, e.g. as for some parameters of a Pareto distribution, the mean never converges, and the Law of Large Numbers does not hold (because the variance is not finite).
+
+\switchcolumn
+
+\subsection{The Central Limit Theorem (CLT)}
+
+Convergence in distribution is about the convergence of distributions associated with a given estimator $\bar{\theta}_n$.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $X_1, X_2, \dots, X_n$ are independent, identically distributed random variables with $E[X_i] = \mu, \text{Var}(X_i) = \sigma^2$ for all $i$, then
+
+    \vspace{-20pt}
+
+    $$\sqrt{n}(\bar{X}_n - \mu) \overset{d}{\rightarrow} \mathcal{N}(0, \sigma^2) \text{ as } n \overset{d}{\rightarrow} \infty$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {CLT for Sums of RVs};
+\end{tikzpicture}
+
+Under these conditions, the \textbf{sample mean} $\bar{X}_n$ is approximately normally distributed with parameters $\mu, \frac{\sigma^2}{n}$:
+
+$$\bar{X}_n \approx N \big( \mu, \frac{\sigma^2}{n} \big) \iff \frac{\bar{X}_n - \mu}{\sigma / \sqrt{n}} \approx \mathcal{N}(0, 1)$$
+
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Therefore, the \textbf{sum of the samples is approximately normally distributed} with parameters $n \mu, n \sigma^2$:
+    
+    $$\sum_{i=1}^n X_i \approx \mathcal{N}(n \mu, n \sigma^2)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {CLT};
+\end{tikzpicture}
+
+As a \textbf{rule of thumb}: $n \geq 30$.
+
+\subsection{Approximation to the Binomial}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A binomially distributed random variable $Y \sim \text{Bin}(n, p)$ is the sum of $n$ independent Bernoulli random variables and, by the CLT, can be approximated by a normal distribution:
+
+    \vspace{-10pt}
+
+    $$Y \approx \mathcal{N}(np, np(1-p))$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+As a \textbf{rule of thumb}: both the expected numbers of successes and failures, $np \geq 5, n(1-p) \geq 5$.
+
+\textbf{Proof}:
+
+\vspace{-20pt}
+
+$$Y \sim \text{Bin}(n, p) \iff Y = \sum_{i=1}^{n} X_i \text{ s.t. } X_i \sim \text{Ber}(p)$$
+
+\vspace{-10pt}
+
+$$E[X_i] = p, \quad \text{Var}(X_i) = p(1-p)$$
+
+\vspace{-10pt}
+
+$$E[Y] = np, \quad \text{Var}(Y) = np(1-p), \quad Y \approx \mathcal{N}(np, np(1-p))$$
+
+\end{paracol}

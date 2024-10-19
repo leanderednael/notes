@@ -1,7 +1,7 @@
 SHELL     := /usr/bin/env bash
 MAKEFLAGS += --silent
 
-TARGETS   := algebra calculus complex diffeqs discrete linalg
+TARGETS   := algebra calculus complex diffeqs discrete linalg probability
 
 all: clean compile clean
 

@@ -1,0 +1,49 @@
+\section{Stochastic Processes}
+
+A stochastic process is a collection of random variables describing the state of the system at a particular point in time.
+
+\subsection{Bernoulli Processes}
+
+Bernoulli processes deal with a sequence of independent trials, where each trial has two possible outcomes (often denoted success and failure).  These trials are indexed by a natural number (often representing the order in which they occur).
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Description}: Text
+    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
+\end{tikzpicture}
+
+\subsection{Poisson Processes}
+
+Poisson processes model the arrival of events over continuous time. The random variable represents the number of arrivals in a specific time interval, until a time $t$.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    A Poisson process is a collection of random variables $\{ N(t) : N(t) \sim \text{Poisson}(\lambda t), t \geq 0 \}$ such that \\
+
+    \begin{enumerate}
+        \item $N(0) = 0$ \\
+
+        \item $N(s) \leq N(t)$ for $s < t$ \\
+
+        \item For all $t$ and for "small" $h$,
+
+        $$P\big( N(t+h) = n + m | N(t) = n \big) = \begin{cases}
+            1 - \lambda h + o(h), & m = 0 \\
+            
+            \lambda h + o(h), & m = 1 \\
+            
+            o(h), & m \geq 2 \\
+        \end{cases}
+        $$
+
+        where $o(h)$ means "anything much smaller than $h$", i.e. $\lim_{h \rightarrow 0} o(h) / h = 0$ \\
+
+        \item State transitions are independent, i.e.
+
+        $$\big( N(t_4) - N(t_3) \big) \perp \big( N(t_2) - N(t_1) \big) \text{ for } t_1 < t_2 < t_3 < t_4$$
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
+\end{tikzpicture}

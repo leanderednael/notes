@@ -1,0 +1,312 @@
+\section{Continuous Random Variables}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A \textbf{probability density function} (pdf) is a function $f : \mathbb{R} \rightarrow \mathbb{R}$ such that for any $B \subset \mathbb{R}$,
+
+    $$P(X \in B) = \int_B f_X(x) \, dx \quad s.t.$$
+
+    $$f_X(x) \geq 0, \qquad \int_{-\infty}^{\infty} f_X(x) \,dx = 1$$
+
+    $$P(X = a) = \int_a^a f_X(x) \,dx = 0 \quad \text{ for all } a \in \mathbb{R}$$
+
+    $$P(a \leq X \leq b) = \int_a^b f_X(x) \,dx$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    For a continuous random variable $X$ with pdf $f_X$, \textbf{cumulative distribution function} (CDF) is the non-decreasing, right-continuous function
+
+    $$F(x) = F_X(x) = P(X \leq x) = \int_{-\infty}^x f_X(x) \,dx \quad s.t.$$
+
+    $$\lim_{a \rightarrow -\infty} F_X(a) = 0, \qquad \lim_{a \rightarrow \infty} F_X(a) = 1, \qquad F(\infty) = 1$$
+    
+    $$\frac{d}{dx}F(x) = f(x), \text{ where } F(x) \text{ is differentiable}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+The PDF represents the instantaneous probability density at a point, while the CDF represents the accumulated probability up to that point. This relationship is a direct consequence of the Fundamental Theorem of Calculus.
+
+\subsection{Expectation and Variance}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X$ be a continuous random variable with probability density function $f_X$. Then
+
+    \vspace{-10pt}
+
+    $$E[X] = \int_{-\infty}^{\infty} x f_X(x) \,dx,
+    \quad
+    \text{Var}(X) = \int (x - E[X])^2 f_X(x) \,dx$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X$ be a continuous random variable with probability density function $f_X$. Then:
+
+    $$E[g(X)] = \int_{-\infty}^{\infty} g(x) f_X(x) \,dx$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}
+
+Jensen's inequality and the change-of-unit formula apply just like in the discrete case.
+
+\subsection{The Exponential Distribution}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A random variable $X$ follows an \textbf{exponential distribution} with parameter $\lambda > 0$ if $X$ takes values in $[0, \infty)$ with probability
+
+    \vspace{-10pt}
+
+    $$X \sim \text{Exp}(\lambda) : \quad
+    f(x) = \lambda e^{-\lambda x}, \qquad F(x) = 1 - e^{-\lambda x}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+The exponential distribution models the waiting time between events that are modelled by a Poisson distribution.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The exponential distribution requires the same \textbf{assumptions} to hold as the Poisson distribution:
+
+    \begin{enumerate}
+        \item Occurrences take place instantaneously and individually.
+        \item Occurrences take place independently.
+        \item The interval is finite and constant.
+        \item The average occurrence rate is constant.
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+The exponential distribution also shares the geometric distribution's property of memorylessness:
+
+\begin{itemize}
+    \item $\text{Geom}(p)$ counts discrete "failures" until "successes".
+    \item $\text{Exp}(\lambda)$ measures continuous time between "events".
+\end{itemize}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Memorylessness}: If $X \sim \text{Exp}$ then
+
+    $$P(X > t + s | X > t) = P(X > s)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\textbf{Derivation}:
+
+Assume we expect six customers per hour, or one customer every 10 minutes:
+
+$$N \sim \text{Poisson}(6), N_\frac{1}{6} \sim \text{Poisson}(1)$$
+
+In general, the "number of events in $t$ time units" $N_t$ is thus:
+
+$$N_t \sim \text{Poisson}(\lambda t)$$
+
+The probability of waiting at least $t$ units between events is the probability of zero events occurring in $t$ units, as modelled by the Poisson distribution:
+
+$$P(X > t) = P(N_t = 0) = e^{-\lambda t}$$
+
+Therefore, the cumulative distribution function of the exponential distribution, the cumulative waiting time, is
+
+$$F(t) = P(X \leq t) = 1 - P(X > t) = 1 - e^{-\lambda t}$$
+
+Differentiation gives the probability density function.
+
+The expectation can be found by found by integration by parts:
+
+$$E[X] = \int_0^\infty x \lambda e^{-\lambda x} \,dx = \frac{1}{\lambda}$$
+
+\end{paracol}
+
+The \textbf{Gamma distribution} is the sum of exponentials: $\Gamma(n, \lambda) = \sum_{i=1}^n \text{Exp}(\lambda)$
+
+\subsection{The Pareto Distribution}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A random variable $X$ follows a \textbf{Pareto distribution} with parameter $\alpha > 0$ if $X$ can take on the values in the interval $[1, \infty)$ with probability
+
+    $$X \sim \text{Pareto}(\alpha) :
+    f(x) = \begin{cases}
+        \frac{\alpha}{x^{\alpha+1}} & \text{ if } x \geq 1 \\
+        0 & \text{ if } x < 1
+    \end{cases}$$
+
+    $$F(x) = \int f(x) \,dx = 1 - \Big( \frac{1}{x} \Big)^\alpha$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+TODO: The $0.10^\text{th}$ quantile is such that $F(x) = 0.10$ (for all distributions).
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $X \sim \text{Pareto}(\alpha)$ and $Y = \log(X)$, then $Y \sim \text{Exp}(\alpha)$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Proof}:
+
+\vspace{-30pt}
+
+\begin{align*}
+    F_Y(y) & = P(Y \leq y) \\
+    & = P(\log(X) \leq y) \\
+    & = P(X \leq e^y) \\
+    & = F_X(e^y) \\
+    & = 1 - (\frac{1}{e^y})^\alpha \\
+    & = 1 - e^{-\alpha y}
+\end{align*}
+
+\end{paracol}
+
+\subsection{The Normal Distribution}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    A random variable $X$ follows a \textbf{Normal distribution} with parameters $\mu$ and $\sigma^2$ if $X$ has the following density function for all $x$:
+
+    $$X \sim \mathcal{N}(\mu, \sigma^2) :
+    f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+The integral of this Gaussian function cannot be written using
+elementary functions. However, the standard normal distribution can be used to calculate probabilities!
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Linear transformations}:
+    
+    If $X \sim \mathcal{N}(\mu, \sigma^2)$ and $r, s$ are real numbers, then
+
+    $$rX + s \sim \mathcal{N}(r\mu + s, r^2 \sigma^2)$$
+
+    \vspace{2.5pt}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $X \sim \mathcal{N}(\mu, \sigma^2)$, then
+
+    $$Z = \frac{X - \mu}{\sigma} \sim \mathcal{N}(0, 1)$$
+
+    is called the \textbf{standard normal} distribution.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Any normally distributed random variable can transformed to a standard normal distribution:
+
+    $$X \sim \mathcal{N}(\mu, \sigma^2) \Rightarrow \frac{X - \mu}{\sigma} \sim \mathcal{N}(0, 1)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Corollary};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$\Phi(-x) = 1 - \Phi(x) \iff P(X \leq -x) = P(X > x)$$
+    $$F(x) = P(X \leq x) = P\Big( \frac{X - \mu}{\sigma} \leq \frac{x - \mu}{\sigma} \Big) = \Phi\Big( \frac{x - \mu}{\sigma} \Big)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\vspace{5pt}
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+    Distribution & PDF & $E[X]$ & $\text{Var}(X)$ \\
+
+    \hline
+
+    $\text{Uni}(a, b)$ & $\frac{1}{b-a}, \quad a < x < b$ & $\frac{1}{2}(a + b)$ & $\frac{1}{12}(b - a)^2$ \\[0.5cm]
+
+    $\text{Exp}(\lambda)$ & $\lambda e^{-\lambda x}, \quad x > 0$ & $1 / \lambda$ & $1 / \lambda^2$ \\[0.5cm]
+
+    $\text{Gamma}(n, \lambda)$ & $\frac{(\lambda x)^{n-1}}{\lambda e^{\lambda x}(n-1)!}, \quad x > 0$ & $n / \lambda$ & $n / \lambda^2$ \\[0.5cm]
+
+    $\text{Pareto}(\alpha)$ & $\begin{cases}
+        \frac{\alpha}{x^{\alpha+1}} & \text{ if } x \geq 1 \\
+        0 & \text{ if } x < 1
+    \end{cases}$ & $\begin{cases}
+        \infty & \text{ for } \alpha \leq 1 \\
+        \frac{\alpha}{\alpha - 1} & \text{ for } \alpha > 1
+    \end{cases}$ & $\begin{cases}
+        \infty & \text{ for } \alpha \leq 2 \\
+        \frac{\alpha}{(\alpha - 1)^2 (\alpha - 2)} & \text{ for } \alpha > 2
+    \end{cases}$ \\[0.5cm]
+
+    $\mathcal{N}(\mu, \sigma^2)$ & $\frac{1}{\sqrt{2 \pi \sigma^2}} e^{- \frac{(x - \mu)^2}{2 \sigma^2}}$ & $\mu$ & $\sigma^2$ \\[0.5cm]
+
+    Standard normal & $\frac{1}{\sqrt{2 \pi}} e^{- \frac{x^2}{2}}$ & $0$ & $1$
+\end{tabular}
+\end{center}
+
+\vspace{5pt}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $S_n \sim \text{Bin}(n, p)$ converges to a standard normal
+
+    $$
+    \lim_{n \rightarrow \infty} P \Big( a \leq \frac{S_n - np}{\sqrt{np (1-p)}} \leq b \Big) = \Phi(b) - \Phi(a)
+    $$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {DeMoivre-Laplace Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+Thus, there are two \textbf{approximations to the binomial distribution}:
+
+\begin{itemize}
+    \item The Poisson distribution is a good approximation when $n$ is large and $p$ is small.
+
+    \item The standard normal distribution is a good approximation when $np (1-p)$ is large.
+\end{itemize}
+
+\end{paracol}

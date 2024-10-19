@@ -1,0 +1,325 @@
+\section{Discrete Random Variables}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $\Omega$ be a sample space. A \textbf{discrete random variable} is a function $X : \Omega \rightarrow \mathbb{R}$ that takes on a finite number of values $x_1, x_2, \dots, x_n$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{(probability) mass (function)} of a discrete random variable $X$ is $p(X) = P(X = x)$
+
+    $= P(X \leq x) - \lim_{y \rightarrow x^-} P(X \leq y) = F(x) - \lim_{y \rightarrow x^-} F(y)$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{(cumulative) distribution (function)} of a discrete random variable $X$ is the non-decreasing, right-continuous function
+    $$F(x) = F_X(x) = P(X \leq x) \quad s.t.$$
+    $$\lim_{x \rightarrow -\infty} F(x) = 0, \lim_{x \rightarrow \infty} F(x) = 1$$
+    $$P(a < X \leq b) = P(X \leq b) - P(X \leq a) = F(b) - F(a)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Expectation and Variance}
+
+The expectation is comparable to the centre of mass of an object - the point where it would balance.
+
+The variance and standard deviation measure the spread of a probability distribution around the expectation. Specifically, the standard deviation is the distance from the mean, with 68\%, 95\% and 99.7\% of data points within one, two and three standard deviations from the expectation, respectively.
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X$ be a discrete random variable with probability mass function $p_X$ and possible values $x_1, x_2, \dots$. The \textbf{expectation} of $X$ is the weighted average of the possible values of $X$:
+
+    $$E[X] = \sum_i{x_i p(x_i)} = \sum_i{x_i P(X=x_i)}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+For the standard deviation, consider the expression $X - E[X]$. It is also a random variable, so one could take its expectation, however, by definition it will always occur that $E[X - E[X]] = 0$. Therefore, a more practical definition is:
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{variance} of a r.v. $X$, $\text{Var}(X) = \text{Var}(-X)$, is
+
+    \vspace{-5pt}
+
+    $$\text{Var}(X) = E[(X - E[X])^2] = E[X^2] - (E[X])^2 \geq 0$$
+
+    The \textbf{standard deviation} of a random variable $X$ is
+
+    $$\text{SD}(X) = \sqrt{\text{Var}(X)} \geq 0$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\textbf{Example}: Consider the random variable $X$ for which $P(X = -1) = P(X = 1) = p, P(X = 0) = 1-2p, 0 < p < \frac{1}{2}$.
+
+\vspace{-20pt}
+
+\begin{align*}
+    E[X] & = (-1) \cdot p + 1 \cdot p + 0 \cdot (1-2p) = 0 \\
+    \text{Var}(X) & = (-1)^2 \cdot p + 1^2 \cdot p + 0^2 \cdot (1-2p) - (E[X])^2 = 2p
+\end{align*}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $f$ be a function and $X$ a discrete random variable. Then
+
+    $$E[g(X)] = \sum_i{g(x_i) P(X = x_i)}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+Note: In general, $E[g(X)] \neq g(E[X])$.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $E[g(X)]$ and $g(E[X])$ are finite, and $g(x)$ is a \textbf{convex} function on $R_X$, i.e. $f''(x) \geq 0$, then
+    
+    $$E[g(X)] \geq g(E[X])$$
+
+    If $E[g(X)]$ and $g(E[X])$ are finite, and $g(x)$ is a \textbf{concave} function on $R_X$, i.e. $f''(x) \leq 0$, then
+    
+    $$E[g(X)] \leq g(E[X])$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Jensen's Inequaltiy};
+\end{tikzpicture}
+
+\textbf{Example}:
+
+Let $g(x) = x^a \quad \forall \quad a \in \mathbb{R}$. Then $f''(x) = a(a-1)x^{a-2} > 0 \iff a < 0 \text{ or } a > 1$. Therefore,
+
+$$
+\begin{cases}
+    E[X^a] \geq (E[X])^a & \text{ if } a < 0 \text{ or } a > 1 \\
+    E[X^a] = (E[X])^a & \text{ if } a = 0 \text{ or } a = 1 \\
+    E[X^a] \leq (E[X])^a & \text{ if } 0 < a < 1
+\end{cases}
+$$
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Linearity of expectation:
+
+    \vspace{-10pt}
+
+    $$E[rX + s] = r E[X] + s$$
+
+    \vspace{-20pt}
+    
+    $$E[rX + sY] = r E[X] + s E[Y] \qquad E[\bar{X}_1 - \bar{X}_2] = \mu_1 - \mu_2$$
+
+    \vspace{-20pt}
+
+    $$\text{Var}(rX + s) = r^2 \text{Var}(X) \qquad \text{Var}(\bar{X}_1 - \bar{X}_2) = \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}$$
+
+    \vspace{-20pt}
+
+    $$\text{Var}(rX + sY) = r^s \text{Var}(X) + 2 \text{Cov}(X, Y) + s^2 \text{Var}(Y)$$
+
+    \vspace{-25pt}
+
+    $$\text{Var}(rX + sY) = r^s \text{Var}(X) + s^2 \text{Var}(Y) \iff X \perp Y$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Change-of-Unit Formulae};
+\end{tikzpicture}
+
+\textbf{Proofs}:
+
+    \vspace{-10pt}
+
+\begin{align*}
+    E[rX + s] & = \sum_i{(r x_i + s) P(X = x_i)} \\
+    & = \sum_i{r x_i P(X = x_i)} + \sum_i{s P(X = x_i)} \\
+    & = r \sum_i{x_i P(X = x_i)} + s \sum_i{P(X = x_i)} \\
+    & = r E[X] + s \\
+\end{align*}
+
+\vspace{-30pt}
+
+\begin{align*}
+    \text{Var}(rX + s) & = E[(rX + s)^2] - (E[rX + s])^2 \\
+    & = E[r^2 X^2 + 2rsX + s^2] - (rE[X] + s)^2 \\
+    & = (r^2 E[X^2] + 2rsE[X] + s^2) \\
+    & \quad \quad - (r^2 (E[X])^2 + 2rsE[X] + s^2) \\
+    & = r^2 (E[X^2] - (E[X])^2) \\
+    & = r^2 \text{Var}(X)
+\end{align*}
+
+\end{paracol}
+
+\newpage
+
+\subsection{Discrete Distributions}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A random variable $X$ has a \textbf{Bernoulli distribution} with parameter $p$ if $X$ can take the values $k = 0, 1$ with probabilities
+
+    $$X \sim \text{Ber}(p) :
+    P(X = k) = \begin{cases}
+        1 - p & \text{ if } k = 0 \\
+        p & \text{ if } k = 1
+    \end{cases}
+    $$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+The geometric distribution describes how many \textit{independent} Bernoulli experiments are needed until the first success.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A random variable $X$ has a \textbf{geometric distribution} with parameter $p$ if $X$ takes on the values $k = 1, 2, 3, \dots$ with probability
+
+    $$X \sim \text{Geom}(p):
+    P(X = k) = p (1-p)^{k-1}
+    $$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: The geometric distribution is memory-less:
+
+\vspace{-20pt}
+
+\begin{align*}
+    P(X = 11 | X > 7) & = \frac{P(X = 11 \cap X > 7)}{P(X > 7)} \\
+    & = \frac{P(X = 11)}{P(X > 7)} \\
+    & = \frac{p (1-p)^{11-1}}{(1-p)^7} \\
+    & = p (1-p)^3
+\end{align*}
+
+The binomial distribution models the number of successes in a sequence of length $n$.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A random variable $X$ follows a \textbf{binomial distribution} with parameters $n, p$ if $X$ can take on the values $k = 0, 1, 2, \dots, n$ with probabilities
+
+    $$X \sim \text{Bin}(n, p) :
+    P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
+    $$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$X \sim \text{Bin}(n, p) : P(X = k + 1) = \frac{p}{1-p} \cdot \frac{n-k}{k+1} \cdot P(X = k)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Corollary};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Given random variables $X_1, X_2, \dots, X_n$, if
+
+    \begin{enumerate}
+        \item all $X_i$ are mutually independent, and
+        \item all $X_i \sim \text{Ber}(p)$ for the same value of $p$
+        \item the sample space is fixed, i.e. there is a fixed number of trials $n$
+    \end{enumerate}
+
+    then the sum of of all $X_i$s is a random variable with binomial distribution:
+
+    $$
+    \Big( \sum_{i=1}^n{X_i} \Big) \sim \text{Bin}(n, p)
+    $$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+The \textbf{negative binomial distribution} models the number of independent $\text{Ber}(p)$ trials until the $r^{th}$ success: $\sum_{i=1}^r \text{Geom}(p)$.
+
+The \textbf{hypergeometric distribution} models the number of red balls drawn when we draw $n$ balls out of $m$ red balls and $N-m$ blue balls.
+
+\switchcolumn
+
+The Poisson distribution models the number of random occurrences of a specific event over a fixed interval (time, space).
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A random variable follows a \textbf{Poisson distribution} with parameters $\lambda$ if $X$ can take on the values $k = 0, 1, 2, \dots$ with probabilities
+
+    $$X \sim \text{Pois}(\lambda) :
+    P(X = k) = \frac{\lambda^k}{k!} e^{-\lambda}
+    $$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The Poisson distribution requires the following assumptions:
+
+    \begin{enumerate}
+        \item Occurrences take place instantaneously and individually.
+        \item Occurrences take place independently.
+        \item The interval under consideration is finite and constant.
+        \item The average occurrence rate is constant.
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Derivation}:
+
+Divide a given interval into $n$ sub-intervals. The occurrence of an event in each sub-interval is either $0$ or $1$:
+
+$$X_m \sim \text{Ber}\Big(\frac{\lambda}{n}\Big), m = 1, \dots, n$$
+
+By independence, the total number of occurrences in the discrete interval is
+
+$$Y_n = X_1 + \dots + X_n \sim \text{Bin}\Big(n, \frac{\lambda}{n}\Big)$$
+
+That is, $Y_n \sim \text{Bin}(n, \frac{\lambda}{n})$ has probability mass function
+
+$$P(Y_n = k) = \binom{n}{k} \Big(\frac{\lambda}{n}\Big)^k \Big(1 - \frac{\lambda}{n}\Big)^{n-k}$$
+
+The Poisson distribution is the $\lim_{n \rightarrow \infty} \text{Bin}(n, p), \lambda = np$ (and, \textbf{for large} $n$ \textbf{and small} $p$, \textbf{can be used as an approximation for the binomial distribution} $\text{Bin}(n, p)$):
+
+\vspace{-25pt}
+
+\begin{align*}
+    \lim_{n \rightarrow \infty}{P(Y_n = k)} & = \lim_{n \rightarrow \infty}{\binom{n}{k} \Big(\frac{\lambda}{n}\Big)^k \Big(1 - \frac{\lambda}{n}\Big)^{n-k}} \\
+    & = \frac{\lambda^k}{k!} e^{-\lambda}
+\end{align*}
+
+\vspace{20pt}
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+    Distribution & PMF & $E[X]$ & $\text{Var}(X)$ \\
+    \hline
+    $\text{Ber}(p)$ & $\begin{cases} p & x = 1 \\ 1-p & p = 0 \end{cases}$ & $p$ & $p(1-p)$ \\[0.5cm]
+    $\text{Geom}(p)$ & $p (1-p)^{(k-1)}$ & $1/p$ & $(1-p)/p^2$ \\[0.5cm]
+    \text{Bin}(n, p) & $\binom{n}{k} p^k (1-p)^{(n-k)}$ & $np$ & $np(1-p)$ \\[0.5cm]
+    $\text{Pois}(\lambda)$ & $\lambda^k e^{-\lambda} / k!$ & $\lambda$ & $\lambda$ \\[0.5cm]
+    $\text{NBin}(r, p)$ & $\binom{n-1}{r-1} (1-p)^{n-r} p^r$ & $r/p$ & $r(1-p)/p^2$ \\[0.5cm]
+    $\text{HG}(N, m, n)$ & $\binom{m}{k} \binom{N-m}{n-k} / \binom{N}{n}$ & $nm/M$ &
+\end{tabular}
+\end{center}
+
+\end{paracol}

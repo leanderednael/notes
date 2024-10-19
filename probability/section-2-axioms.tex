@@ -1,0 +1,247 @@
+\section{Axioms of Probability}
+
+\subsection{Probability Spaces}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A statistical experiment is a random procedure whose \textbf{outcome} is uncertain. \\
+
+    The set of all possible outcomes is called the \textbf{sample space} $\Omega$. It is "collectively exhaustive". \\
+
+    Subsets of the sample space are called \textbf{events}. An event occurs if the outcome of the statistical experiment is an element of the event.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $E, F \subset \Omega$ are events, then the following too are events:
+
+    \begin{enumerate}
+        \item their union $E \cup F$
+        \item their intersection $E \cap F$
+        \item their complement(s) $E^C = \Omega \setminus E$
+    \end{enumerate}
+
+    They are \textbf{disjoint (or mutually exclusive)} if $EF = \emptyset$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$( \cup A_i )^C = \cap A_i^C , \qquad ( \cap A_i )^C = \cup A_i^C$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {De Morgan's Laws};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A \textbf{probability space} $(\Omega, P)$ incorporates a sample space $\Omega$ with collectively exhaustive and mutually exclusive events $E \in \Omega$ and their probabilities $P$:
+
+    \vspace{-15pt}
+
+    $$0 \leq P(\omega) \leq 1 \quad \forall \quad \omega \in \Omega, \qquad P(\Omega) = \sum_{\omega \in \Omega} P(\omega) = 1$$
+
+    \vspace{-5pt}
+
+    The probability of an event $E_i \subseteq \Omega$ is the sum of the probabilities of the possible outcomes in $E_i$:
+
+    \vspace{-5pt}
+
+    $$P(E_i) \triangleq \sum_{\omega \in E_i} P(\omega) \quad \forall \quad E_i \in \Omega$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A probability space with $m$ different possible outcomes, i.e. with a sample space of size $| \Omega | = m$, has
+    $2^m$
+    \textbf{possible distinct events}, incl.
+
+    \begin{itemize}
+        \item the empty set (which represents an impossible situation, and has probability zero),
+        \item the whole sample space itself (which has $P(\Omega) = 1$),
+        \item all combinations of events in between (all with probability $> 0, < 1$).
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\newpage
+
+\subsection{Probability Functions}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A \textbf{probability function} $P$ assigns to each event $A \in \Omega$ a value $P(A) \in [0, 1]$, called the probability of the event, such that: \\
+
+    \begin{enumerate}
+        \item the total probability is equal to one:
+
+        $$P(\Omega) = \frac{| \Omega |}{| \Omega |} = 1$$
+        
+        \item the sum rule / inclusion-exclusion formula applies: \begin{align*}
+            P(E \cup F) & = P(E) + P(F) - P(E \cap F) \\
+            & \Big( = \frac{| E | + | F | - | E \cap F |}{| \Omega |} \Big)
+        \end{align*}
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Given any probability function $P$, for any event $E$, its \textbf{complement}
+
+    $$P(E^C) = 1 - P(E)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A \textbf{Laplace experiment} is a statistical experiment with finite sample space $\Omega$ such that all outcomes $\omega \in \Omega$ are equally likely. The probability of any given event in a Laplace experiment is
+
+    $$P(E) = \frac{| E |}{| \Omega |}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Conditional Probability}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{conditional probability} of an event $A$, given an event $B$, is
+
+    $$P(A | B) = \frac{P(A \cap B)}{P(B)}, \text{ provided } P(B) \neq 0$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{The multiplication rule}: For any two events $A$ and $B$, for which $P(B) \neq 0$,
+
+    $$P(A \cap B) = P(B) P(A | B)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Corollary};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Two events $A$ and $B$ are \textbf{independent}, $A \perp B$, if $P(A | B) = P(A), \quad P(B | A) = P(B), \quad P(A \cap B) = P(B) P(A)$. \textit{The outcome of one event is independent of the outcome of the other event(s)}. \\
+
+    Multiple events $A, B, C$ may be \textbf{mutually (or marginally)}, $A \perp B \perp C$, or \textbf{pairwise independent}, $A \perp B$ and / or $A \perp C$ and / or $B \perp C$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}:  With a fair coin, let's say that we just tossed it five times and tails turned up all five times. Is it more likely now that we'll see heads? No, because the previous outcome doesn't tell us anything about the outcome of a new toss.
+
+\end{paracol}
+
+\begin{paracol}{2}
+
+\textbf{Example}: Random variables $W, I$ are not independent:
+
+\begin{verbatim}
+>>> prob_W_I = np.array([[1/2, 0], [0, 1/6], [0, 1/3]])
+>>> prob_W_I
+array([[0.5       , 0.        ],
+       [0.        , 0.16666667],
+       [0.        , 0.33333333]])
+>>> prob_W = prob_W_I.sum(axis=1)
+>>> prob_I = prob_W_I.sum(axis=0)
+>>> prob_W
+array([0.5       , 0.16666667, 0.33333333])
+>>> prob_I
+array([0.5, 0.5])
+>>> np.outer(prob_W, prob_I)
+array([[0.25      , 0.25      ],
+       [0.08333333, 0.08333333],
+       [0.16666667, 0.16666667]])
+\end{verbatim}
+
+\switchcolumn
+
+\textbf{Example}: Random variables $X, Y$ are independent:
+
+\begin{verbatim}
+>>> prob_X_Y = np.array([[1/4, 1/4], [1/12, 1/12], [1/6, 1/6]])
+>>> prob_X_Y
+array([[0.25      , 0.25      ],
+       [0.08333333, 0.08333333],
+       [0.16666667, 0.16666667]])
+>>> prob_X = prob_X_Y.sum(axis=1)
+>>> prob_Y = prob_X_Y.sum(axis=0)
+>>> prob_X
+array([0.5       , 0.16666667, 0.33333333])
+>>> prob_Y
+array([0.5, 0.5])
+>>> np.outer(prob_X, prob_Y)
+array([[0.25      , 0.25      ],
+       [0.08333333, 0.08333333],
+       [0.16666667, 0.16666667]])
+\end{verbatim}
+
+\end{paracol}
+
+\subsection{Law of Total Probability and Bayes' Theorem}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose $B_1, \dots, B_m$ are disjoint events such that
+
+    $$B_1 \cup \dots \cup B_m = \Omega$$
+
+    Then for any event $A$,
+
+    \begin{align*}
+        P(A) & = \sum_i P(A | B_i) P(B_i) \\
+        & ( = P(A | B_1) P(B_1) + \dots + P(A | B_m) P(B_m) )
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Law of Total Probability};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    In the special case where $m = 2$,
+
+    $$P(A) = P(A | B) P(B) + P(A | B^C) P(B^C)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Corollary};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    For any two events $A$ and $B$ (with non-zero probabilities,
+
+    $$P(B | A) = \frac{P(A | B) P(B)}{P(A)}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Bayes' Theorem};
+\end{tikzpicture}
+
+\end{paracol}

@@ -1,0 +1,90 @@
+\section{Counting}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    If in sub-experiment $i$ there are $n_i$ possible outcomes for $i = 1, \dots, k$, then there are $n_1 n_2 \dots n_k$ possible outcomes for the experiment.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Basic Principle of Counting};
+\end{tikzpicture}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The number of ways to distribute $n$ elements into $k$ ordered piles of sizes $n_1, n_2, \dots, n_k$ is given by the \textbf{multinomial coefficient}
+
+    $$\binom{n}{n_1, n_2, \dots, n_k} = \frac{n!}{n_1! n_2! \dots n_k!}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The number of \textbf{permutations} is the number of ways of distributing $n$ elements into $k$ ordered piles of sizes $n_1, \dots, n_k$:
+
+    $$P_n^k = \frac{n!}{n_1! n_2! \dots n_k!}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$(a + b)^n = \sum_{k=0}^n \binom{n}{k} a^k b^{n-k}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Binomial Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    There are $n!$ possible ways to order $n$ (distinguishable) items.
+
+    \vspace{-12.5pt}
+
+    $$P_n = n!$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Corollary};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The number of ways to choose $k$ elements out of $n$ elements is given by the \textbf{binomial coefficient} \\
+
+    $$\binom{n}{k} = \frac{n!}{k! (n-k)!}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The number of \textbf{combinations} is the number of ways of choosing $k$ from $n$ items such that the order of selection does not matter:
+
+    $$C_n^k = \binom{n}{k} = \frac{n!}{k! (n-k)!}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    The number of \textbf{variations} is the number of ways of choosing $k$ out of $n$ items such that the order of selection \textit{does} matter:
+
+    \begin{itemize}
+        \item without repetition:
+        $$\binom{n}{k} k! = \frac{n!}{(n-k)!}$$
+        \item with repetition:
+        $$n^k$$
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
