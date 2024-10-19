@@ -1,0 +1,191 @@
+\section{Transcendental Functions}
+
+Transcendental functions are non-algebraic functions that cannot be expressed as a finite combination of algebraic operations such as addition, subtraction, multiplication, division, raising to a power, and extracting roots. In other words, they are functions that are not solutions to polynomial equations.
+
+\subsection{The Natural Logarithm}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    The natural logarithmic function is the function defined by
+
+    $$\ln{x} = \int_1^x \frac{1}{t} \, dt, \quad x > 0$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+The existence of this function depends on the fact that the integral of a continuous function always exists.
+
+\begin{itemize}
+    \item For $x > 1$, then $\ln{x}$ can be interpreted geometrically as the area under the hyperbola $y = \frac{1}{t}$ from $t = 1$ to $t = x$.
+    \item For $x = 1$, $\ln{1} = \int_1^1 \frac{1}{t} \, dt = 0$
+    \item For $0 < x < 1$, $ln{x} = \int_1^x \frac{1}{t} \, dt = - \int_x^1 \frac{1}{t} \, dt < 0$ and so $\ln{x}$ is the negative of the area under the hyperbola on that interval.
+\end{itemize}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \vspace{-5pt}
+
+    $$\frac{d}{dx}(\ln{x}) = \frac{1}{x}$$
+
+    \vspace{-5pt}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Corollary};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$\lim_{x \rightarrow \infty} \ln{x} = \infty \qquad \lim_{x \rightarrow 0^+} \ln{x} = -\infty$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $e$ is the number such that $\ln{e} = 1$.
+
+    $$e = \lim_{x \rightarrow 0} (1+x)^{1/x}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Laws of Logarithms}:
+
+    \vspace{-10pt}
+
+    $$\ln{xy} = \ln{x} + \ln{y} \qquad \ln{\frac{x}{y}} = \ln{x} - \ln{y} \qquad \ln{x^r} = r \ln{x}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{The Natural Exponential Function}
+
+\begin{paracol}{2}
+
+Since $\ln$ is an increasing function, it is one-to-one and therefore has an inverse function.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$e^x = y \quad \iff \quad \ln{y} = x$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$e^{\ln{x}} = x, \quad x > 0 \qquad \ln{e^x} = x \text{ for all } x$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Laws of Exponents}: \\
+
+    If $x, y$ are real numbers and $r$ is rational, then
+
+    $$e^{x + y} = e^x e^y \qquad e^{x - y} = \frac{e^x}{e^y} \qquad (e^x)^r = e^{rx}$$
+
+    If $x, y$ are real numbers and $a, b > 0$, then
+
+    $$a^{x + y} = a^x a^y \quad a^{x - y} = \frac{a^x}{a^y} \quad (a^x)^y = a^{xy} \quad (ab)^x = a^x b^x$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    \textbf{Properties of the natural exponential function}: The exponential function $f(x) = e^x$ is a continuous function with domain $\mathbb{R}$ and range $(0, \infty)$.
+
+    Thus, $e^x > 0$ for all $x$, $\lim_{x \rightarrow -\infty} e^x = 0$, $\lim_{x \rightarrow \infty} e^x = \infty$.
+
+    The $x$-axis is a horizontal asymptote of $f(x) = e^x$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\subsection{General Logarithmic Functions}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    If $a > 0$ and $a \neq 1$, then $f(x) = a^x$ is a one-to-one function. Its inverse function is called the logarithmic function with base $a$:
+
+    $$\log_a{x} = y \quad \iff \quad a^y = x$$
+
+    $$\frac{d}{dx}(\log_a{x}) = \frac{1}{x \ln{a}}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$\log_a(a^x) = x \text{ for all } x \in \mathbb{R}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$a^{\log_a{x}} = x \text{ for all } x > 0$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$\log_a(xy) = \log_a(x) + \log_a(y)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$\log_a(x / y) = \log_a(x) - \log_a(y)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $a > 1$, then
+
+    $$\lim_{x \rightarrow \infty} \log_a{x} = \infty \qquad \text{and} \qquad \lim_{x \rightarrow 0^+} \log_a{x} = -\infty$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    For any positive number $a$ ($a \neq 1$),
+
+    $$\log_a{x} = \frac{\ln{x}}{\ln{a}}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Change-of-Base Formula};
+\end{tikzpicture}
+
+\end{paracol}

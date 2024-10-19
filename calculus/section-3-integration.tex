@@ -1,0 +1,443 @@
+\section{Integration}
+
+\subsection{Areas and Distances}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    The area $A$ of the region $S$ that lies under the graph of the continuous function $f$ is the limit of the sum of the areas of approximating rectangles:
+
+    $$A = \lim_{n \rightarrow \infty} R_n = \lim_{n \rightarrow \infty} [f(x_1) \triangle x + f(x_2) \triangle x + \dots + f(x_n) \triangle x]$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\subsection{The Definite Integral}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is a function defined on $[a, b]$, the \textbf{definite integral} of $f$ from $a$ to $b$ is the number
+
+    $$\int_a^b f(x) \, dx = \lim_{\max{\triangle x_i} \rightarrow 0} \sum_{i=1}^n f(x_i^*) \triangle x_i$$
+
+    provided that this limit exists.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \vspace{5pt}
+
+    If $f$ is continuous on $[a, b]$, or if $f$ has only a finite number of jump discontinuities, then $f$ is \textbf{integrable} on $[a, b]$; that is, the definite integral $\int_a^b f(x) \, dx$ exists.
+
+    \vspace{5pt}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is integrable on $[a, b]$, then
+
+    $$\int_a^b f(x) \, dx = \lim_{n \rightarrow \infty} \sum_{i=1}^n f(x_i) \triangle x$$
+
+    where $\triangle x = \frac{b - a}{n}$ and $x_i = a + i \triangle x$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$\int_a^b f(x) \, dx \approx \sum_{i=1}^n f(\bar{x}_i) \triangle x = \triangle x [f(\bar{x}_1) + \dots + f(\bar{x}_n)]$$
+
+    where $\triangle x = \frac{b - a}{n}$ \\
+
+    and $\bar{x}_i = \frac{1}{2} (x_{i-1} + x_i)$ is the midpoint of $[x_{i-1}, x_i]$. \\
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Midpoint Rule};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Properties of the integral}: \\
+
+    \begin{enumerate}
+        \item $\int_a^b c \, dx = c(b - a)$, where $c$ is any constant \\
+
+        \item $\int_a^b [f(x) + g(x)] \, dx = \int_a^b f(x) \, dx + \int_a^b g(x) \, dx$ \\
+
+        \item $\int_a^b c f(x) \, dx = c \int_a^b f(x) \, dx$, where $c$ is any constant \\
+
+        \item $\int_a^b [f(x) - g(x)] \, dx = \int_a^b f(x) \, dx - \int_a^b g(x) \, dx$ \\
+
+        \item $\int_a^c f(x) \, dx + \int_c^b f(x) \, dx = \int_a^b f(x) \, dx$
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Comparison properties of the integral}: \\
+
+    \begin{enumerate}
+        \item If $f(x) \geq 0$ for $a \leq x \leq b$, then $\int_a^b f(x) \, dx \geq 0$. \\
+
+        \item If $f(x) \geq g(x)$ for $a \leq x \leq b$, then $\int_a^b f(x) \, dx \geq \int_a^b g(x) \, dx$. \\
+
+        \item If $m \leq f(x) \leq M$ for $a \leq x \leq b$, then
+
+        $$m(b - a) \leq \int_a^b f(x) \, dx \leq M(b - a)$$
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is continuous on the interval $[a, b]$, then
+
+    $$\int_a^b f(x) \, dx = F(b) - F(a)$$
+
+    where $F$ is any \textbf{antiderivative} of $f$, that is, $F'(x) = f(x)$ for all $x$ in an interval $I$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Evaluation Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The integral of a rate of change is the net change:
+
+    $$\int_a^b F'(x) \, dx = F(b) - F(a)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Net Change Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{The Fundamental Theorem of Calculus}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose $f$ is continuous on $[a, b]$. \\
+
+    \begin{enumerate}
+        \item If $g(x) = \int_a^x f(t) \, dt$, then $g'(x) = f(x)$. \\
+
+        \item $\int_a^b f(x) \, dx = F(b) - F(a)$, where $F$ is any antiderivative of $f$; that is, $F' = f$.
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Fundamental Theorem of Calculus};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is continuous on $[a, b]$, then there exists a number $c$ in $[a, b]$ such that $f(c)$ is the \textbf{average value} of a function:
+
+    $$f(c) = f_\text{ave} = \frac{1}{b - a} \int_a^b f(x) \, dx$$
+
+    $$\text{that is, } \qquad \qquad \int_a^b f(x) \, dx = f(c) (b - a) \qquad \qquad \qquad$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Mean Value Theorem for Integrals};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Improper Integrals}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Improper integrals of type 1}:
+
+    \begin{itemize}
+        \item If $\int_a^t f(x) \, dx$ exists for every number $t \geq a$, then
+
+        $$\int_a^\infty f(x) \, dx = \lim_{t \rightarrow \infty} \int_a^t f(x) \, dx$$
+
+        provided this limit exists (as a finite number).
+
+        \item If $\int_t^b f(x) \, dx$ exists for every number $t \leq b$, then
+
+        $$\int_{-\infty}^b f(x) \, dx = \lim_{t \rightarrow -\infty} \int_t^b f(x) \, dx$$
+
+        provided this limit exists (as a finite number).
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The improper integrals $\int_a^\infty f(x) \, dx$ and $\int_{-\infty}^b f(x) \, dx$ are called \textbf{convergent} if the corresponding limit exists and \textbf{divergent} if the limit does not exist.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $\int_a^\infty f(x) \, dx$ and $\int_{-\infty}^a f(x) \, dx$ are called convergent, then
+
+    $$\int_{-\infty}^\infty f(x) \, dx = \int_{-\infty}^a f(x) \, dx + \int_a^\infty f(x) \, dx$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Improper integrals of type 2}:
+
+    \begin{itemize}
+        \item If $f$ is continuous on $[a, b)$ and discontinuous at $b$,
+
+        $$\int_a^b f(x) \, dx = \lim_{t \rightarrow b^-} \int_a^t f(x) \, dx$$
+
+        if this limit exists (as a finite number).
+
+        \item If $f$ is continuous on $(a, b]$ and discontinuous at $a$,
+
+        $$\int_a^b f(x) \, dx = \lim_{t \rightarrow a^+} \int_t^b f(x) \, dx$$
+
+        if this limit exists (as a finite number).
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The improper integrals $\int_a^b f(x) \, dx$ is called \textbf{convergent} if the corresponding limit exists and \textbf{divergent} if the limit does not exist.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ has a discontinuity at $c$, where $a < c < b$, and both $\int_a^c f(x) \, dx$ and $\int_c^b f(x) \, dx$ are convergent, then we define
+
+    $$\int_a^b f(x) \, dx = \int_a^c f(x) \, dx + \int_c^b f(x) \, dx$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+\begin{center}
+    $\int_1^\infty \frac{1}{x^p} \, dx$ is convergent if $p > 1$ and divergent if $p \leq 1$.
+\end{center}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Proof}: Suppose $T_n(x)$ is the $n^\text{th}$ Taylor polynomial of a function $f(x)$. Then $\int T_n(x) \, dx$ is the $(n + 1)^\text{st}$ Taylor polynomial of an anti-derivative $F(x)$ of $f(x)$. For $a > 0$:
+
+$$
+\int_a^\infty \frac{1}{x^p} \, dx \quad \begin{cases}
+    \text{diverges} & \text{if } p \leq 1 \\
+    \text{converges to } \frac{a^{-p + 1}}{p - 1} & \text{if } p > 1
+\end{cases}
+\qquad \qquad
+\int_0^a \frac{1}{x^p} \, dx \quad \begin{cases}
+    \text{diverges} & \text{if } p \geq 1 \\
+    \text{converges to } \frac{a^{1 - p}}{1 - p} & \text{if } p < 1
+\end{cases}
+$$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Suppose that $f$ and $g$ are continuous functions with $f(x) \geq g(x) \geq 0$ for $x \geq a$. \\
+
+    \begin{itemize}
+        \item If $\int_a^\infty f(x) \, dx$ is convergent, then $\int_a^\infty g(x) \, dx$ is convergent. \\
+
+        \item If $\int_a^\infty g(x) \, dx$ is divergent, then $\int_a^\infty f(x) \, dx$ is divergent.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Comparison Theorem};
+\end{tikzpicture}
+
+\subsection{Techniques of Integration}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $g'$ is continuous on $[a, b]$ and $f$ is continuous on the range of $u = g(x)$, then
+
+    $$\int_a^b f(g(x)) g'(x) \, dx = \int_{g(a)}^{g(b)} f(u) \, du$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Substitution Rule for Definite Integrals};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose $f$ is continuous on $[-a, a]$. \\
+
+    \begin{itemize}
+        \item If $f$ is even, $f(-x) = f(x)$, then $\int_{-a}^a f(x) \, dx = 2 \int_0^a f(x) \, dx$.
+
+        \item If $f$ is odd, $f(-x) = -f(x)$, then $\int_{-a}^a f(x) \, dx = 0$.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Integrals of Symmetric Functions};
+\end{tikzpicture}
+
+\end{paracol}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    $$\qquad \qquad \int u \, dv = uv - \int v \, du \qquad \text{or, equivalently,} \qquad \int_a^b f(x) g'(x) \, dx = f(x) g(x) \Big|_a^b - \int_a^b g(x) f'(x) \, dx$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Integration by Parts};
+\end{tikzpicture}
+
+\quad
+
+\begin{center}
+\begin{tabular}{c|c|c}
+    Expression & Trigonometric Substitution & Identity \\[0.25cm]
+    \hline
+    & & \\[0.25cm]
+
+    $\sqrt{a^2 - x^2}$ & $x = a \sin{\theta}, -\frac{\pi}{2} \leq \theta \leq \frac{\pi}{2}$ & $1 - \sin^2{\theta} = \cos^2{\theta}$ \\[0.5cm]
+
+    $\sqrt{a^2 + x^2}$ & $x = a \tan{\theta}, -\frac{\pi}{2} < \theta < \frac{\pi}{2}$ & $1 + \tan^2{\theta} = \sec^2{\theta}$ \\[0.5cm]
+
+    $\sqrt{x^2 - a^2}$ & $x = a \sec{\theta}, 0 \leq \theta \leq \frac{\pi}{2}$ or $\pi \leq \theta < \frac{3 \pi}{2}$ & $\sec^2{\theta} - 1 = \tan^2{\theta}$
+\end{tabular}
+\end{center}
+
+\subsection{Applications of Integration}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{area} $A$ of the region bounded by the curves $y = f(x), y = g(x)$ and the lines $x = a, x = b$, where $f$ and $g$ are continuous and $f(x) \geq g(x)$ for all $x$ in $[a, b]$, is
+
+    $$A = \int_a^b [f(x) - g(x)] \, dx$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $S$ be a solid that lies between $x = a$ and $x = b$. If the cross-sectional area of $S$ in the plane $P_x$, through $x$ and perpendicular to the $x$-axis, is $A(x)$, where $A$ is an integrable function, then the \textbf{volume} of $S$ is
+
+    $$V = \lim_{\max{\triangle x_i} \rightarrow 0} \sum_{i=1}^n A(x_i^*) \triangle x_i = \int_a^b A(x) \, dx$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Surface area}: Where $f$ is positive and has a continuous derivative, the area of the surface obtained by rotating the curve $y = f(x), a \leq x \leq b,$ about the $x$-axis as
+
+    \vspace{-10pt}
+
+    $$S = \int_a^b 2 \pi \, f(x) \, \sqrt{1 + [f'(x)]^2} \, dx = \int_a^b 2 \pi \, y \, \sqrt{1 + \Big( \frac{dy}{dx} \Big)^2} \, dx$$
+
+    If the curve is described as $x = g(y), c \leq y \leq d,$ then the formula for the surface area becomes
+
+    \vspace{-10pt}
+
+    $$S = \int_c^d 2 \pi \, g(y) \, \sqrt{1 + [g'(y)]^2} \, dy = \int_c^d 2 \pi \, x \, \sqrt{1 + \Big( \frac{dx}{dy} \Big)^2} \, dy$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Arc length}: If $f'$ is continuous on $[a, b]$, then the length of the curve $y = f(x), a \leq x \leq b$, is
+
+    \vspace{-5pt}
+
+    $$L = \int_a^b \sqrt{1 + [f'(x)]^2} \, dx = \int_a^b \sqrt{1 + \Big( \frac{dy}{dx} \Big)^2} \, dx$$
+
+    If $g'$ is continuous on $[c, d]$, then the length of the curve $x = g(y), c \leq x \leq d$, is
+
+    \vspace{-10pt}
+
+    $$L = \int_c^d \sqrt{1 + [g'(y)]^2} \, dy = \int_c^d \sqrt{1 + \Big( \frac{dx}{dy} \Big)^2} \, dy$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If a curve $C$ is described by the \textbf{parametric equations} $x = f(t), y = g(t)$ and is traversed once as $t$ increases from $\alpha$ to $\beta$, then the area under the curve is
+
+    $$A = \int_a^b y \, dx = \int_\alpha^\beta g(t) f'(t) \, dt$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If a curve $C$ is described by the \textbf{parametric equations} $x = f(t), y = g(t), \alpha \leq t \leq \beta$, where $f'$ and $g'$ are continuous on $[ \alpha, \beta]$ and $C$ is transversed exactly once as $t$ increases from $\alpha$ to $\beta$, then the length of $C$ is
+
+    $$L = \int_\alpha^\beta \sqrt{\Big(\frac{dx}{dt}\Big)^2 + \Big(\frac{dy}{dt}\Big)^2} \, dt$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    In \textbf{polar coordinates},
+
+    $$A = \int_a^b \frac{1}{2} [f(\theta)]^2 \, d\theta = \int_a^b \frac{1}{2} r^2 \, d\theta$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    In \textbf{polar coordinates},
+
+    $$L = \int_a^b \sqrt{r^2 + \Big( \frac{dr}{d\theta} \Big)^2} \, d\theta$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}

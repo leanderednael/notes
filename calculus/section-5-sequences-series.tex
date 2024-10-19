@@ -1,0 +1,604 @@
+\section{Sequences and Series}
+
+\subsection{Sequences}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A sequence $\{a_n\}$ has the limit $L$ and we write
+
+    $$\lim_{n \rightarrow \infty} = L \qquad \text{or} \qquad a_n \rightarrow L \text{ as } n \rightarrow \infty$$
+
+    if we can make the terms $a_n$ as close to $L$ as we like by taking $n$ sufficiently large. \\
+
+    If $\lim_{n \rightarrow \infty} a_n$ exists, we say the sequence \textbf{converges} (or is convergent). Otherwise, it \textbf{diverges} (or is divergent).
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $\lim_{x \rightarrow \infty} f(x) = L$ and $f(n) = a_n$ when $n$ is an integer, then $\lim_{n \rightarrow \infty} a_n = L$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Limit Laws for Sequences}: If $\{a_n\}$ and $\{b_n\}$ are convergent sequences and $c$ is a constant, then
+
+    $$\lim_{n \rightarrow \infty} (a_n + b_n) = \lim_{n \rightarrow \infty} a_n + \lim_{n \rightarrow \infty} b_n$$
+
+    $$\lim_{n \rightarrow \infty} (a_n - b_n) = \lim_{n \rightarrow \infty} a_n - \lim_{n \rightarrow \infty} b_n$$
+
+    $$\lim_{n \rightarrow \infty} c a_n = c \lim_{n \rightarrow \infty} a_n
+    \qquad \qquad
+    \lim_{n \rightarrow \infty} c = c$$
+
+    $$\lim_{n \rightarrow \infty} (a_n b_n) = \lim_{n \rightarrow \infty} a_n \cdot \lim_{n \rightarrow \infty} a_n$$
+
+    $$\lim_{n \rightarrow \infty} \frac{a_n}{b_n} = \frac{\lim_{n \rightarrow \infty} a_n}{\lim_{n \rightarrow \infty} b_n} \text{ if } \lim_{n \rightarrow \infty} b_n \neq 0$$
+
+    $$\lim_{n \rightarrow \infty} a_n^p = [\lim_{n \rightarrow \infty} a_n]^p \text{ if } p > 0 \text{ and } a_n > 0$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $a_n \leq b_n \leq c_n$ for $n \geq n_0$ and $\lim_{n \rightarrow \infty} a_n = \lim_{n \rightarrow \infty} c_n = L$, then $\lim_{n \rightarrow \infty} b_n = L$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $\lim_{n \rightarrow \infty} | a_n | = 0$, then $\lim_{n \rightarrow \infty} a_n = 0$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $\lim_{n \rightarrow \infty} a_n = L$ and the function $f$ is continuous at $L$, then
+
+    $$\lim_{n \rightarrow \infty} f(a_n) = f(L)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Continuity and Convergence Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The sequence $\{r^n\}$ is convergent if $-1 < r \leq 1$ and divergent for all other values of $r$.
+
+    $$
+    \lim_{n \rightarrow \infty} r^n = \begin{cases}
+        0 & \text{if } -1 < r < 1 \\
+        1 & \text{if } r = 1
+    \end{cases}
+    $$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A sequence $\{a_n\}$ is called \textbf{increasing} if $a_n < a_{n+1}$ for all $n \geq 1$, that is, $a_1 < a_2 < a_3 < \dots$. It is called \textbf{decreasing} if $a_n > a_{n + 1}$ for all $n \geq 1$. \\
+
+    A sequence is \textbf{monotonic} if it is either increasing or decreasing.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A sequence $\{a_n\}$ is \textbf{bounded above} if there is a number $M$ such that
+
+    $$a_n \leq M \quad \text{for all } n \geq 1$$
+
+    A sequence $\{a_n\}$ is \textbf{bounded below} if there is a number $m$ such that
+
+    $$m \leq a_n \quad \text{for all } n \geq 1$$
+
+    If a sequence is bounded above and below, then it is a \textbf{bounded sequence}.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Every bounded, monotonic sequence is convergent.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Monotonic Sequence Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Series}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Given a series $\sum_{n = 1}^\infty a_n = a_1 + a_2 + a_3 + \dots$, let $s_n$ denote its $n^\text{th}$ partial sum:
+
+    $$s_n = \sum_{i = 1}^n a_i = a_1 + a_2 + \dots + a_n$$
+
+    If the sequence $\{s_n\}$ is convergent and $\lim_{n \rightarrow \infty} s_n = s$ exists as a real number, then the series $\sum a_n$ is called \textbf{convergent}, and we write
+
+    \vspace{-20pt}
+
+    $$a_1 + a_2 + \dots + a_n + \dots = s \qquad \text{or} \qquad \sum_{n = 1}^\infty a_n = s$$
+
+    The number $s$ is called the \textbf{sum} of the series. If the sequence $\{s_n\}$ is divergent, the series is called \textbf{divergent}.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{geometric series} $\sum_{n = 1}^\infty a r^{n-1} = a + ar + ar^2 + \dots$ is divergent if $| r | \geq 1$; convergent if $| r | < 1$, and its sum is
+
+    $$\sum_{n = 1}^\infty a r^{n-1} = \frac{a}{1 - r} \qquad | r | < 1$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Proof}: $s_n = 1 + a + a^2 + \dots + a^n, s_{n+1} = 1 + a + a^2 + \dots + a^n + a^{n+1}$. Then $s_n + a^{n+1} = 1 + a s_n \quad \Rightarrow \quad s_n (1 - a) = 1 - a^{n+1} \quad \Rightarrow \quad s_n = \frac{1 - a^{n+1}}{1 - a}$. Taking the limit, \\
+$\lim_{n \rightarrow \infty} \frac{1 - a^{n+1}}{1 - a} = \begin{cases}
+    \infty & | a | \geq 1 \\
+    \frac{1}{1 - a} & | a | < 1
+\end{cases}$
+
+\textbf{Example}: $a = 1, r = 2$ \\
+$\sum_{n=1}^\infty a r^{n-1} = 1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \dots = 2 = \frac{1}{1 / 2} = \frac{a}{1 - r}$
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If the series $\sum_{n = 1}^\infty a_n$ is convergent, then $\lim_{n \rightarrow \infty} a_n = 0$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+With any series $\sum a_n$ we associate two sequences:
+
+\begin{itemize}
+    \item the sequence $\{s_n\}$ of its partial sums, and
+    \item the sequence $\{a_n\}$ of its terms.
+\end{itemize}
+
+If $\sum a_n$ is convergent, then the limit of the sequence $\{s_n\}$ is the sum of the series, $s$, and, as the theorem asserts, the limit of the sequence $\{a_n\}$ is $0$.
+
+However, the converse is not true in general: If $\lim_{n \rightarrow \infty} a_n = 0$, we cannot conclude that $\sum a_n$ is convergent. \textbf{Example}: For the harmonic series $\sum 1 / n$, $a_n = 1 / n \rightarrow 0$ as $n \rightarrow \infty$, but $\sum 1 / n$ is divergent.
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $\lim_{n \rightarrow \infty} a_n$ does not exist or if $\lim_{n \rightarrow \infty} a_n \neq 0$, then the series $\sum_{n = 1}^\infty a_n$ is divergent.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Test for Divergence};
+\end{tikzpicture}
+
+\begin{itemize}
+    \item If $\lim_{n \rightarrow \infty} a_n \neq$, $\sum a_n$ is divergent.
+    \item If $\lim_{n \rightarrow \infty} a_n = 0$, the series $\sum a_n$ may be convergent or divergent.
+\end{itemize}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $\sum a_n$ and $\sum b_n$ are convergent series, then so are the series $\sum c a_n$ (where $c$ is a constant), $\sum (a_n + b_n)$, and $\sum (a_n - b_n)$; and
+
+    \begin{itemize}
+        \item $\sum_{n=1}^\infty c a_n = c \sum_{n=1}^\infty a_n$
+        \item $\sum_{n=1}^\infty (a_n + b_n) = \sum_{n=1}^\infty a_n + \sum_{n=1}^\infty b_n$
+        \item $\sum_{n=1}^\infty (a_n - b_n) = \sum_{n=1}^\infty a_n - \sum_{n=1}^\infty b_n$
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Convergence Tests}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose $f$ is a continuous, positive, decreasing function on $[1, \infty)$ and let $a_n = f(n)$. \\
+    
+    Then the series $\sum_{n=1}^\infty a_n$ is convergent if and only if the improper integral $\int_1^\infty f(x) \, dx$ is convergent. \\
+    
+    In other words: \\
+
+    \begin{itemize}
+        \item If $\int_1^\infty f(x) \, dx$ is convergent, then $\sum_{n=1}^\infty a_n$ is convergent. \\
+
+        \item If $\int_1^\infty f(x) \, dx$ is divergent, then $\sum_{n=1}^\infty a_n$ is divergent.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Integral Test};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The $p$-series $\sum_{n=1}^\infty \frac{1}{n^p}$ is convergent if $p > 1$ and divergent if $p \leq 1$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose that $\sum a_n$ and $\sum b_n$ are series with positive terms. \\
+
+    \begin{itemize}
+        \item If $\sum b_n$ is convergent and $a_n \leq b_n$ for all $n$, then $\sum a_n$ is also convergent. \\
+
+        \item If $\sum b_n$ is divergent and $a_n \geq b_n$ for all $n$, then $\sum a_n$ is also divergent.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Comparison Test};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose that $\sum a_n$ and $\sum b_n$ are series with positive terms. If
+
+    $$\lim_{n \rightarrow \infty} \frac{a_n}{b_n} = c$$
+
+    where $c$ is a finite number and $c > 0$, then either both series converge or both diverge. \\
+
+    \begin{itemize}
+        \item If $\sum b_n$ is convergent and the above limit equals $0$, then $\sum a_n$ is also convergent. \\
+
+        \item If $\sum b_n$ is divergent and the above limit equals $\infty$, then $\sum a_n$ is also divergent.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Limit Comparison Test};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The alternating series $\sum_{n=1}^\infty (-1)^{n-1} b_n = b_1 - b_2 + b_3 - b_4 + b_5 - b_6 + \dots, b_n > 0$ is convergent if it satisfies
+
+    \begin{itemize}
+        \item $b_{n+1} \leq b_n$ for all $n$
+
+        \item $\lim_{n \rightarrow \infty} b_n = 0$
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Alternating Series Test};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $s = \sum (-1)^{n-1} b_n$ is the sum of an alternating series that satisfies $0 \leq b_{n+1} \leq b_n$ and $\lim_{n \rightarrow \infty} b_n = 0$, then
+
+    \vspace{-10pt}
+
+    $$| R_n | = | s - s_n | \leq b_{n+1}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Alternating Series Estimation Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A series $\sum a_n$ is called \textbf{absolutely convergent} if the series of absolute values $\sum | a_n |$ is convergent.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A series $\sum a_n$ is called \textbf{conditionally convergent} if it is convergent but not absolutely convergent.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If a series $\sum a_n$ is absolutely convergent, it is convergent.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \begin{itemize}
+        \item If $\lim_{n \rightarrow \infty} \Big| \frac{a_{n+1}}{a_n} \Big| = L < 1$, then the series $\sum_{n=1}^\infty a_n$ is absolutely convergent (and therefore convergent). \\
+
+        \item If $\lim_{n \rightarrow \infty} \Big| \frac{a_{n+1}}{a_n} \Big| = L > 1$ or $\lim_{n \rightarrow \infty} \Big| \frac{a_{n+1}}{a_n} \Big| = \infty$, then the series $\sum_{n=1}^\infty a_n$ is divergent. \\
+
+        \item If $\lim_{n \rightarrow \infty} \Big| \frac{a_{n+1}}{a_n} \Big| = 1$, the Ratio Test is inconclusive.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Ratio Test};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \begin{itemize}
+        \item If $\lim_{n \rightarrow \infty} \sqrt[n]{| a_n |} = L < 1$, then the series $\sum_{n=1}^\infty a_n$ is absolutely convergent (and therefore convergent). \\
+
+        \item If $\lim_{n \rightarrow \infty} \sqrt[n]{| a_n |} = L > 1$ or $\lim_{n \rightarrow \infty} \sqrt[n]{| a_n |} = \infty$, then the series $\sum_{n=1}^\infty a_n$ is divergent. \\
+
+        \item If $\lim_{n \rightarrow \infty} \sqrt[n]{| a_n |} = 1$, the Root Test is inconclusive.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Root Test};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Power Series}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    For a given power series $\sum_{n=0}^\infty c_n (x - a)^n$ there are only three possibilities: \\
+
+    \begin{itemize}
+        \item The series converges only when $x = a$. ($R = 0$)
+
+        \item The series converges for all $x$. ($R = \infty$)
+
+        \item There is a positive number $R$, the \textbf{radius of convergence} of the power series, such that the series converges if $| x - a | < R$ and diverges if $| x - a | > R$.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+The \textbf{interval of convergence} of a power series is the interval that consists of all values of $x$ for which the series converges:
+
+\begin{itemize}
+    \item a single point $a$,
+
+    \item the interval $( - \infty, \infty )$,
+
+    \item in the third case, $| x - a | < R \quad \Rightarrow \quad a - R < x < a + R$, the series might converge at one or both endpoints or it might diverge at both endpoints:
+
+    \vspace{-20pt}
+
+    $$(a - R, a + R) \quad (a - R, a + R] \quad [a - R, a + R) \quad [a - R, a + R]$$
+\end{itemize}
+
+\end{paracol}
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+    & Series & Radius of convergence & Interval of convergence \\[0.25cm]
+    \hline \\[0.05cm]
+    Geometric series & $\sum_{n=0}^\infty x^n$ & $R = 1$ & $(-1, 1)$ \\[0.25cm]
+    Example 1 & $\sum_{n=0}^\infty n! x^n$ & $R = 0$ & $\{0\}$ \\[0.25cm]
+    Example 2 & $\sum_{n=1}^\infty \frac{(x - 3)^n}{n}$ & $R = 1$ & $[2, 4)$ \\[0.25cm]
+    Example 3 & $\sum_{n=0}^\infty \frac{(-1)^n x^{2n}}{2^{2n} (n!)^2}$ & $R = \infty$ & $( - \infty, \infty)$ \\[0.25cm]
+\end{tabular}
+\end{center}
+
+The Ratio Test (or sometimes the Root Test) should be used to determine the radius of convergence $R$ in most cases. The Ratio and Root Tests always fail when $x$ is an endpoint of the interval of convergence, so the endpoints must be checked with some other test.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    If the power series $\sum c_n (x - a)^n$ has radius of convergence $R > 0$, then the function $f$ defined by
+
+    $$f(x) = c_0 + c_1 (x - a) + c_2 (x - a)^2 + \dots = \sum_{n=0}^\infty c_n (x - a)^n$$
+
+    is differentiable (and therefore continuous) on the interval $(a - R, a + R)$; and \\
+
+    \begin{itemize}
+        \item $f'(x) = c_1 + 2 c_2 (x - a) + 3 c_3 (x - a)^2 + \dots = \sum_{n=1}^\infty n c_n (x - a)^{n-1}$ \\
+
+        \item $\int f(x) \, dx = C + c_0 (x - a) + c_1 \frac{(x - a)^2}{2} + c_2 \frac{(x - a)^3}{3} + \dots = C + \sum_{n=0}^\infty c_n \frac{(x - a)^{n+1}}{n+1}$ \\
+    \end{itemize}
+
+    The radii of convergence of the power series in these two equations are both $R$, that is, the radius of convergence remains the same when a power series is differentiated or integrated.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+Note: We know that for finite sums, the derivative of a sum is the sum of the derivatives and the integral of a sum is the sum of the integrals. The same is true for infinite sums, provided we are dealing with power series:
+
+\begin{itemize}
+    \item $\frac{d}{dx} \Big[ \sum_{n=0}^\infty c_n (x - a)^n \Big] = \sum_{n=0}^\infty \frac{d}{dx} [c_n (x - a)^n]$
+
+    \item $\int \Big[ \sum_{n=0}^\infty c_n (x - a)^n \Big] \, dx = \sum_{n=0}^\infty \int c_n (x - a)^n \, dx$
+\end{itemize}
+
+Note: Although the theorem states that the radius of convergence remains the same when a power series is differentiated or integrated, this does not mean that the interval of convergence remains the same. It may happen that the original series converges at an endpoint, whereas the differentiated series diverges there.
+
+\subsection{Taylor and Maclaurin Series}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ has a power series representation (expansion) at $a$, that is, if
+
+    $$f(x) = \sum_{n=0}^\infty c_n (x - a)^n, \quad | x - a | < R$$
+
+    then its coefficients are given by the formula
+
+    $$c_n = \frac{f^{(n)}(a)}{n!}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ has a power series representation (expansion) at $a$, then it is called the \textbf{Taylor series} of the function $f$ at $a$ (or about $a$ or centred at $a$):
+
+    \vspace{-12.5pt}
+
+    \begin{align*}
+        & f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!} (x - a)^n \\
+        & = f(a) + \frac{f'(a)}{1!} (x - a) + \frac{f''(a)}{2!} (x - a)^2 + \frac{f'''(a)}{3!} (x - a)^3 \\
+        & \quad + \dots
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A Taylor series for which $a = 0$ is called a \textbf{Maclaurin series}:
+
+    \vspace{-12.5pt}
+
+    $$f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!} x^n = f(0) + \frac{f'(0)}{1!} x + \frac{f''(0)}{2!} x^2 + \dots$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f(x) = T_n(x) + R_n(x)$, where $T_n$ is the $n^{th}$-degree Taylor polynomial of $f$ at $a$ and
+
+    $$\lim_{n \rightarrow \infty} R_n(x) = 0$$
+
+    for $| x - a | < R$, then $f$ is equal to the sum of its Taylor series on the interval $| x - a | < R$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+NB: If $f$ can be represented as a power series about $a$, then $f$ is equal to the sum of its Taylor series.
+
+But there exist functions that are not equal to the sum of their Taylor series.
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ has $n + 1$ derivatives in an interval $I$ that contains the number $a$, then for $x$ in $I$ there is a number $z$ strictly between $x$ and $a$ such that the remainder term in the Taylor series can be expressed as
+
+    $$R_n(x) = \frac{f^{(n+1)}(z)}{(n+1)!} (x - a)^{n+1}$$
+
+    The number $z$ lies somewhere between $x$ and $a$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Taylor's Formula};
+\end{tikzpicture}
+
+For the special case $n = 0$, with $x = b, z = c$,
+
+$$f(b) = f(a) + f'(c) (b - a)$$
+
+which is the Mean Value Theorem.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    For every real number $x$,
+
+    $$\lim_{n \rightarrow \infty} \frac{x^n}{n!} = 0$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    \textbf{Multivariable Taylor / Maclaurin Series}: $f(x, y) = f  + f_x(x) x + f_y(y) y + \frac{1}{2!} \big( f_{xx}(x) x^2 + 2 f_{xy}(x, y) x y + f_{yy}(y) y^2 \big) + \dots$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: Important Maclaurin series and their radii of convergence:
+
+\vspace{-20pt}
+
+$$\frac{1}{1 - x} = \sum_{n=0}^\infty x^n = 1 + x + x^2 + x^3 + \dots, \quad R = 1
+\qquad \qquad
+\ln(1 + x) = \sum_{n=1}^\infty (-1)^{n-1} \frac{x^n}{n} = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \dots, \quad R = 1$$
+
+\vspace{-20pt}
+
+$$\sin{x} = \sum_{n=0}^\infty (-1)^n \frac{x^{2n + 1}}{(2n + 1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \dots, \quad R = \infty
+\qquad \qquad
+\cos{x} = \sum_{n=0}^\infty (-1)^n \frac{x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \dots, \quad R = \infty$$
+
+\vspace{-20pt}
+
+$$\tan^{-1}{x} = \sum_{n=0}^\infty (-1)^n \frac{x^{2n + 1}}{2n + 1} = x - \frac{x^3}{3} + \frac{x^5}{5} - \frac{x^7}{7} + \dots, \quad R = 1
+\qquad \qquad
+e^x = \sum_{n=0}^\infty \frac{x^n}{n!} = 1 + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \dots, \quad R = \infty$$
+
+\vspace{-10pt}
+
+$$(1 + x)^k = \sum_{n=0}^\infty \binom{k}{n} x^n = 1 + kx + \frac{k(k - 1)}{2!} x^2 + \frac{k(k - 1)(k - 2)}{3!} x^3 + \dots, \quad R = 1$$
+
+\subsection{Approximating Functions by Polynomials}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose that $f(x)$ is equal to the sum of its Taylor series at $a$: $f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!} (x - a)^n$.
+    Thus, its $n^{th}$-degree Taylor polynomial is $T_n(x) = \sum_{i=0}^n \frac{f^{(i)}(a)}{i!} (x - a)^i = f(a) + \frac{f'(a)}{1!} (x - a) + \frac{f''(a)}{2!} (x - a)^2 + \dots + \frac{f^{(n)}}{n!} (x - a)^n$. \\
+
+    Since $f$ is the sum of its Taylor series, $T_n(x) \rightarrow f(x)$ as $n \rightarrow \infty$ and so $T_n$ can be used as an approximation to $f$:
+    
+    $$f(x) \approx T_n(x)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+Notice that the first-degree Taylor polynomial is the same as the linearisation of the function $f(x)$:
+
+$$T_1(x) = f(a) + f'(a) (x - a)$$
+
+Notice also that $T_1$ and its derivative have the same values at $a$ that $f$ and $f'$ have. In general, it can be shown that the derivatives of $T_n$ at $a$ agree with those of $f$ up to and including derivatives of order $n$.
+
+\switchcolumn
+
+How good an approximation is it? How large should we take $n$ to be in order to achieve a desired accuracy? To answer these questions we need to look at the absolute value of the remainder:
+
+\vspace{-20pt}
+
+$$| R_n(x) | = | f(x) - T_n(x) |$$
+
+\vspace{-5pt}
+
+There are three methods for estimating the size of the error:
+
+\begin{enumerate}
+    \item If a graphing device is available, we can use it to graph $| R_n(x) |$ and thereby estimate the error.
+
+    \item If the series happens to be an alternating series, we can use the Alternating Series Estimation Theorem.
+
+    \item In all cases, we can use Taylor's Formula, which says that
+
+    \vspace{-25pt}
+
+    $$R_n(x) = \frac{f^{(n+1)}(z)}{(n + 1)!} (x - a)^{n+1}$$
+
+    \vspace{-10pt}
+
+    where $z$ is a number that lies between $x$ and $a$.
+\end{enumerate}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $| f^{(n+1)}(x) | \leq M$ for $| x - a | \leq d$, then the remainder $R_n(x)$ of the Taylor series satisfies the inequality
+
+    $$| R_n(x) | \leq \frac{M}{(n + 1)!} | x - a |^{n+1} \quad \text{for } | x - a | \leq d$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Taylor's Inequality};
+\end{tikzpicture}
+
+\end{paracol}

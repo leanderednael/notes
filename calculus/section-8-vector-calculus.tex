@@ -1,0 +1,663 @@
+\section{Vector Calculus}
+
+\subsection{Vector Functions and Space Curves}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $\mathbf{r}(t) = \langle f(t), g(t), h(t) \rangle$, then
+
+    \vspace{-5pt}
+
+    $$\lim_{t \rightarrow a} \mathbf{r}(t) = \langle \lim_{t \rightarrow a} f(t), \lim_{t \rightarrow a} g(t), \lim_{t \rightarrow a} h(t) \rangle$$
+
+    provided the limits of the component function exist.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{derivative} of a vector function $\mathbf{r}$ is given by
+
+    \vspace{-5pt}
+
+    $$\mathbf{r}'(t) = \frac{d\mathbf{r}}{dt} = \lim_{h \rightarrow 0} \frac{\mathbf{r}(t + h) - \mathbf{r}(t)}{h}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: Velocity and acceleration:
+
+$\mathbf{v}(t) = \lim_{h \rightarrow 0} \frac{\mathbf{a}(t + h) - \mathbf{a}(t)}{h} = \mathbf{a}'(t)$
+
+\vspace{-5pt}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $\mathbf{r}(t) = \langle f(t), g(t), h(t) \rangle = f(t) \mathbf{i} + g(t) \mathbf{j} + h(t) \mathbf{k}$, where $f$, $g$ and $h$ are differentiable functions, then
+
+    \vspace{-15pt}
+
+    $$\mathbf{r}'(t) = \langle f'(t), g'(t), h'(t) \rangle = f'(t) \mathbf{i} + g'(t) \mathbf{j} + h'(t) \mathbf{k}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose $\mathbf{u}, \mathbf{v}$ are differentiable vector functions, $c$ is a scalar, and $f$ is a real-valued function. Then \\
+
+    \begin{enumerate}
+        \item $\frac{d}{dt}[\mathbf{u}(t) + \mathbf{v}(t)] = \mathbf{u}'(t) + \mathbf{v}'(t)$ \\
+
+        \item $\frac{d}{dt}[c \mathbf{u}(t)] = c \mathbf{u}'(t)$ \\
+
+        \item $\frac{d}{dt}[f(t) \mathbf{u}(t)] = f'(t) \mathbf{u}(t) + f(t) \mathbf{u}'(t)$ \\
+
+        \item $\frac{d}{dt}[\mathbf{u}(t) \cdot \mathbf{v}(t)] = \mathbf{u}'(t) \cdot \mathbf{v}(t) + \mathbf{u}(t) \cdot \mathbf{v}'(t)$ \\
+
+        \item $\frac{d}{dt}[\mathbf{u}(t) \times \mathbf{v}(t)] = \mathbf{u}'(t) \times \mathbf{v}(t) + \mathbf{u}(t) \times \mathbf{v}'(t)$ \\
+
+        \item $\frac{d}{dt}[\mathbf{u}(f(t))] = f'(t) \mathbf{u}'(f(t))$
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{integral} of a vector function $\mathbf{r}$ is given by
+
+    \vspace{-10pt}
+
+    $$\int_a^b \mathbf{r}(t) \, dt = \Big( \int_a^b f(t) \, dt \Big) \mathbf{i} + \Big( \int_a^b g(t) \, dt \Big) \mathbf{j} + \Big( \int_a^b h(t) \, dt \Big) \mathbf{k}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$\int_a^b \mathbf{r}(t) \, dt = \mathbf{R}(t) \Big|_a^b = \mathbf{R}(b) - \mathbf{R}(a)$$
+
+    where $\mathbf{R}$ is an antiderivative of $\mathbf{r}$, that is, $\mathbf{R}'(t) = \mathbf{r}(t)$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Fundamental Theorem of Calculus};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Arc length}:
+
+    \vspace{-10pt}
+
+    \begin{align*}
+        L & = \int_a^b \sqrt{[f'(t)]^2 + [g'(t)]^2 + [h'(t)]^2} \, dt \\
+        & = \int_a^b \sqrt{\Big(\frac{dx}{dt}\Big)^2 + \Big(\frac{dy}{dt}\Big)^2 + \Big(\frac{dz}{dt}\Big)^2} \, dt \\
+        & = \int_a^b |\mathbf{r}'(t)| \, dt
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{curvature} of a curve is
+
+    $$\kappa = \Big| \frac{d\mathbf{T}}{ds} \Big|$$
+
+    where $\mathbf{T}$ is the unit tangent vector.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The curvature of the curve given by the vector function $\mathbf{r}$ is
+
+    \vspace{-10pt}
+
+    $$\kappa(t) = \frac{| \mathbf{r}'(t) \times \mathbf{r}''(t)|}{|\mathbf{r}'(t)|^3}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\vspace{-5pt}
+
+\subsection{Vector Fields}
+
+\vspace{-5pt}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    In physics, scalars and vectors can be functions of both space and time. Such functions are called \textbf{fields}.
+    The equations governing a field are called the \textbf{field equations}. These commonly take the form of partial differential equations.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: The temperature in some region of space is a scalar field, i.e. a function of space and time: $T(\mathbf{r}, t) = T(x, y, z; t)$
+
+\textbf{Example}: Maxwell's equations govern electric and magnetic vector fields, the Navier-Stokes equation governs fluid velocity, the Schrödinger equation is the equation for the scalar field (called the wave function) in non-relativistic quantum mechanics.
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $D$ be a set in $\mathbb{R}^2$ (a plane region). A \textbf{vector field} on $\mathbb{R}^2$ is a function $\mathbf{F}$ that assigns to each point $(x, y)$ in $D$ a two-dimensional vector $\mathbf{F}(x, y)$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $E$ be a subset of $\mathbb{R}^3$ (a plane region). A \textbf{vector field} on $\mathbb{R}^3$ is a function $\mathbf{F}$ that assigns to each point $(x, y, z)$ in $E$ a three-dimensional vector $\mathbf{F}(x, y, z)$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\vspace{5pt}
+
+A vector field can be expressed in terms of its component functions, e.g. in $\mathbb{R}^3$:
+
+$$\mathbf{F}(x, y, z) = P(x, y, z) \mathbf{i} + Q(x, y, z) \mathbf{j} + Q(x, y, z) \mathbf{k}$$
+
+\vspace{10pt}
+
+The component functions are \textbf{scalar fields}.
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A vector field $\mathbf{F}$ is called a \textbf{conservative vector field} if it is the gradient of some scalar function, that is, if there exists a function $f$ such that $\mathbf{F} = \mathbf{\nabla} f$. In this situation, $f$ is called a $\textbf{potential function}$ for $\mathbf{F}$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+Conservative vector fields arise frequently in physics.
+
+\end{paracol}
+
+\subsection{Differential Operators}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Consider a three-dimensional scalar field $f(x, y, z)$ and the differential
+
+    $$df = \frac{\partial f}{\partial x} dx + \frac{\partial f}{\partial y} dy + \frac{\partial f}{\partial z} dz = \mathbf{\nabla} f \cdot \begin{pmatrix}
+        dx \\ dy \\ dz
+    \end{pmatrix} = \mathbf{\nabla} f \cdot dr$$
+
+     $$\text{"del-f" is the \textbf{gradient} of } f: \quad \mathbf{\nabla} f = \begin{pmatrix}
+        \frac{\partial f}{\partial x} \\
+        \frac{\partial f}{\partial y} \\
+        \frac{\partial f}{\partial z}
+    \end{pmatrix} \qquad \qquad$$
+
+    The gradient $\mathbf{\nabla} f$ points in the direction of maximally increasing $f$, and its magnitude gives the slope (or gradient) of $f$ in that direction.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Example}: The gradient of the scalar field $f(x, y, z) = xyz$ is the gradient vector field
+
+\vspace{-20pt}
+
+$$
+\mathbf{\nabla} f = \begin{pmatrix}
+    yz \\ xz \\ xy
+\end{pmatrix}
+$$
+
+\vspace{-10pt}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Consider a three-dimensional vector field $\mathbf{F} = \begin{pmatrix}
+        P(x, y, z), Q(x, y, z), R(x, y, z)
+    \end{pmatrix}$. The \textbf{divergence} of $\mathbf{F}$, "del-dot-F", is defined as the scalar field given by the dot product of the vector differential operator $\mathbf{\nabla}$ and the vector field $\mathbf{F}$:
+
+    $$\text{div} \, \mathbf{F} = \mathbf{\nabla} \cdot \mathbf{F} = \begin{pmatrix}
+        \frac{\partial}{\partial x} \\
+        \frac{\partial}{\partial y} \\
+        \frac{\partial}{\partial z}
+    \end{pmatrix} \cdot \begin{pmatrix}
+        P \\ Q \\ R
+    \end{pmatrix} = \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}$$
+
+    The divergence measures how much a vector field spreads out, or diverges, from a point.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: The divergence of $\mathbf{F} = \frac{\mathbf{r}}{|\mathbf{r}|}, \mathbf{r} \neq \mathbf{0},$ is
+
+\vspace{-10pt}
+
+\begin{align*}
+    \mathbf{\nabla} \cdot \mathbf{F} & = \begin{pmatrix}
+        \frac{\partial}{\partial x} \\
+        \frac{\partial}{\partial y} \\
+        \frac{\partial}{\partial z}
+    \end{pmatrix} \cdot \frac{1}{(x^2 + y^2 + z^2)^{3/2}} \begin{pmatrix}
+        x \\ y \\ z
+    \end{pmatrix} \\
+    & =\frac{(x^2 + y^2 + z^2)^{3/2} - 3 x^2 (x^2 + y^2 + z^2)^{1/2}}{(x^2 + y^2 + z^2)^3} \\
+        & + \frac{(x^2 + y^2 + z^2)^{3/2} - 3 y^2 (x^2 + y^2 + z^2)^{1/2}}{(x^2 + y^2 + z^2)^3} \\
+        & + \frac{(x^2 + y^2 + z^2)^{3/2} - 3 z^2 (x^2 + y^2 + z^2)^{1/2}}{(x^2 + y^2 + z^2)^3} \\
+    & = \frac{1}{|\mathbf{r}|^3} - \frac{3x^2}{|\mathbf{r}|^5}
+        + \frac{1}{|\mathbf{r}|^3} - \frac{3y^2}{|\mathbf{r}|^5}
+        + \frac{1}{|\mathbf{r}|^3} - \frac{3z^2}{|\mathbf{r}|^5} \\
+    & = \frac{3}{|\mathbf{r}|^3} - \frac{3 (x^2 + y^2 + z^2)}{|\mathbf{r}|^5} \\
+    & = \frac{3}{|\mathbf{r}|^3} - \frac{3 |\mathbf{r}|^2}{|\mathbf{r}|^5} \\
+    & = 0
+\end{align*}
+
+\vspace{-10pt}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $\mathbf{F}$ is a vector field defined on all of $\mathbb{R}^3$ whose component functions have continuous partial derivatives and $\text{curl} \, \mathbf{F} = \mathbf{0}$, then $\mathbf{F}$ is a \textbf{conservative vector field}.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Consider a three-dimensional vector field $\mathbf{F} = \begin{pmatrix}
+        P(x, y, z), Q(x, y, z), R(x, y, z)
+    \end{pmatrix}$. The \textbf{curl} of $\mathbf{F}$, "del-cross-F", is defined as the vector field given by the cross product of the vector differential operator and the vector field $\mathbf{F}$:
+
+    $$\text{curl} \, \mathbf{F} = \mathbf{\nabla} \times \mathbf{F} = \begin{vmatrix}
+        \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+        \partial / \partial x & \partial / \partial y & \partial / \partial z \\
+        P & Q & R
+    \end{vmatrix} = \begin{pmatrix}
+        \frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z} \\
+        \frac{\partial P}{\partial z} - \frac{\partial R}{\partial x} \\
+        \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}
+    \end{pmatrix}$$
+
+    The curl measures how much a vector field rotates, or curls, around a point.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is a function of three variables that has continuous second-order partial derivatives, then the curl of the gradient is zero: $\text{curl}(\mathbf{\nabla} f) = \mathbf{0}$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Proof}:
+
+\vspace{-20pt}
+
+$$
+\mathbf{\nabla} \times (\mathbf{\nabla} f) = \begin{vmatrix}
+    \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+    \partial / \partial x & \partial / \partial y & \partial / \partial z \\
+    \partial f / \partial x & \partial f / \partial y & \partial f / \partial z
+\end{vmatrix}
+= \begin{pmatrix}
+    \frac{\partial^2 f}{\partial y \partial z} - \frac{\partial^2 f}{\partial z \partial y} \\
+    \frac{\partial^2 f}{\partial z \partial x} - \frac{\partial^2 f}{\partial x \partial z} \\
+    \frac{\partial^2 f}{\partial x \partial y} - \frac{\partial^2 f}{\partial y \partial x}
+\end{pmatrix}
+= \mathbf{0}
+$$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $\mathbf{F} = P \mathbf{i} + Q \mathbf{j} + R \mathbf{k}$ is a vector field on $\mathbb{R}^3$ and $P, Q, R$ have continuous second-order partial derivatives, then the divergence of the curl is zero: $\text{div} \, \text{curl} \, \mathbf{F} = 0$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\vspace{-5pt}
+
+\begin{align*}
+    & \textbf{Proof}: \mathbf{\nabla} \cdot (\mathbf{\nabla} \times \mathbf{F}) \\
+    & = \frac{\partial}{\partial x} \Bigg( \frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z} \Bigg)
+    + \frac{\partial}{\partial y} \Bigg( \frac{\partial P}{\partial z} - \frac{\partial R}{\partial x} \Bigg)
+    + \frac{\partial}{\partial z} \Bigg( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \Bigg) \\
+    & = \Bigg( \frac{\partial^2 P}{\partial y \partial z} - \frac{\partial^2 P}{\partial z \partial y} \Bigg)
+    + \Bigg( \frac{\partial^2 Q}{\partial z \partial x} - \frac{\partial^2 Q}{\partial x \partial z} \Bigg)
+    + \Bigg( \frac{\partial^2 R}{\partial x \partial y} - \frac{\partial^2 R}{\partial y \partial x} \Bigg) \\
+    & = 0
+\end{align*}
+
+\vspace{-5pt}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{Laplacian}, "del-squared", is defined as
+
+    $$\mathbf{\nabla}^2 = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2}$$
+
+    The Laplacian applied to a scalar field $f = f(x, y, z)$ can be written as the divergence of the gradient:
+
+    $$\nabla^2 f = \mathbf{\nabla} \cdot (\mathbf{\nabla} f) = \frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2} + \frac{\partial^2 f}{\partial z^2}$$
+
+    The Laplacian applied to a vector field $\mathbf{F}$ acts on each component of the vector field separately:
+
+    $$\mathbf{\nabla}^2 \mathbf{u} = \begin{pmatrix}
+        \mathbf{\nabla}^2 P(x, y, z) \\
+        \mathbf{\nabla}^2 Q(x, y, z) \\
+        \mathbf{\nabla}^2 R(x, y, z)
+    \end{pmatrix} = \begin{pmatrix}
+        \frac{\partial^2 P}{\partial x^2} + \frac{\partial^2 P}{\partial y^2} + \frac{\partial^2 P}{\partial z^2} \\
+        \frac{\partial^2 Q}{\partial x^2} + \frac{\partial^2 Q}{\partial y^2} + \frac{\partial^2 Q}{\partial z^2} \\
+        \frac{\partial^2 R}{\partial x^2} + \frac{\partial^2 R}{\partial y^2} + \frac{\partial^2 R}{\partial z^2}
+    \end{pmatrix}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: The Laplacian of the scalar field $f(x, y, z) = x^2 + y^2 + z^2$ is $\nabla^2 f = 2 + 2 + 2 = 6$.
+
+\end{paracol}
+
+\subsection{Line Integrals}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $\mathbf{F}$ be a continuous vector field defined on a smooth curve $C$ given by a vector function $\mathbf{r}(t), a \leq t \leq b$. Then the \textbf{line integral} of $\mathbf{F}$ along $C$ is
+
+    \vspace{-20pt}
+
+    \begin{align*}
+        \int_C \mathbf{F} \cdot \, d\mathbf{r} & = \int_a^b \mathbf{F}(\mathbf{r}(t)) \cdot \mathbf{r}'(t) \, dt = \int_C \mathbf{F} \cdot \mathbf{T} \, ds \\
+        & = \int_C P \, dx + Q \, dy + R \, dz, \\
+        & \qquad \text{where } \mathbf{F} = P \mathbf{i} + Q \mathbf{j} + R \mathbf{k}
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $C$ be a smooth curve given by the vector function $\mathbf{r}(t), a \leq t \leq b$. Let $f$ be a differentiable function of two or three variables whose gradient vector $\mathbf{\nabla} f$ is continuous on $C$. Then
+
+    \vspace{-20pt}
+
+    $$\int_C \mathbf{\nabla} f \cdot d\mathbf{r} = f(\mathbf{r}(b)) - f(\mathbf{r}(a))$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Fundamental Theorem for Line Integrals};
+\end{tikzpicture}
+
+That is, the line integral of a conservative vector field (the gradient field of the potential function $f$) can be evaluated simply by knowing the value of $f$ at the endpoints of $C$. The line integral of $\mathbf{\nabla} f$ is the net change in $f$.
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $\int_C \mathbf{F} \cdot d\mathbf{r}$ is independent of path in $D$ if and only if $\int_C \mathbf{F} \cdot d\mathbf{r} = 0$ for every closed path $C$ in $D$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose $\mathbf{F}$ is a vector field that is continuous on an open connected region $D$. If $\int_C \mathbf{F} \cdot d\mathbf{r}$ is independent of path in $D$, then $\mathbf{F}$ is a conservative vector field on $D$; that is, there exists a function $f$ such that $\mathbf{\nabla} f = \mathbf{F}$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $\mathbf{F}(x, y) = P(x, y) \mathbf{i} + Q(x, y) \mathbf{j}$ is a conservative vector field, where $P$ and $Q$ have continuous first-order partial derivatives on a domain $D$, then throughout $D$, $\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $\mathbf{F}(x, y) = P(x, y) \mathbf{i} + Q(x, y) \mathbf{j}$ be a vector field on an open simply-connected region $D$. Suppose that $P$ and $Q$ have continuous first-order derivatives and $\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}$ throughout $D$. Then $\mathbf{F}$ is conservative.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Surface Integrals}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If a smooth parametric surface $S$ is given by the equation
+
+    $$\mathbf{r}(u, v) = x(u, v) \mathbf{i} + y(u, v) \mathbf{j} + z(u, v) \mathbf{k}, \quad (u, v) \in D$$
+
+    and $S$ is covered just once as $(u, v)$ ranges throughout the parameter domain $D$, then the surface area of $S$ is
+
+    $$A(S) = \iint_D | \mathbf{r}_u \times \mathbf{r}_v | \, dA$$
+
+    where $\mathbf{r}_u = \frac{\partial x}{\partial u} \mathbf{i} + \frac{\partial y}{\partial u} \mathbf{j} + \frac{\partial z}{\partial u} \mathbf{k},
+    \quad
+    \mathbf{r}_v = \frac{\partial x}{\partial v} \mathbf{i} + \frac{\partial y}{\partial v} \mathbf{j} + \frac{\partial z}{\partial v} \mathbf{k}$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The surface area of the graph of a function is
+
+    $$A(S) = \iint_D \sqrt{1 + \Big( \frac{\partial z}{\partial x} \Big)^2 + \Big( \frac{\partial z}{\partial y} \Big)^2}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \begin{align*}
+        \iint_S & f(x, y, z) \, dS = \iint_D f(\mathbf{r}(u, v)) | \mathbf{r}_u \times \mathbf{r}_v | \, dA \\
+        & = \iint_D f(x, y, g(x, y)) \sqrt{\Big( \frac{\partial z}{\partial x} \Big)^2 + \Big( \frac{\partial z}{\partial y} \Big)^2 + 1} \, dA
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $\mathbf{F}$ is a continuous vector field defined on an oriented surface $S$ with unit normal vector $\mathbf{n}$, then the surface integral of $\mathbf{F}$ over $S$ is called the \textbf{flux} of $\mathbf{F}$ across $S$:
+
+    $$\iint_S \mathbf{F} \cdot \, dS = \iint_S \mathbf{F} \cdot \mathbf{n} \, dS$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: If $\mathbf{v}$ is the fluid velocity (length divided by time), and $\rho$ is the fluid density (mass divided by volume), then the surface integral $\oint_S \rho \mathbf{v} \cdot dS$ computes the mass flux, that is, the mass passing through the surface $S$ per unit time.
+
+If $S$ is a closed surface, then the normal vector $\mathbf{n}$ is assumed to be in the outward direction, and a positive value for the flux integral implies a net flux from inside the surface to outside; a negative value implies a net flux from outside to inside. If a fluid is incompressible, a positive mass flux indicates a source of fluid inside the closed surface, and a negative mass flux indicates a sink.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \vspace{-10pt}
+
+    \begin{align*}
+        \iint_S \mathbf{F} \cdot \, dS & = \iint_D \mathbf{F} \cdot (\mathbf{r}_u \times \mathbf{r}_v) \, dA \\
+        & = \iint_D \Big( -P \frac{\partial g}{\partial x} - Q \frac{\partial g}{\partial y} + R \Big) \, dA
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+Integration over a closed surface can be signified with $\oint_S \mathbf{r} \, dS$.
+
+\end{paracol}
+
+\subsection{Fundamental Theorems}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $\mathbf{\nabla} \phi$ be the gradient of a scalar field $\phi = \phi(\mathbf{r})$, and let $C$ be a directed curve $C$ by $\mathbf{r} = \mathbf{r}(t)$, where $t_1 \leq t \leq t_2, \mathbf{r}(t_1) = \mathbf{r}_1, \mathbf{r}(t_2) = \mathbf{r}_2$. Then, for any closed curve $C$, $\oint_C \mathbf{\nabla} \phi \cdot d\mathbf{r} = 0$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Gradient Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+That is, the line integral of the gradient of a function is path independent, depending only on the endpoints of the curve. The theorem is a generalisation of the FTC for line integrals.
+
+\textbf{Proof}: Using the chain rule, $\frac{d}{dt} \phi(\mathbf{r}) = \mathbf{\nabla} \phi(\mathbf{r}) \cdot \frac{d\mathbf{r}}{dt}$, and FTC,
+
+\vspace{-20pt}
+
+$$
+\int_C \mathbf{\nabla} \phi \cdot d\mathbf{r}
+= \int_{t_1}^{t_2} \mathbf{\nabla} \phi(\mathbf{r}) \cdot \frac{d\mathbf{r}}{dt} dt
+= \int_{t_1}^{t_2} \frac{d}{dt} \phi(\mathbf{r}) \, dt
+= \phi(\mathbf{r}(t_2)) - \phi(\mathbf{r}(t_1)) = \phi(\mathbf{r}_2) - \phi(\mathbf{r}_1)
+$$
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    For a vector field $\mathbf{F}$ defined on $\mathbb{R}^3$, except perhaps at isolated singularities, the following conditions are equivalent: \\
+
+    \begin{enumerate}
+        \item $\mathbf{\nabla} \times \mathbf{F} = \mathbf{0}$. \\
+
+        \item $\mathbf{F} = \mathbf{\nabla} \phi$ for some scalar field $\phi = \phi(r)$. \\
+
+        \item $\int_C \mathbf{F} \cdot dr$ is path independent for any curve $C$. \\
+
+        \item $\oint_C \mathbf{F} \cdot dr = 0$ for any closed curve $C$. \\
+
+        \item $\mathbf{F}$ is a \textbf{conservative vector field}.
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Example}: Let $\mathbf{F}(x, y) = x^2 (1 + y^3) \mathbf{i} + y^2 (1 + x^3) \mathbf{j}$. Show that $\mathbf{F}$ is a conservative vector field, and determine $\phi = \phi(x, y)$ such that $\mathbf{\nabla} \times \mathbf{F} = \mathbf{0}$.
+
+$\mathbf{F}$ is a conservative vector field if and only if $\mathbf{\nabla} \times \mathbf{F} = 0$:
+
+$$
+\mathbf{\nabla} \times \mathbf{F} = \begin{vmatrix}
+    \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+    \partial / \partial x & \partial / \partial y & \partial / \partial z \\
+    x^2 (1 + y^3) & y^2 (1 + x^3) & 0
+\end{vmatrix} = (3x^2y^2 - 3x^2y^2) \mathbf{k} = 0
+$$
+
+To find the scalar field $\phi$,
+
+$$
+\frac{\partial \phi}{\partial x} = x^2 (1 + y^3), \qquad \frac{\partial \phi}{\partial y} = y^2 (1 + x^3)
+$$
+
+Integrating the first equation with respect to $x$ holding $y$ fixed,
+
+$$
+\phi = \int x^2 (1 + y^3) \, dx = \frac{1}{3} x^3 (1 + y^3) + f(y)
+$$
+
+Differentiating $\phi$ with respect to $y$ and using the second equation,
+
+$$
+x^3 y^2 + f'(y) = y^2 (1 + x^3) \qquad \text{or} \qquad f'(y) = y^2
+$$
+
+One more integration results in $f(y) = y^3 / 3 + c$, and the scalar field is given by
+
+$$
+\phi(x, y) = \frac{1}{3} (x^3 + x^3 y^3 + y^3) + c
+$$
+
+\textbf{Example}: Conservation of energy
+
+The work-energy theorem states that the work done on a mass by a force is equal to the change in the kinetic energy of the mass, or $\int_C \mathbf{F} \cdot d\mathbf{r} = T_f - T_i$, where the kinetic energy of a mass $m$ moving with velocity $v$ is given by $T = \frac{1}{2} m |v|^2$.
+
+If $\mathbf{F}$ is a conservative vector field, then $\mathbf{F} = - \mathbf{\nabla} V$, where $V = V(\mathbf{r})$ is the potential energy.
+
+Using the gradient theorem, $T_f - T_i = - \int_C \mathbf{\nabla} V \cdot d\mathbf{r} = V_i - V_f$, where $V_i, V_f$ are the initial and final potential energies of the masses.
+
+The sum of the of the kinetic and potential energy is conserved:
+
+$$T_i + V_i = T_f + V_f$$
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $E$ be a simple solid region and let $S$ be the boundary surface of $E$, given with positive (outward) orientation. Let $\mathbf{F}$ be a vector field whose component functions have continuous partial derivatives on an open region that contains $E$. Then
+
+    $$\oint_S \mathbf{F} \cdot \, dS = \iiint_E (\mathbf{\nabla} \cdot \mathbf{F}) \, dV = \iiint_E \text{div} \, \mathbf{F} \, dV$$
+
+    That is, the integral of the divergence of a vector field over the enclosed volume is equal to the vector field's flux through the bounding surface.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Divergence Theorem};
+\end{tikzpicture}
+
+It is often used to derive a continuity equation, which expresses the local conservation of some physical quantity.
+
+\textbf{Example}: Let the scalar function $\rho(\mathbf{r}, t)$ be the mass density of a fluid at position $\mathbf{r}$ and time $t$, and $\mathbf{F}(\mathbf{r}, t)$ be the fluid velocity. Consider a small test volume $V$ in the fluid flow and consider the change in the fluid mass $M$ inside $V$.
+
+The fluid mass $M$ in $V$ varies because of the mass flux through the surface $S$ surrounding $V$, $\frac{dM}{dt} = - \oint_S \rho \mathbf{F} \cdot dS$.
+
+Now the mass of the fluid is given in terms of the mass density by $M = \int_V \rho \, dV$, and application of the divergence theorem to the surface integral gives $\frac{d}{dt} \int_V \rho \, dV = - \int_V \mathbf{\nabla} \cdot (\rho \mathbf{F}) \, dV$.
+
+Taking the time derivative inside the integral on the left, and combining the two integrals yields $\int_V ( \frac{\partial \rho}{\partial t} + \mathbf{\nabla} \cdot (\rho \mathbf{F}) ) \, dV = 0$.
+
+Since this integral vanishes for any test volume placed in the fluid, the integrand itself must be zero everywhere, resulting in the continuity equation $\frac{\partial \rho}{\partial t} + \mathbf{\nabla} \cdot (\rho \mathbf{F}) = 0$.
+
+For an incompressible fluid, for which the mass density $\rho$ is uniform and constant, the continuity equation reduces to $\mathbf{\nabla} \cdot \mathbf{F} = 0$. A vector field with zero divergence is called \textbf{incompressible} or solenoidal.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $C$ be a positively oriented, piecewise-smooth, simple closed curve in the plane, and let $D$ be the region bounded by $C$. If $P$ and $Q$ have continuous partial derivatives on an open region that contains $D$, then
+
+    $$\oint_C P \, dx + Q \, dy = \iint_D \Big( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \Big) \, dA$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Green's Theorem};
+\end{tikzpicture}
+
+Green's theorem is the counterpart of the FTC ($F(b) - F(a) = \int_a^b F'(x) \, dx$) for double integrals.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $S$ be an oriented piecewise-smooth surface that is bounded by a simple, closed, piecewise-smooth boundary curve $C$ with a positive orientation. Let $\mathbf{F}$ be a vector field whose components have continuous partial derivatives on an open region in $\mathbb{R}^3$ that contains $S$. Then
+
+    \vspace{-10pt}
+
+    $$\oint_C \mathbf{F} \cdot \, d\mathbf{r} = \iiint_S (\mathbf{\nabla} \times \mathbf{F}) \cdot dS = \iiint_S \text{curl} \, \mathbf{F} \cdot \, dS$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Stokes' Theorem};
+\end{tikzpicture}
+
+Stoke's theorem is the extension of Green's Theorem to three dimensions.
+
+\begin{itemize}
+    \item With $\mathbf{F} = P(x, y, z) \mathbf{i} + Q(x, y, z) \mathbf{j} + R(x, y, z) \mathbf{k}$, $\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} = (\mathbf{\nabla} \times \mathbf{F}) \cdot \mathbf{k}$, i.e. the curl.
+
+    \item And with $dS = \mathbf{k} dS$, $P \, dx + Q \, dy = \mathbf{F} \cdot dr$
+\end{itemize}
+
+\end{paracol}

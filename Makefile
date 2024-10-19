@@ -1,7 +1,7 @@
 SHELL     := /usr/bin/env bash
 MAKEFLAGS += --silent
 
-TEX_DOCS  := algebra
+TEX_DOCS  := algebra calculus
 
 all: clean compile clean
 

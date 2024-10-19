@@ -1,0 +1,437 @@
+\section{Multiple Integrals and Curvilinear Coordinates}
+
+\subsection{Double Integrals over Rectangles}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{double integral} of $f$ over the rectangle $R$ is
+
+    $$\iint_R f(x, y) \, dA = \lim_{m ,n \rightarrow \infty} \sum_{i=1}^m \sum_{j=1}^n f(x_i, y_j) \, \Delta A$$
+
+    if this limit exists.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f(x, y) \geq 0$, then the \textbf{volume} $V$ of the solid that lies above the rectangle $R$ and below the surface $z = f(x, y)$ is
+
+    \vspace{-20pt}
+
+    $$V = \iint_R f(x, y) \, dA$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$\iint_R f(x, y) \, dA \approx \sum_{i=1}^m \sum_{j=1}^n f(\bar{x}_i, \bar{y}_j) \Delta A$$
+
+    where $\bar{x}_i$ is the midpoint of $[x_{i-1}, x_i]$ and $\bar{y}_i$ is the midpoint of $[y_{j-1}, y_j]$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Midpoint Rule};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is continuous on the rectangle $R = \{ (x, y) | a \leq x \leq b, c \leq y \leq d \}$, then
+
+    \begin{align*}
+        \iint_R f(x, y) \, dA & = \int_a^b \int_c^d f(x, y) \, dy \, dx \\
+        & = \int_c^d \int_a^b f(x, y) \, dx \, dy
+    \end{align*}
+
+    More generally, this is true if $f$ is bounded on $R$, $f$ is discontinuous only on a finite number of smooth curves, and the iterated integrals exist.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Fubini's Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \vspace{10pt}
+
+    $$\iint_R g(x) h(y) \, dA = \int_a^b g(x) \, dx \int_c^d h(y) \, dy$$
+
+    \vspace{10pt}
+
+    where $R = [a, b] \times [c, d]$
+
+    \vspace{10pt}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Double Integrals over General Regions}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is continuous on a \textbf{type I region} $D$ such that
+
+    $$D = \{ (x, y) | a \leq x \leq b, g_1(x) \leq y \leq g_2(x) \}$$
+
+    then
+
+    $$\iint_D f(x, y) \, dA = \int_a^b \int_{g_1(x)}^{g_2(x)} f(x, y) \, dy \, dx$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is continuous on a \textbf{type II region} $D$ such that
+
+    $$D = \{ (x, y) | c \leq y \leq d, h_1(y) \leq x \leq h_2(y) \}$$
+
+    then
+
+    $$\iint_D f(x, y) \, dA = \int_c^d \int_{h_1(y)}^{h_2(y)} f(x, y) \, dx \, dy$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Properties of Double Integrals}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Linearity:
+
+    $$\iint_D [ f(x, y) + g(x, y) ] \, dA = \iint_D f(x, y) \, dA + \iint_D g(x, y) \, dA$$
+
+    $$\iint_D c f(x, y) \, dA = c \iint_D f(x, y) \, dA, \quad c \in \mathbb{R}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f(x, y) \geq g(x, y)$ for all $(x, y)$ in $D$, then
+
+    $$\iint_D f(x, y) \, dA \geq \iint_D g(x, y) \, dA$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The integral of the constant function $f(x, y) = 1$ over a region $D$ is the area of $D$:
+
+    $$\iint_D 1 \, dA = A(D)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $D = D_1 \cup D_2$, where $D_1$ and $D_2$ don't overlap except perhaps on their boundaries, then
+
+    $$\iint_D f(x, y) \, dA = \iint_{D_1} f(x, y) \, dA + \iint_{D_2} f(x, y) \, dA$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+This property can be used to evaluate double integrals over regions $D$ that are neither type I nor type II but can be expressed as a union of regions of type I or type II.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $m \leq f(x, y) \leq M$ for all $(x, y)$ in $D$, then
+
+    $$m A(D) \leq \iint_D f(x, y) \, dA \leq M A(D)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\newpage
+
+\subsection{Double Integrals in Polar Coordinates}
+
+\begin{paracol}{2}
+
+Polar to Cartesian conversion:
+
+$$x = r \cos{\theta} \qquad y = r \sin{\theta}$$
+
+\switchcolumn
+
+Cartesian to Polar conversion:
+
+$$r^2 = x^2 + y^2 \qquad \tan{\theta} = \frac{y}{x}$$
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is continuous on a polar rectangle $R$ given by $0 \leq 0 \leq r \leq b, \alpha \leq \theta \leq \beta$, where $0 \leq \beta - \alpha \leq 2 \pi$, then \\
+
+    $$\iint_R f(x, y) \, dA = \int_\alpha^\beta \int_a^b f(r \cos{\theta}, r \sin{\theta}) \, r \, dr \, d\theta$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is continuous on a polar region of the form
+
+    $$D = \{ (r, \theta) | \alpha \leq \theta \leq \beta, h_1(\theta) \leq r \leq h_2(\theta) \}$$
+
+    \vspace{-10pt}
+
+    $$\text{then } \iint_R f(x, y) \, dA = \int_\alpha^\beta \int_{h_1(\theta)}^{h_2(\theta)} f(r \cos{\theta}, r \sin{\theta}) \, r \, dr \, d\theta$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Triple Integrals}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The triple integral of $f$ over the box $B$ is
+
+    $$\iiint_B f(x, y, z) \, dV = \lim_{m, n, o \rightarrow \infty} \sum_{i=1}^m \sum_{j=1}^n \sum_{k=1}^o f(x_i, y_j, z_k) \, \Delta V$$
+
+    if this limit exists.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is continuous on the rectangular box $B = [a, b] \times [c, d] \times [r, s]$, then
+
+    $$\iiint_B f(x, y, z) \, dV = \int_r^s \int_c^d \int_a^b f(x, y, z) \, dx \, dy \, dz$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Fubini's Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \begin{align*}
+        \iiint_E & f(x, y, z) \, dV \\[0.25cm]
+        & = \iint_D \Bigg[ \int_{u_1(x, y)}^{u_2(x, y)} f(x, y, z) \, dz \Bigg] \, dA \\[0.5cm]
+        & = \int_a^b \int_{g_1(x)}^{g_2(x)} \int_{u_1(x, y)}^{u_2(x, y)} f(x, y, z) \, dz \, dy \, dx \\[0.5cm]
+        & = \int_c^d \int_{h_1(y)}^{h_2(y)} \int_{u_1(x, y)}^{u_2(x, y)} f(x, y, z) \, dz \, dx \, dy \\
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Triple Integrals in Cylindrical Coordinates}
+
+\begin{paracol}{2}
+
+Cylindrical to Cartesian conversion:
+
+$$x = r \cos{\theta} \qquad y = r \sin{\theta} \qquad z = z$$
+
+\switchcolumn
+
+Cartesian to cylindrical conversion:
+
+$$r^2 = x^2 + y^2 \qquad \tan{\theta} = \frac{y}{x} \qquad z = z$$
+
+\end{paracol}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    $$\iiint_E f(x, y, z) \, dV = \int_\alpha^\beta \int_{h_1(\theta)}^{h_2(\theta)} \int_{u_1(r \cos{\theta}, r \sin{\theta}}^{u_2(r \cos{\theta}, r \sin{\theta}} f(r \cos{\theta}, r \sin{\theta}, z) \, r \, dz \, dr \, d\theta$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\subsection{Triple Integrals in Spherical Coordinates}
+
+Conversion:
+
+$$x = \rho \sin{\phi} \cos{\theta} \qquad y = \rho \sin{\phi} \sin{\theta} \qquad z = \rho \cos{\phi} \qquad \rho^2 = x^2 + y^2 + z^2$$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    $$\iiint_E f(x, y, z) \, dV = \int_c^d \int_\alpha^\beta \int_a^b f(\rho \sin{\phi} \cos{\theta}, \rho \sin{\phi} \sin{\theta}, \rho \cos{\phi}) \rho^2 \sin{\phi} \, d\rho \, d\theta \, d\phi$$
+
+    where $E$ is a spherical wedge given by
+
+    $$E = \{ (\rho, \theta, \phi) \, | \, a \leq \rho \leq b, \alpha \leq \theta \leq \beta, c \leq \phi \leq d \}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\newpage
+
+\subsection{Change of Variables in Multiple Integrals}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose $T$ is a transformation from a region $S$ in $uv$-space onto a region $R$ in $xy$-space by means of the equations $x = g(u, v), y = h(u, v)$. \\
+
+    The \textbf{Jacobian} of the transformation is
+
+    $$\frac{\partial(x, y)}{\partial(u, v)} = \begin{vmatrix}
+        \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\[0.25cm]
+        \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}
+    \end{vmatrix} = \frac{\partial x}{\partial u} \frac{\partial y}{\partial v} - \frac{\partial x}{\partial v} \frac{\partial y}{\partial u}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose $T$ is a transformation from a region $S$ in $uvw$-space onto a region $R$ in $xyz$-space by means of the equations $x = g(u, v, w), y = h(u, v, w), z = k(u, v, w)$. \\
+
+    The \textbf{Jacobian} of the transformation is
+
+    $$\frac{\partial(x, y, z)}{\partial(u, v, w)} = \begin{vmatrix}
+        \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} & \frac{\partial x}{\partial w} \\[0.1cm]
+        \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} & \frac{\partial y}{\partial w} \\[0.1cm]
+        \frac{\partial z}{\partial u} & \frac{\partial z}{\partial v} & \frac{\partial z}{\partial w}
+    \end{vmatrix}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+\end{paracol}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Suppose $T$ is a transformation whose Jacobian is nonzero and that maps a region $S$ in the $uv$-plane onto a region $R$ in the $xy$-plane.
+
+    Suppose that $f$ is continuous on $R$ and that $R$ and $S$ are type I or type II plane regions.
+
+    Suppose also that $T$ is one-to-one, except perhaps on the boundary of $S$. Then
+
+    $$\iint_R f(x, y) \, dA = \iint_S f\big(x(u, v), y(u, v)\big) \begin{vmatrix}
+        \frac{\partial(x, y)}{\partial(u, v)} \, du \, dv
+    \end{vmatrix}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Example}: Polar coordinates:
+
+$$
+dA = \begin{vmatrix}
+    \frac{\partial(x, y)}{\partial(r, \theta)} \, dr \, d\theta
+\end{vmatrix} = \begin{vmatrix}
+    \frac{\partial x}{\partial r} & \frac{\partial x}{\partial \theta} \\
+    \frac{\partial y}{\partial r} & \frac{\partial y}{\partial \theta}
+\end{vmatrix} \, dr \, d\theta = \begin{vmatrix}
+    \cos{\theta} & - r \sin{\theta} \\
+    \sin{\theta} & r \cos{\theta}
+\end{vmatrix} \, dr \, d\theta = r \, dr \, d\theta
+$$
+
+The region in the $r-\theta$ plane that defines a circle is $0 \leq r \leq R, 0 \leq \theta \leq 2 \pi$. Its area is
+
+$$A = \int_0^{2 \pi} \int_0^R r \, dr \, d\theta = \int_0^{2 \pi} \, d\theta \int_0^R r \, dr = \pi R^2$$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Suppose $T$ is a transformation whose Jacobian is nonzero and that maps a region $S$ in the $uvw$-hyperplane onto a region $R$ in the $xyz$-hyperplane.
+
+    Suppose that $f$ is continuous on $R$ and that $R$ and $S$ are type I or type II plane regions.
+
+    Suppose also that $T$ is one-to-one, except perhaps on the boundary of $S$. Then
+
+    $$\iint_R f(x, y, z) \, dV = \iint_S f\big(x(u, v, w), y(u, v, w), z(u, v, w)\big) \begin{vmatrix}
+        \frac{\partial(x, y, z)}{\partial(u, v, w)} \, du \, dv \, dw
+    \end{vmatrix}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\subsection{Applications in Physics}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{centre of mass} $(\bar{x}, \bar{y}, \bar{z})$ is
+
+    $$\bar{x} = \frac{1}{m} \iiint_E x \, \rho(x, y, z) \, dV$$
+
+    $$\bar{y} = \frac{1}{m} \iiint_E y \, \rho(x, y, z) \, dV$$
+
+    $$\bar{z} = \frac{1}{m} \iiint_E z \, \rho(x, y, z) \, dV$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$\iint_R 1 \ dA = A(R)
+    \qquad
+    \iiint_E 1 \, dV = V(E)$$
+
+    \vspace{10pt}
+
+    $$\iiint_E \rho(x, y, z) \, dV = mass(E), \qquad \rho = \text{density}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{moments of inertia} measure the spread of mass around an object's centre of mass determining how much an object will resist changes in its rotation (about an axis or the origin):
+
+    \vspace{-15pt}
+
+    $$I_x = \iint_D y^2 \, \rho(x, y), \, dx \, dy
+    \qquad
+    I_y = \iint_D x^2 \, \rho(x, y), \, dx \, dy$$
+
+    \vspace{-10pt}
+
+    $$I_0 = \iint_D (x^2 + y^2) \, \rho(x, y), \, dx \, dy$$
+
+    In three dimensions:
+
+    $$I_x = \iiint_E (y^2 + z^2) \, \rho(x, y, z), \, dx \, dy \, dz$$
+
+    \vspace{-5pt}
+
+    $$I_y = \iiint_E (x^2 + z^2) \, \rho(x, y, z), \, dx \, dy \, dz$$
+
+    \vspace{-5pt}
+
+    $$I_z = \iiint_E (x^2 + y^2) \, \rho(x, y, z), \, dx \, dy \, dz$$
+
+    \vspace{-5pt}
+
+    $$I_0 = \iiint_E (x^2 + y^2 + z^2) \, \rho(x, y, z), \, dx \, dy \, dz$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}

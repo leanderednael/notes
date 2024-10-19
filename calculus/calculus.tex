@@ -1,0 +1,45 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[margin=0.75cm]{geometry}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{biblatex}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{paracol}
+\usepackage{parskip}
+\usepackage{tikz}
+\usepackage{titlesec}
+\usepackage{verbatim}
+\usepackage{xcolor}
+
+\titleformat{\section}[block]{\Large\bfseries\filcenter\color{black}}{\thesection}{1em}{}
+\titleformat{\subsection}[block]{\bfseries\filcenter\color{black}}{\thesubsection}{1em}{}
+
+\setlength{\columnsep}{25pt}
+
+\tikzset{
+    rounded-box/.style = {draw=cyan, fill=white, thin, rectangle, rounded corners, inner sep=5pt, inner ysep=10pt},
+    rounded-box-title/.style = {fill=cyan, text=white, font=\bfseries},
+}
+
+\addbibresource{references.bib}
+
+\begin{document}
+\title{Calculus}
+
+\input{section-1-functions-limits}
+\input{section-2-differentiation} \newpage
+\input{section-3-integration}
+\input{section-4-transcendental-functions} \newpage
+\input{section-5-sequences-series} \newpage
+\input{section-6-partial-derivatives} \newpage
+\input{section-7-multiple-integrals} \newpage
+\input{section-8-vector-calculus} \newpage
+
+\nocite{*}
+\printbibliography
+
+\end{document}

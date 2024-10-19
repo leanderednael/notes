@@ -1,0 +1,332 @@
+\section{Partial Derivatives}
+
+\subsection{Functions of Several Variables}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A function of two variables is a rule that assigns to each ordered pair of real numbers $(x, y)$ in a set $D$ a unique real number denoted by $f(x, y)$. The set $D$ is the \textbf{domain} of $f$ and its \textbf{range} is the set of values that $f$ takes on, that is, $\{ f(x, y) | (x, y) \in D \}$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+That is, $z = f(x, y)$, where $x$ and $y$ are the \textbf{independent variables} and $z$ is the \textbf{dependent variable}.
+The domain is a subset of $\mathbb{R}^2$ and the range is a subset of $\mathbb{R}$.
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is a function of two variables with domain $D$, then the \textbf{graph} of $f$ is the set of all points $(x, y, z)$ in $\mathbb{R}^3$ such that $z = f(x, y)$ and $(x, y)$ is in $D$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{level curves} of a function $f$ of two variables are the curves with equations $f(x, y) = k$, where $k$ is a constant (in the range of $f$).
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $f$ be a function of two variables whose domain $D$ includes points arbitrarily close to $(a, b)$. Then the \textbf{limit} of $f(x, y)$ as $(x, y)$ approaches $(a, b)$ is $L$
+
+    $$\lim_{(x, y) \rightarrow (a, b)} f(x, y) = L$$
+
+    if for every number $\varepsilon > 0$ there is a corresponding number $\delta > 0$ such that if $(x, y) \in D$ and $0 < \sqrt{(x - a)^2 + (y - b)^2} < \delta$ then $| f(x, y) - L | < \varepsilon$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f(x, y) \rightarrow L_1$ as $(x, y) \rightarrow (a, b)$ along a path $C_1$ and $f(x, y) \rightarrow L_2$ as $(x, y) \rightarrow (a, b)$ along a path $C_2$, where $L_1 \neq L_2$, then $\lim_{(x, y) \rightarrow (a, b)} f(x, y)$ does not exist.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A function $f$ of two variables is continuous at $(a, b)$ if
+
+    \vspace{-7.5pt}
+
+    $$\lim_{(x, y) \rightarrow (a, b)} f(x, y) = f(a, b)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A function $f$ of two variables is continuous on a disk $D$ if it is continuous at every point $(a, b)$ in $D$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is defined on a subset $D$ of $\mathbb{R}^n$, then $\lim_{x \rightarrow a} f(\mathbf{x}) = L$ means that for every number $\varepsilon > 0$ there is a corresponding number $\partial > 0$ such that
+
+    \vspace{-7.5pt}
+
+    $$\text{if } \mathbf{x} \in D \text{ and } 0 < | \mathbf{x} - \mathbf{a} | < \partial \text{ then } | f(\mathbf{x} - L | < \varepsilon$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Partial Derivatives}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is a function of two variables, its \textbf{partial derivatives} are the rates of change of $f$ in directions $x$ and $y$:
+
+    $$f_x(x, y) \Big( = \frac{\partial f}{\partial x} \Big) = \lim_{h \rightarrow 0} \frac{f(x + h, y) - f(x, y)}{h}$$
+
+    $$f_y(x, y) \Big( = \frac{\partial f}{\partial y} \Big) = \lim_{h \rightarrow 0} \frac{f(x, y + h) - f(x, y)}{h}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+In general, if $f$ is a function of $n$ variables, $f = f(x_1, \dots, x_n)$, its partial derivative with respect to the $i^\text{th}$ variable $x_i$ is $f_{x_i} = \frac{\partial f}{ \partial x_i} = \lim_{h \rightarrow 0} \frac{f(x_1, \dots, x_{i-1}, x_i + h, x_{i+1}, \dots, x_n) - f(x_1, \dots, x_i, \dots, x_n)}{h}$. \\
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose $f$ is defined on a disk $D$ that contains the point $(a, b)$. If the functions $f_{xy}, f_{yx}$ are both continuous on $D$, then $f_{xy}(a, b) = f_{yx}(a, b)$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Clairaut's Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose that $f$ is a differentiable function of the $n$ variables $x_1, x_2, \dots, x_n$ and each $x_j$ is a differentiable function of the $m$ variables $_1, t_2, \dots, t_m$, $f(x_1(t_1, \dots, t_m), x_2(t_1, \dots, t_m), \dots, x_n(t_1, \dots, t_m))$. Then, for each $i = 1, 2, \dots, m$,
+
+    $$\frac{\partial f}{\partial t_i} = \frac{\partial f}{\partial x_1} \frac{\partial x_1}{\partial t_i} + \frac{\partial f}{\partial x_2} \frac{\partial x_2}{\partial t_i} + \dots + \frac{\partial f}{\partial x_2} \frac{\partial x_2}{\partial t_i}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Chain Rule};
+\end{tikzpicture}
+
+\textbf{Example}: $z = f(x, y), x = g(t), y = h(t), \frac{z}{dt} = \frac{\partial f}{\partial x} \frac{dx}{dt} + \frac{\partial f}{\partial y} \frac{dy}{dt}$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+
+    $$\frac{dy}{dx} = - \frac{\frac{\partial F}{\partial x}}{\frac{\partial F}{\partial y}} = - \frac{F_x}{F_y}$$
+
+    \vspace{-2.5pt}
+    
+    $$\frac{\partial z}{\partial x} = - \frac{\frac{\partial F}{\partial x}}{\frac{\partial F}{\partial z}},
+    \qquad
+    \frac{\partial z}{\partial y} = - \frac{\frac{\partial F}{\partial y}}{\frac{\partial F}{\partial z}}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Implicit Differentiation};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Tangent Planes and Linear Approximations}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose $f$ has continuous partial derivatives. An equation of the tangent plane to the surface $z = f(x, y)$ at the point $P(x_0, y_0, z_0)$ is
+
+    $$z - z_0 = f_x(x_0, y_0) (x - x_0) + f_y(x_0, y_0) (y - y_0)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\vspace{-5pt}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If the partial derivatives $f_x, f_y$ exist near $(a, b)$ and are continuous at $(a, b)$, then $f$ is differentiable at $(a, b)$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\vspace{-7.5pt}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Linearisation}:
+
+    $L(x, y) = f(x_0, y_0) + f_x(x_0, y_0) (x - x_0) + f_y(x_0, y_0) (y - y_0)$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}
+
+\newpage
+
+\subsection{Directional Derivatives}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The directional derivative of $f$ at $(x_0, y_0)$ in the direction of a unit vector $\mathbf{u} = \langle a, b \rangle$ is
+
+    $$D_\mathbf{u} f(x_0, y_0) = \lim_{h \rightarrow 0} \frac{f(x_0 + h a, y_0 + h b) - f(x_0, y_0)}{h}$$
+
+    if this limit exists.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is a differentiable function of $x$ and $y$, then $f$ has a directional derivative in the direction of any unit vector $\mathbf{u} = \langle a, b \rangle$, and
+
+    $$D_\mathbf{u} f(x, y) = f_x(x, y) a + f_y(x, y) b$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is a function of two variables $x$ and $y$, then the \textbf{gradient} of $f$ is the vector function
+
+    $$\nabla f(x, y) = \langle f_x(x, y), f_y(x, y) \rangle = \frac{\partial f}{\partial x} \mathbf{i} + \frac{\partial f}{\partial y} \mathbf{j}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The directional derivative in the direction of a unit vector $\mathbf{u}$ is the scalar projection of the gradient vector onto $\mathbf{u}$:
+
+    \vspace{-20pt}
+
+    \begin{align*}
+        D_\mathbf{u} f(x, y) & = \mathbf{\nabla} f(x, y) \cdot \mathbf{u} \\
+        & = || \mathbf{\nabla} || \cos{\theta} \qquad ( = || \mathbf{\nabla} || || \mathbf{\hat{u}} || \cos{\theta} ) \\
+        & \text{since } \mathbf{\hat{u}} \text{ is a unit vector}
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose $f$ is a differentiable function of two or three variables. The maximum value of the directional derivative $D_\mathbf{u} f(\mathbf{x})$ is
+
+    \vspace{-20pt}
+
+    $$|\nabla f(\mathbf{x})|$$
+
+    and it occurs when $\mathbf{u}$ has the same direction as the gradient vector $\nabla f(\mathbf{x})$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+The directional derivative $D_\mathbf{u} f(x, y)$ is
+\begin{itemize}
+    \item a maximum when $\cos{\theta} = 1 \iff \theta = 0 \iff \mathbf{u}$ has the same direction as the gradient.
+    \item a minimum when $\cos{\theta} = -1 \iff \theta = \pi \iff \mathbf{u}$ has the opposite direction as the gradient.
+    \item zero when $\cos{\theta} = 0 \iff \theta = \frac{\pi}{2} \iff \mathbf{u}$ is orthogonal.
+\end{itemize}
+
+\end{paracol}
+
+\subsection{Extreme Values}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ has a local maximum or minimum at $(a, b)$ and the first-order partial derivatives of $f$ exist there, then $f_x(a, b) = 0$ and $f_y(a, b) = 0$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose the second partial derivatives of $f$ are continuous on a disk with centre $(a, b)$, and suppose that $f_x(a, b) = 0$ and $f_y(a, b) = 0$ (that is, $(a, b)$ is a critical point of $f$). \\
+
+    Let $D = D(a, b) = f_{xx}(a, b) f_{yy}(a, b) - \big( f_{xy}(a, b) \big)^2$. \\
+
+    \begin{itemize}
+        \item Local minimum: $D > 0$ and $f_{xx}(a, b) > 0$
+        \item Local maximum: $D > 0$ and $f_{xx}(a, b) < 0$
+        \item Neither: $D < 0$
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Second Derivative Test};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $f$ is continuous on a closed, bounded set $D$ in $\mathbf{R}^2$, then $f$ attains an absolute maximum value $f(x_1, y_1)$ and an absolute minimum value $f(x_2, y_2)$ at some points $(x_1, y_1)$ and $(x_2, y_2)$ in $D$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Bivariate Extreme Value Theorem};
+\end{tikzpicture}
+
+To find the absolute maximum and minimum values of a continuous function $f$ on a closed, bounded set $D$:
+
+\begin{enumerate}
+    \item Find the values of $f$ at the critical points of $f$ in $D$.
+    \item Find the extreme values of $f$ on the boundary of $D$.
+    \item The largest of the values from steps 1 and 2 is the absolute maximum value; the smallest of these values is the absolute minimum value.
+\end{enumerate}
+
+\end{paracol}
+
+\subsection{Constrained Optimisation}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    To find the maximum and minimum values of $f(x, y, z)$ \textbf{subject to the constraint} $g(x, y, z) = k$ (assuming that these extreme values exist, and $\nabla g \neq 0$ on the surface $g(x, y, z) = k$): \\
+
+    \begin{enumerate}
+        \item Find all values of $x, y, z$ and $\lambda$ such that
+
+        $$\nabla f(x, y, z) = \lambda \nabla g(x, y, z), \qquad g(x, y, z) = k$$
+
+        \item Evaluate $f$ at all the points $(x, y, z)$ that result from step 1. The largest of these values is the maximum value of $f$; the smallest is the minimum value of $f$.
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Method of Lagrange Multipliers};
+\end{tikzpicture}
+
+\switchcolumn
+
+Given two constraints of the form $g(x, y, z) = k, h(x, y, z) =c$, geometrically this means the extreme values of $f(x, y, z)$ when $(x, y, z)$ is restricted to lie on the curve $C$ of intersection of the level surfaces $g(x, y, z) = k$ and $h(x, y, z) = c$.
+
+Suppose $f$ has such an extreme value at a point $P(x_0, y_0, z_0)$.
+
+Then $\nabla g$ is orthogonal to $g(x, y, z) = k$, and $\nabla h$ is orthogonal to $h(x, y, z) = c$, so $\nabla g$ and $\nabla h$ are both orthogonal to $C$.
+
+Therefore, the gradient vector $\nabla f(x_0, y_0, z_0)$ is in the plane determined by $\nabla g(x_0, y_0, z_0)$ and $\nabla h(x_0, y_0, z_0)$. (Assuming these gradient vectors are not zero and not parallel.)
+
+So there are numbers $\lambda, \mu$ (the Lagrange multipliers) s.t.
+
+\vspace{-10pt}
+
+$$\nabla f(x_0, y_0, z_0) = \lambda \nabla g(x_0, y_0, z_0) + \mu \nabla h(x_0, y_0, z_0)$$
+
+Writing this equation in terms of its components yields five equations in the five unknowns $x, y, z, \lambda, \mu$.
+
+\end{paracol}
