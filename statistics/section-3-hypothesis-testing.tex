@@ -1,0 +1,289 @@
+\section{Hypothesis Testing}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{p-value} for a hypothesis test is the probability, under the assumption of $H_0$, that the test statistic has its observed value as an outcome, or a value that is even more extreme in the direction of $H_1$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+A small p-value  implies that random variation because of the sampling process alone is not likely to account for the observed difference.
+
+Therefore, with a small p-value, we reject $H_0$:
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Statistical significance}: If the p-value is less than some reference value, usually $\alpha = 0.05$, then data provide statistically significant evidence against the null hypothesis. \\
+
+    \begin{itemize}
+        \item Reject if $p \leq \alpha$.
+        \item Fail to reject if $p > \alpha$.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Errors: \\
+
+    \begin{itemize}
+        \item Type I Error (false positive): Rejecting the null hypothesis when it's actually true. \\
+
+        \item Type II Error (false negative): Accepting the null hypothesis when it's actually false.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+By reducing the rate of one type of error, you risk increasing the rate of the other type.
+
+But with more and better data it is possible to reduce both error rates simultaneously.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Power}: the probability of correctly rejecting the null hypothesis: (where $\beta$ is the probability of a type I error)
+
+    $$1 - \beta = P(X \geq c)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: Suppose you are given a number $v$, which is a realisation of a random variable $V \sim \mathcal{N}(\mu, 1)$. Consider the following hypotheses: $H_0: \mu = 0, H_1: \mu\neq 0$. You decide to reject $H_0$ when $|v| \geq 2.5$.
+
+The probability of committing a type I error is $P(|V| \geq 2.5) = P(V \leq -2.5) + P(V \geq 2.5) = 2 \cdot P(V \leq -2.5) = 2 \cdot P \big( \frac{V - \mu}{\sigma} \leq \frac{-2.5 - \mu}{\sigma} \big) = 2 = P \big( Z \leq \frac{-2.5-0}{1} \big) = 2 \cdot P(Z \leq -2.5) = 2 \cdot 0.0062 = 0.0124$. \\
+
+A z-score measures the number of standard deviations that a datapoint $x$ is from the mean $\mu$.
+
+\begin{itemize}
+    \item When $x$ is 1 standard deviation larger than the mean, then $z = 1$.
+    \item When $x$ is 2 standard deviations smaller than the mean, then $z = -2$.
+\end{itemize}
+
+\end{paracol}
+
+\subsection{The One-Sample t-Test}
+
+\begin{paracol}{2}
+
+Let $H_0: \mu = \mu_0, H_1: \mu \neq \mu_0$ for some $\mu_0$. Since $\bar{X}_n \approx \mu$ by the LLN, so $|| \bar{X}_n - \mu_0 || \approx 0$ is in favour of the null hypothesis and $|| \bar{X}_n - \mu_0 || \gg 0$ is in favour of the alternative hypothesis.
+
+However, a difference is not a representative test statistic unless it is compared with something - the standard deviation:
+
+\begin{align*}
+    \sqrt{\text{Var}(\bar{X}_n - \mu_0)} & = \sqrt{\text{Var}(\bar{X}_n)} = \sqrt{\text{Var}\Big( \frac{1}{n} \sum_{i=1}^n X_i \Big)} & \\
+    & = \sqrt{\frac{1}{n^2} \sum_{i=1}^n \text{Var}(X_i)} \qquad \text{for independent $X_i$} \\
+    & = \sqrt{\frac{1}{n^2} n \sigma^2} & \\
+    & = \frac{\sigma}{\sqrt{n}}
+\end{align*}
+
+Because the true value of $\sigma$ is unknown, it is replaced by the sample standard deviation $\frac{S_n}{\sqrt{n}}$, where $S_n^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X}_n)^2$.
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $H_0: \mu = \mu_0, H_1: \mu \neq \mu_0$ for some $\mu_0$. The \textbf{test statistic} $T$ for a hypothesis test is
+
+    $$T = \frac{\bar{X}_n - \mu_0}{S_n / \sqrt{n}}$$
+
+    $T \approx 0$ is in favour of the null hypothesis, while $| T | \gg 0$ is against the null hypothesis.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+Since independent $X_1, X_2, \dots, X_n \sim \mathcal{N}(\mu, \sigma^2)$, the sample mean $\bar{X}_n \sim \mathcal{N}\big( \mu, \frac{\sigma^2}{n} \big)$ and the hypothetical test statistic $\frac{\bar{X}_n - \mu_0}{\sigma \ \sqrt{n}} \sim \mathcal{N}(0, 1)$.
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A continuous random variable has a $\mathbf{t}$\textbf{-distribution} with parameter $m$, if it has a probability density
+
+    $$f(x) = k_m \big( 1 + \frac{x^2}{m} \big)^{-\frac{m+1}{2}} \text{ for } -\infty < x < \infty$$
+
+    The distribution is denoted by $t(m)$. The parameter $m$ is called the \textbf{degrees of freedom}.
+
+    $k_m$ is a normalising constant such that $\int_{-\infty}^\infty f(x) \,dx = 1$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{itemize}
+    \item When $m = 1$, the distribution equals the Cauchy distribution:
+
+    $$f(x) = \frac{1}{\pi} (1 + x^2)^{-1}$$
+
+    \item As $m \rightarrow \infty$, the distribution approaches a Normal distribution:
+
+    $$f(x) \rightarrow \frac{1}{\sqrt{2 \pi}} e^{-x^2/2}$$
+\end{itemize}
+
+Therefore, a t-distribution is somewhere between these two extremes. The density is symmetric around zero and it is bell-shaped like the standard normal. The distinguishing feature is that densities of the t-distribution have heavier tails - the mean is smaller and the density goes to zero more slowly than the standard normal density as $s \rightarrow \pm \infty$.
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X_1, X_2, \dots, X_n$ be independent normally distributed random variables. Then the random variable
+
+    $$T | H_0 = \frac{\bar{X}_n - \mu_0}{S_n / \sqrt{n}} \sim t(n-1)$$
+
+    that is, the test statistic follows a $t$-distribution with $n-1$ degrees of freedom.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X_1, X_2, \dots, X_n$ be independent random variables with a (non-normal) distribution with finite expectation $\mu$ and finite variance $\sigma^2$. Then (by the CLT),
+
+    $$\frac{\bar{X}_n - \mu_0}{S_n / \sqrt{n}} \overset{d}{\rightarrow} \mathcal{N}(0, 1) \text{ as } n \rightarrow \infty$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Variation of the CLT};
+\end{tikzpicture}
+
+Consequently,
+
+$$P \Big( a < \frac{\bar{X}_n - \mu_0}{S_n / \sqrt{n}} < b \Big) \rightarrow P(a < Z < b),
+\quad
+Z \sim \mathcal{N}(0, 1)$$
+
+\end{paracol}
+
+\subsection{Two-Sample Testing}
+
+\begin{paracol}{2}
+
+One-sample $t$-test: $T = \frac{\bar{X}_n}{(S_n / \sqrt{n}} \sim t(n-1)$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A \textbf{paired two-sample $t$-test} compares the means of two groups of paired samples (i.e. \textit{not independent}):
+    
+    $$H_0: \mu_1 = \mu_2 \iff \mu_D = 0, D_i = X_i - Y_i$$
+    
+    $$H_1: \mu_1 \neq \mu_2 \iff \mu_D \neq 0$$
+    
+    $$T = \frac{\bar{D}_n}{(S_D)_n / \sqrt{n}} \sim t(n-1)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Examples}:
+
+\begin{itemize}
+    \item Blood pressure of patients before and after a treatment
+    \item Market capitalisation of companies now and in two years
+    \item Air resistance of an airplane wing before and after a coating is applied
+    \item Lung closing capacity for smokers and non-smokers
+\end{itemize}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{pooled variance} of two groups of observations $x_1, \dots, x_{n_x}$ and $y_1, \dots, y_{n_y}$ is given by
+
+    $$s_p^2 = \frac{(n_x - 1) s_X^2 + (n_y - 1) s_Y^2}{n_x + n_y - 2}$$
+
+    The \textbf{pooled standard deviation} is
+
+    $$s_p = \sqrt{s_p^2}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The pooled variance is an unbiased estimator for the common variance $\sigma^2$, i.e. $E[S_p^2] = \sigma^2$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $X_i \sim \mathcal{N}(\mu, \sigma^2)$ for $1 \leq i \leq n_x$ and $Y_i \sim \mathcal{N}(\mu, \sigma^2)$ for $1 \leq i \leq n_y$ are \textit{independent}, then
+
+    $$T = \frac{\bar{X_{n_x}} - \bar{Y_{n_y}}}{S_p \sqrt{\frac{1}{n_x} + \frac{1}{n_y}}} \sim t(n_x + n_y - 2)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    An \textbf{unpaired two-sample $t$-test} compares the means of two groups of unpaired samples:
+    
+    $$H_0: \mu_1 = \mu_2 \iff \mu_D = 0, D_i = X_i - Y_i$$
+    
+    $$H_1: \mu_1 \neq \mu_2 \iff \mu_D \neq 0$$
+    
+    $$T = \frac{\bar{D}_n}{(S_D)_n / \sqrt{n}} \sim t(n-1)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+If the two samples have different variances, \textbf{Welch's test} can be applied.
+
+\end{paracol}
+
+\newpage
+
+\begin{verbatim}
+set.seed(42)
+
+# Suppose you toss a fair coin 10 times. To compute the probability of a certain
+# number of heads, you can use the command dbinom. It returns the value of the
+# probability mass function at that number.
+dbinom(5, size=10, prob=0.5)
+
+# To compute the probability of computing at most a certain number of heads, you
+# can use the command pbinom. It returns the value of the cumulative density
+# function at that number. What is the probability of at most 6 and at least 3?
+pbinom(6, size=10, prob=0.5) - pbinom(2, size=10, prob=0.5)
+
+dbinom(500, size=1000, prob=0.5)
+range <- 425:575
+plot(range, dbinom(range, size=1000, prob=0.5))
+plot(range, pbinom(range, size=1000, prob=0.5))
+# To compute the number of heads, such that the probability of flipping that many
+# heads has a certain value, you can use the command qbinom. It returns the value
+# of the inverse cumulative density function or quantile function at that probability.
+# The first quartile (Q1) is the point where you expect the cumulative density function to be 0.25.
+qbinom(0.25, size=1000, prob=0.5)
+
+# To draw random samples of the binomial distribution, you can use the command rbinom.
+# Flip 1000 coins 10 times. What is the mean?
+rsample <- rbinom(10, size=1000, prob=0.5)
+mean(rsample)
+
+# What's the probability of 133 successes in 175 trials?
+dbinom(133, size=175, prob=0.68)
+range <- 85:150
+plot(range, dbinom(range, size=175, prob=0.68))
+# What's the probability of at least 133 successes?
+1 - pbinom(132, size=175, prob=0.68)
+# This is the p-value for hypotheses H_0: mu=0.68, H_1: mu > 0.68
+binom.test(133, n=175, p=0.68, alternative = "greater", conf.level = 0.95)
+
+data("iris")
+head(iris)
+only_versicolor <- iris[iris$Species == "versicolor",]
+sep_len <- only_versicolor$Sepal.Length
+hist(sep_len)
+qqnorm(sep_len)
+t.test(sep_len, mu=5.731)
+
+data("chickwts")
+sunfl <- subset(chickwts, feed == "sunflower")[,1]
+soyb <- subset(chickwts, feed == "soybean")[,1]
+var.test(sunfl, soyb)
+# The high p-value tells you not to reject the equality of variances.
+# This means we now know which t-test to apply: the two-sample unpaired t-test, equal variances.
+t.test(sunfl, soyb, alternative = "greater", paired = FALSE, var.equal = TRUE)
+
+\end{verbatim}

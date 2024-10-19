@@ -1,0 +1,192 @@
+\section{Confidence Intervals}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A \textbf{pivotal quantity} or \textbf{pivot} $T$ is a function of observations and unknown parameters such that the distribution of $T$ does not depend on any unknown parameters.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: The test statistic $T = \frac{\bar{X}_n - \mu}{S_n \ \sqrt{n}} \sim t(n-1)$ depends both on observations and unknown parameters, while its distribution does not. $T$ is a pivot.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Assuming normality:
+
+    Given i.i.d. $X_i \sim \mathcal{N}(\mu, \sigma^2)$, $T = \frac{\bar{X}_n - \mu}{S_n \ \sqrt{n}} \sim t(n-1)$. Hence
+
+    $$P \big(\bar{X}_n - t_{n-1, \alpha / 2} \frac{S_n}{\sqrt{n}} \leq \mu \leq \bar{X}_n + t_{n-1, \alpha / 2} \frac{S_n}{\sqrt{n}} \big) = 1 - \alpha = \gamma$$
+
+    Thus there is a $\gamma \%$ probability that $\mu$ lies in the \textbf{confidence interval}
+
+    $$\Big[ \bar{X}_n - t_{n-1, \alpha / 2} \frac{S_n}{\sqrt{n}} , \bar{X}_n + t_{n-1, \alpha / 2} \frac{S_n}{\sqrt{n}} \Big]$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+NB: The statement "$\mu$ has $\gamma \%$ probability of lying in this interval" is not correct!
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Normal approximation given a large sample size:
+
+    Without normality, for large $n$, it follows from the CLT that $T = \frac{\bar{X}_n - \mu}{S_n \ \sqrt{n}} \overset{d}{\approx} \mathcal{N}(0, 1)$. Hence
+
+    $$P \big(\bar{X}_n - z_{\alpha / 2} \frac{S_n}{\sqrt{n}} \leq \mu \leq \bar{X}_n + z_{\alpha / 2} \frac{S_n}{\sqrt{n}} \big) = 1 - \alpha = \gamma$$
+
+    The $(1 - \alpha)$ confidence interval for $\mu$ in this case then is
+
+    $$\Big[ \bar{X}_n - z_{\alpha / 2} \frac{S_n}{\sqrt{n}} , \bar{X}_n + z_{\alpha / 2} \frac{S_n}{\sqrt{n}} \Big]$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Disadvantages of the CLT approximation}:
+
+\begin{enumerate}
+    \item The CLT only gives an approximate interval.
+    \item The approximation may not be very good for small $n$.
+    \item It is more accurate to use the \textit{actual distribution}.
+\end{enumerate}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $\gamma (= 1 - \alpha)$ is the \textbf{confidence level}. Common choices are 90\%, 95\%, 99.9\%.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Connection to hypothesis testing}: The two following statements are equivalent: \\
+
+    \begin{enumerate}
+        \item $H_0: \mu = \mu_0$ is rejected at significance level $\alpha$ in a two-sided test.
+        \item The $1 - \alpha$ confidence interval does not contain the value $\mu_0$.
+    \end{enumerate}
+
+    \vspace{10pt}
+
+    That is, the confidence interval is the set of all $\mu_0$ for which $H_0: \mu = \mu_0$ would not be rejected in a two-sided hypothesis test (with the same $\alpha$).
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The sum of $n$ independent $\text{Exp}(\lambda)$ random variables follows a $\Gamma(n, 1 / \lambda)$ distribution.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A continuous random variable follows a \textbf{Gamma distribution} with parameters $n \in \mathbb{Z}$ and $1 / \lambda > 0$ if it has a probability density
+    
+    $$f(x) = \frac{\lambda^n}{(n-1)!} x^{n-1} e^{-\lambda x} \text{ for } x \geq 0$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Problem}: The Gamma distribution depends on an \textbf{unknown parameter} $1 / \lambda$. Therefore, a random variable $S \sim \Gamma(n, 1 / \lambda)$ is not a pivot.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Scaling property of the Gamma distribution}: If $X \sim \Gamma(n, 1 / \lambda)$ then $aX \sim \Gamma(n, a / \lambda)$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+(The Gamma scaling property follows from a similar scaling property of the Exponential distribution.)
+
+\textbf{Solution}: $\lambda S \sim \Gamma(n, 1)$ is a pivot. Thus you can avoid the CLT approximation and instead use the known distribution.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The $(1 - \alpha)$ confidence interval for $\lambda$ based on $n$ observations is given by
+
+    $$\Bigg[ \frac{q_{n, \alpha / 2}}{\sum_{i=1}^n X_i}, \frac{q_{n, 1 - \alpha / 2}}{\sum_{i=1}^n X_i} \Bigg]$$
+
+    where $q_{n, \rho}$ is the $\rho$-quantile of the $\Gamma(n, 1)$ distribution.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: Given a random variable $X \sim \text{Bin}(n, p)$, its test statistic is not a pivot because its distribution depends on an unknown parameter, $p$. By the CLT,
+
+$$\frac{X - np}{\sqrt{np(1-p)}} \overset{d}{\rightarrow} \text{ as } n \rightarrow \infty \Rightarrow \frac{X - np}{\sqrt{np(1-p)}} \overset{d}{\approx} \mathcal{N}(0, 1)$$
+
+Approximating $p$ by its sample estimate $\hat{p} = \frac{X}{n}$,
+
+$$\frac{X - np}{\sqrt{n\hat{p}(1-\hat{p})}} \overset{d}{\rightarrow} \text{ as } n \rightarrow \infty \Rightarrow \frac{X - np}{\sqrt{n\hat{p}(1-\hat{p})}} \overset{d}{\approx} \mathcal{N}(0, 1)$$
+
+This leads to the approximate confidence interval $\approx 1 - \alpha$, with $\hat{p} = X / n$, for $p$:
+
+$$\Bigg[ \hat{p} - z_{\alpha / 2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} , \hat{p} + z_{\alpha / 2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \Bigg] = \hat{p} \pm z_{\alpha / 2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A random variable which is not a pivot but can be approximated by a standard normal distribution, by the CLT, is called a \textbf{near-pivot}.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}
+
+\newpage
+
+The critical value for a t-based confidence interval is always larger than the equivalent z-based critical value, because not only are we uncertain about the population mean, we are also uncertain about the population standard deviation. As sample size increases, $t$ converges to $z$.
+
+\begin{verbatim}
+# Suppose you are given a dataset that is sampled from a normally distributed population.
+# The size of your dataset is 26, the sample mean is 23, and the sample standard deviation is 10.
+# Compute the lower limit of the 80% confidence interval for mu.
+sample_mean <- 23
+sample_sd <- 10
+sample_size <- 26
+confidence_level <- 0.8
+alpha <- 1 - confidence_level
+critical_value <- qt(1 - alpha/2, df = sample_size - 1)
+margin_of_error <- critical_value * (sample_sd / sqrt(sample_size))
+lower_limit <- sample_mean - margin_of_error
+print(lower_limit)
+
+# Use R to generate a random sample of size 100 from a normal distribution with parameters mu=25, sigma=3.
+# Compute the sample mean and standard deviation.
+# Set the parameters
+x <- rnorm(100, mean = 25, sd = 3)
+sd(x)
+mean(x)
+t.test(x, mu = 25)
+# If 1000 of your fellow MOOC students correctly solve this exercise, how many do you expect will answer "yes" on the previous subquestion?
+# 950. There is a 95% probability of obtaining a random sample that gives rise to a confidence interval (computed with this technique) that does contain the actual value of mu.
+
+set.seed(10)
+
+# Run a simulation making one million 95% confidence intervals for the parameter lambda,
+# based on samples of size 15 from an exponential distribution with parameter 0.923.
+count1 <- 0
+count2 <- 0
+for (i in 1:1000000) {
+  decays <- rexp(15, 0.923)
+  CI_lower <- qgamma(0.025, 15, 1) / sum(decays)
+  CI_upper <- qgamma(0.975, 15, 1) / sum(decays)
+  if (CI_lower > 0.923) {
+    count1 <- count1 + 1
+  }
+  if (CI_upper < 0.923) {
+    count2 <- count2 + 1
+  }
+}
+# What is the value of count1, the number of confidence intervals for which the
+# lower bound is higher than the real value of the parameter?
+count1
+# How many intervals do contain the exact value of lambda?
+count2
+# Notice this means that ~95% of the confidence intervals contained the true parameter as expected.
+
+\end{verbatim}

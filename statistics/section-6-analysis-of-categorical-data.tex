@@ -1,0 +1,98 @@
+\section{Analysis of Categorical Data}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{variance} of a categorical variable ($0$ or $1$) is
+
+    $$\sigma^2 = p (1-p)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Proof}: Recall the variance is defined as the average squared deviation from the mean. For $1$, the squared deviation from the mean is $(1-p)^2$; for $0$, it is $p^2$.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{standard error} for a categorical variable is
+
+    $$\text{SE}_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The sample size needed for a given confidence interval is
+
+    $$n = \frac{p(1-p)}{\text{SE}^2}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Variance is maximised when $p = \frac{1}{2}$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The standard error of a difference in proportions is
+
+    $$\text{SE}(p_1 - p_2) = \sqrt{\frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The $z$-statistic of the difference is calculated as
+
+    $$z = \frac{\text{observed} - \text{expected}}{\text{SE}} = \frac{(p_1 - p_2) - 0}{\text{SE}}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The \textbf{Chi-Squared distribution} is such that, taking repeated samples from random variable(s) $z_i \sim \mathcal{N}(0, 1), i = 1, 2, \dots,$ and squaring them,
+
+    $$\chi^2(1) = z_1^2, \quad \chi^2(2) = z_1^2 + z_2^2, \quad \dots$$
+
+    The \textbf{degrees of freedom} uniquely define each $\chi^2$ distribution.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{The $\chi^2$ goodness-of-fit test}: When the observed frequency is far from the expected frequency, the corresponding term in the sum is large (and vice versa).
+
+    $$\chi^2 = \sum \frac{(\text{observed frequency} - \text{expected frequency})^2}{\text{expected frequency}}$$
+
+    \begin{itemize}
+        \item When the null model is "good", the sum will be small.
+        \item When the null model is "bad", the sum will be large.
+    \end{itemize}
+
+    Reject the null hypothesis when the result is large enough.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}:
+
+\begin{align*}
+    \chi^2 & = \frac{(4-10)^2}{10} + \frac{(6-10)^2}{10} + \frac{(17-10)^2}{10} \\
+    & = \frac{6^2}{10} + \frac{4^2}{10} + \frac{7^2}{10} \\
+    & = 10.1
+\end{align*}
+
+Reject the null hypothesis when the result of the $\chi^2$ test is large enough - compare with the appropriate $\chi^2$ distribution with $k-1$ degrees of freedom.
+
+\end{paracol}

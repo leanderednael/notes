@@ -1,0 +1,329 @@
+\section{Estimator Theory}
+
+Often, an unknown quantity of interest is represented by some parameter of the model distribution, and one wants to estimate this parameter by means of the observations.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    Suppose we model a dataset $x_1, x_2, \dots, x_n$ as the realisation of random variables $X_1, X_2, \dots, X_n$. \\
+
+    Then the random variable $T = h(X_1, X_2, \dots, X_n)$ is called an \textbf{estimator} and any $t = h(x_1, x_2, \dots, x_n)$ for some function $h$ is called an \textbf{estimate}. The distribution of $T$ is called the \textbf{sampling distribution}.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $X_1, X_2, \dots, X_n$ be random variables with a distribution that depends on some parameter $\theta$. Let $T = h(X_1, X_2, \dots, X_n)$ be an estimator for $\theta$. \\
+    
+    Then the \textbf{mean squared error (MSE)} for $T$ with respect to $\theta$ is
+
+    \vspace{-20pt}
+
+    \begin{align*}
+        \text{MSE}(T; \theta) & = E_\theta[(T - \theta)^2] & \\
+        & = \text{Var}_\theta(T - \theta) + (E_\theta[T - \theta])^2 & \text{by definition} \\
+        & = \text{Var}_\theta(T) + (E_\theta[T] - \theta)^2 & \text{as Var}_\theta(\theta) = 0, \\
+        & & E_\theta[\theta] = \theta
+    \end{align*}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+That is, the MSE is composed of variance and bias:
+
+\begin{itemize}
+    \item $\text{Var}_\theta(T)$ measures the variation of $T$ around $E_\theta[T]$,
+    \item $E_\theta[T] - \theta$ measures the average deviation of $T$ from $\theta$.
+\end{itemize}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $T$ be an estimator with a sampling distribution that depends on $\theta$. \\
+
+    Then $E_\theta[T] - \theta$ is called the \textbf{bias} of $T$ with respect to $\theta$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{itemize}
+    \item When the bias is positive, the estimator $T$ systematically produces values that are larger than $\theta$.
+    \item When the bias is negative, the estimator systematically produces values that are smaller than $\theta$.
+    \item Only when the bias is zero, the realisations of $T$ are on average equal to $\theta$.
+\end{itemize}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $T$ be an estimator with a sampling distribution that depends on $\theta$. \\
+
+    When $E_\theta[T] = \theta$, $T$ is an \textbf{unbiased} estimator for $\theta$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\textbf{Example}: The sample mean is an unbiased estimator for the mean:
+
+$$E[\bar{X}_n] = E \big[ \frac{1}{n} \sum_{i=1}^n X_i \big] = \frac{1}{n} \sum_{i=1}^n E[X_i] = \frac{1}{n} n \mu = \mu$$
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Suppose $T$ is an unbiased estimator for a parameter $\theta$. Suppose we want to estimate $g(\theta)$ for some function $g$. \\
+
+    Then $g(T)$ is not necessarily an unbiased estimator for $g(\theta)$. \\
+    
+    \textit{Generally, expectation only carries over by linearity, but not necessarily for non-linear functions}.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Example}: If $T$ is unbiased for $\theta$, $E[T] = \theta$. Then $g(T) = 2 + 3T$ is unbiased for $g(\theta)$: $E[2 + 3T] = 2 + 3 E[T] = 2 + 3 \theta$.
+
+\textbf{Example}: The sample variance is an unbiased estimator for the model variance, but the sample standard deviation is a biased estimator for the model standard deviation:
+
+\begin{align*}
+    E[S_n^2] & = \frac{1}{n-1} E \big[ \sum_{i=1}^n (X_i - \bar{X}_n)^2 \big] \\
+    & = \frac{1}{n-1} (n-1) \sigma^2 \\
+    & = \sigma^2
+\end{align*}
+
+By Jensen's inequality, for the convex function $E[S_n^2]$:
+
+$$\sigma^2 = E[S_n^2] > (E[S_n])^2 \Rightarrow E[S_n] < \sigma$$
+
+Thus, $S_n$ has negative bias with respect to $\sigma$.
+
+\end{paracol}
+
+A good estimator should ideally have both low variance and low bias.
+
+Zero bias $E_\theta[T] = \theta$ is a desirable property but \textbf{overall the MSE, composed of variance and bias, determines the performance of an estimator} $T$.
+
+For this reason, in some situations a biased estimator with small variance may be preferable over an unbiased estimator.
+
+Different methods of estimation arise from different principles:
+
+\begin{itemize}
+    \item Method of moments: based on the \textit{moments} of the distribution.
+    \item Maximum likelihood method: based on the \textit{form} of the distribution.
+\end{itemize}
+
+However, although different distributions may have the same moments, the forms of their distributions may be different. For example, the two distinct distributions $X \sim \text{Exp}(1)$ and $Y \sim \mathcal{N}(1, 1)$ both have first and second-order moments $E[X] = 1 = E[Y], \, E[X^2] = 2 = E[Y^2]$.
+
+In such a case, an estimation method based on the form of the distribution (rather than its moments) provides more information; and likely a better estimator (with a lower MSE).
+
+\subsection{The Method of Moments}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Given a random variable $X$, for $k = 1, 2, \dots$, the expectation of $X^k$ is called the $k$-th \textbf{moment}:
+
+    $$M^{(k)} = E[X^k]$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Given a dataset $x_1, x_2, \dots, x_n$, for $k = 1, 2, \dots$, the mean of $x_i^k$ is called the $k$-th \textbf{sample moment}:
+
+    $$M_n^{(k)} = \frac{1}{n} \sum_{i=1}^n x_i^k$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Example}: If $X \sim \mathcal{N}(\mu, \sigma^2)$, then
+
+\vspace{-20pt}
+
+\begin{align*}
+    \sigma^2 = \text{Var}(X) & = E[X^2] - (E[X])^2 \\
+    & = \frac{1}{n} \sum_{i=1}^n x_i^2 - \Bigg( \frac{1}{n} \sum_{i=1}^n x_i \Bigg)^2 \\
+    & = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x}_n)^2
+\end{align*}
+
+(Note: The \textit{sample} variance is commonly divided by $(n-1)$ so it will be an unbiased estimator.)
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \begin{enumerate}
+        \item If the model distribution has more than one parameter, use more than one equation to solve for the parameters.
+        \item When multiple moments can be expressed in terms of the same parameters, then use the smallest value of $k$ for which the $k$-th moment can be expressed in the parameters.
+    \end{enumerate}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {The Method of Moments};
+\end{tikzpicture}
+
+\textbf{Example}: $X_1, X_2, \dots, X_n \sim \mathcal{N}(\mu, \sigma^2)$ has two parameters:
+
+$$\frac{1}{n} \sum_{i=1}^n x_i = E[X_1] = \mu \quad \Rightarrow \quad \hat{\mu} = \bar{X}_n$$
+
+\vspace{-20pt}
+
+\begin{align*}
+    \frac{1}{n} \sum_{i=1}^n x_i^2 & = E[X_1^2] = \text{Var}(X_1) + (E[X_1])^2 = \sigma^2 + \mu^2 \\
+    \Rightarrow \quad \hat{\sigma}^2 & = \frac{1}{n} \sum_{i=1}^n X_i^2 - \hat{\mu} = \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar{X}_n = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X}_n)^2
+\end{align*}
+
+\textbf{Example}: $X_1, X_2, \dots, X_n \sim \mathcal{N}(0, \sigma^2)$ has one parameter, but the first moment is zero: $E[X_1] = 0$.
+
+\vspace{-20pt}
+
+$$E[X_1^2] = \text{Var}(X_1) + (E[X_1])^2 = \sigma^2 + 0
+\quad \Rightarrow \quad
+\hat{\sigma} = \sqrt{\frac{1}{n} \sum_{i=1}^n X_i^2}$$
+
+\end{paracol}
+
+\vspace{-10pt}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+    The \textbf{moment generating function} of a random variable $X$ for $t \in \mathbb{R}$ is
+
+    \vspace{-10pt}
+
+    $$M_X(t) = M(t) = E[e^{tX}] = \begin{cases}
+        \sum_x e^{tx} p_X(x) & \text{if } X \text{ is discrete} \\
+
+        \int_{-\infty}^\infty e^{tx} f_X(x) & \text{if } X \text{ is continuous}
+    \end{cases} \qquad \text{s.t.} \qquad M(0) = 1  = \begin{cases}
+        \sum_x p_X(x) & \text{if } X \text{ is discrete} \\
+
+        \int_{-\infty}^\infty f_X(x) & \text{if } X \text{ is continuous}
+    \end{cases}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The derivatives of the moment generating function of a random variable generate its moments, evaluated at $t = 0$:
+
+    $$M^{(k)} = E[X^k] = \frac{d^k}{dt^k} M(t) \Big|_{t=0}, \quad k = 1, 2, 3, \dots$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    The moment generating function of the sum of $X, Y$ independent random variables is the product of their generating functions:
+
+    $$M_{X + Y}(t) = M_X(t) M_Y(t)$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\end{paracol}
+
+\textbf{Examples}: $E[X] = M'(0), \quad \text{Var}(X) = M''(0) - M'(0)^2$
+
+$\text{Ber}(p): M(t) = p e^t + 1 - p, \quad \text{Bin}(n, p): M(t) = (p e^t + 1 - p)^2, \quad \mathcal{N}(\mu, \sigma^2): M(t) = e^{t \mu + t^2 \sigma^2 / 2}$
+
+\subsection{The Maximum Likelihood Method}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Consider a dataset $x_1, x_2, \dots, x_n$ modelled as realisations of independent discrete random variables $X_1, X_2, \dots, X_n$ whose distribution depends on a parameter $\theta$. The \textbf{likelihood} is the product of marginal probabilities:
+
+    $$L(\theta) = P_\theta(X_1 = x_1) P_\theta(X_2 = x_2) \dots P_\theta(X_n = x_n)$$
+
+    The \textbf{maximum likelihood estimate (MLE)} for $\theta$ is the value of $\theta$ that maximises $L(\theta)$ over all values of $\theta$:
+
+    $$\hat{p} = \operatorname*{arg\,max}_\theta{L(\theta)} = \operatorname*{arg\,max}_\theta{\log L(\theta)}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+(In practice, maximising $\log L(\theta)$ is often easier.)
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Consider a dataset $x_1, x_2, \dots, x_n$ modelled as realisations of independent continuous random variables $X_1, X_2, \dots, X_n$ whose density $f_\theta$ depends on a parameter $\theta$. The \textbf{likelihood} is the product of marginal densities:
+
+    $$L(\theta) = f_\theta(x_1) f_\theta(x_2) \dots f_\theta(x_n)$$
+
+    The \textbf{maximum likelihood estimate (MLE)} for $\theta$ is the value of $\theta$ that maximises $L(\theta)$ over all values of $\theta$:
+
+    $$\hat{p} = \operatorname*{arg\,max}_\theta{L(\theta)} = \operatorname*{arg\,max}_\theta{\log L(\theta)}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+In general it is often true that the maximum likelihood estimator has the lowest MSE (for large $n$), of the asymptotically unbiased estimators.
+
+\end{paracol}
+
+\newpage
+
+\begin{verbatim}set.seed(0)
+n <- 10
+n_exp <- 10000
+# Estimator based on variance
+K_hat_var <- 1:n_exp
+for (i in 1:n_exp) {
+  x <- sample(1:1000, n, replace=FALSE)
+  K_hat_var[i] <- sqrt(12 * var(x) + 1)
+}
+mean(K_hat_var)
+var(K_hat_var)
+# Estimator based on median
+K_hat_median <- 1:n_exp
+for (i in 1:n_exp) {
+  x <- sample(1:1000, n)
+  K_hat_median[i] <- 2 * median(x) - 1
+}
+mean(K_hat_median)
+var(K_hat_median)
+# Estimator based on mean
+K_hat_mean <- 1:n_exp
+for (i in 1:n_exp) {
+  x <- sample(1:1000, n)
+  K_hat_mean[i] <- 2 * mean(x) - 1
+}
+mean(K_hat_mean)
+var(K_hat_mean)
+# Plot estimators
+hist(K_hat_var, col='green', breaks=seq(0, 2000, 100), density=50)
+hist(K_hat_median, col='red', breaks=seq(0, 2000, 100), density=50, add=TRUE)
+hist(K_hat_mean, col='blue', breaks=seq(0, 2000, 100), density=50, add=TRUE)
+# Why is the estimator based on the median different from the estimator based on the average, even though
+# their theoretical values are the same?
+# The estimators happen to have the same expectation, but they are different random variables.
+
+m <- 500
+n <- 100
+p <- 0.5
+N <- 1000
+T1 <- 1:N
+T2 <- 1:N
+for (i in 1:N) {
+  X <- rbinom(m, size=1, prob=p)
+  Y <- rbinom(n, size=1, prob=p)
+
+  T1[i] <- (mean(X) + mean(Y)) / 2
+  T2[i] <- (sum(X) + sum(Y)) / (m + n)
+}
+mean(T1)
+mean(T2)
+MSE_T1 <- mean((p - T1)^2)
+MSE_T2 <- mean((p - T2)^2)
+MSE_T1
+MSE_T2
+# Smaller MSE gives a better estimator.
+
+\end{verbatim}

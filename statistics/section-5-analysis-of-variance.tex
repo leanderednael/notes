@@ -1,0 +1,47 @@
+\section{Analysis of Variance (ANOVA)}
+
+With ANOVA and the associated F test, one can examine the equality of multiple means using a single test:
+
+$$H_0: \mu_1 = \mu_2 = \mu_3 = \dots, \quad H_A: \text{ At least one mean is different.}$$
+
+Three conditions:
+\begin{itemize}
+    \item \textbf{Independence} of observations within and between groups.
+    \item \textbf{Normality}, which can be investigated by checking if the group sizes are sufficiently large.
+    \item \textbf{Constant variance} $\sigma^2$ in all groups ($\sigma^2$ may be known or unknown).
+\end{itemize}
+
+By default, we reject a null hypothesis when we get a p-value less than $\alpha = 0.05$.
+
+The F statistic compares the between group variability (MSG) with the within group variability (MSE):
+
+$$F = \frac{\text{MSG}}{\text{MSE}}$$
+
+\begin{itemize}
+    \item The MSG is the variance of $k$ means, so it has $k - 1$ degrees of freedom.
+    \item The MSE is an average of $k$ individual group variances. It has $(n_1 - 1) + (n_2 - 1) + \dots = N - k$ degrees of freedom.
+\end{itemize}
+
+All else equal, the larger is $F$, the more inclined you should be to reject the null hypothesis.
+
+If the null hypothesis is true, $F$ should be close to $1$ because the variability between groups with match the overall variability in the data.
+
+If the null hypothesis is rejected (i.e. the F test indicates that at least one mean is different), one can proceed with multiple pairwise comparisons.
+
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{s \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}$$
+
+\begin{itemize}
+    \item It is good practice to use more stringent significance levels in pairwise comparisons to avoid making a Type I error.
+
+    \item In addition, a pooled standard deviation should be used.
+
+    \item \textbf{Bonferroni correction}: For a desired overall Type I error rate of $\alpha$, the Bonferroni correction suggests that a significance level $\alpha / K$ should be used for pairwise comparisons where $K$ is the number of pairwise comparisons.
+\end{itemize}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Description}: Text
+    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
+\end{tikzpicture}
