@@ -2,49 +2,53 @@
 
 \begin{paracol}{2}
 
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    In a \textbf{linear regression model} for $(x_1, y_1), \dots, (x_n, y_n)$ we assume that $x_1, \dots, x_n$ are non-random and $y_1, \dots, y_n$ are realisations of random variables $Y_1, \dots, Y_n$ s.t.
+	\begin{tikzpicture}
+		\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+				In a \textbf{linear regression model} for $(x_1, y_1), \dots, (x_n, y_n)$ we assume that $x_1, \dots, x_n$ are non-random and $y_1, \dots, y_n$ are realisations of random variables $Y_1, \dots, Y_n$ s.t.
 
-    $$Y_i = \alpha + \beta x_i + U_i, \text{ for } i = 1, \dots, n$$
+				$$Y_i = \alpha + \beta x_i + U_i, \text{ for } i = 1, \dots, n$$
 
-    where measurement errors $U_1, \dots, U_n$ are independent (i.e. do not influence each other) Normal random variables with $E[U_i] = 0$ (i.e. no systematic deviation from zero in the error term) and $\text{Var}(U_i) = \sigma^2$.
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
-\end{tikzpicture}
+				where measurement errors $U_1, \dots, U_n$ are independent (i.e. do not influence each other) Normal random variables with $E[U_i] = 0$ (i.e. no systematic deviation from zero in the error term) and $\text{Var}(U_i) = \sigma^2$.
+			\end{minipage}};
+		\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+	\end{tikzpicture}
 
-\switchcolumn
+	\switchcolumn
 
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    The least squares estimators $\hat{\alpha}, \hat{\beta}$ that minimise the sum of squared distances
+	\begin{tikzpicture}
+		\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+				The least squares estimators $\hat{\alpha}, \hat{\beta}$ that minimise the sum of squared distances
 
-    $$\sum_{i=1}^n (y_i - \alpha - \beta x_i)^2$$
+				$$\sum_{i=1}^n (y_i - \alpha - \beta x_i)^2$$
 
-    over all $\alpha, \beta \in \mathbb{R}$ are given by
+				over all $\alpha, \beta \in \mathbb{R}$ are given by
 
-    $$\hat{\alpha} = \bar{Y}_n - \hat{\beta} \bar{x}_n$$
-    $$\hat{\beta} = \frac{\sum_{i=1}^n (x_i - \bar{x}_n)(Y_i - \bar{Y}_n)}{\sum_{i=1}^n (x_i - \bar{x}_n)^2} = \frac{s_Y}{s_X}r_{x,Y}$$
+				$$\hat{\alpha} = \bar{Y}_n - \hat{\beta} \bar{x}_n$$
+				$$\hat{\beta} = \frac{\sum_{i=1}^n (x_i - \bar{x}_n)(Y_i - \bar{Y}_n)}{\sum_{i=1}^n (x_i - \bar{x}_n)^2} = \frac{s_Y}{s_X}r_{x,Y}$$
 
-    which are both unbiased; that is, $E[\hat{\alpha}] = \alpha, E[\hat{\beta}] = \beta$.
+				which are both unbiased; that is, $E[\hat{\alpha}] = \alpha, E[\hat{\beta}] = \beta$.
 
-    Since, according to the model, $U_i = Y_i - \alpha - \beta x_i \approx Y_i - \hat{\alpha} - \hat{\beta} x_i$, the least squares estimator for $\sigma^2$ is given by
+				Since, according to the model, $U_i = Y_i - \alpha - \beta x_i \approx Y_i - \hat{\alpha} - \hat{\beta} x_i$, the least squares estimator for $\sigma^2$ is given by
 
-    $$\hat{\sigma^2} = \frac{1}{n-2} \sum_{i=1}^n (Y_i - \hat{\alpha} - \hat{\beta} x_i)^2$$
+				$$\hat{\sigma^2} = \frac{1}{n-2} \sum_{i=1}^n (Y_i - \hat{\alpha} - \hat{\beta} x_i)^2$$
 
-    where dividing by $n-2$ gives an unbiased estimator, given the expression contains two estimated parameters $\hat{\alpha}, \hat{\beta}$.
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
-\end{tikzpicture}
+				where dividing by $n-2$ gives an unbiased estimator, given the expression contains two estimated parameters $\hat{\alpha}, \hat{\beta}$.
+			\end{minipage}};
+		\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+	\end{tikzpicture}
 
-\switchcolumn
+	\switchcolumn
 
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    If $U_1, \dots, U_n \sim \mathcal{N}(0, \sigma^2)$, the least squares estimators $\hat{\alpha}, \hat{\beta}$ obtained with the method of moments are the same as the maximum likelihood estimators $\hat{\alpha}_{ML}, \hat{\beta}_{ML}$.
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
-\end{tikzpicture}
+	\begin{tikzpicture}
+		\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+				If $U_1, \dots, U_n \sim \mathcal{N}(0, \sigma^2)$, the least squares estimators $\hat{\alpha}, \hat{\beta}$ obtained with the method of moments are the same as the maximum likelihood estimators $\hat{\alpha}_{ML}, \hat{\beta}_{ML}$.
+			\end{minipage}};
+		\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+	\end{tikzpicture}
+
+	In the case of multiple linear regression, the line becomes a hyperplane.
+
+	A regression coefficient $\beta_j$ estimates the expected change in $Y$ per unit change in $X_j$, with all other predictors held fixed.
 
 \end{paracol}
 
@@ -52,68 +56,81 @@
 
 \begin{paracol}{2}
 
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    Let $\hat{\alpha}, \hat{\beta}$ be the least-squares estimators. Then for each observation, the $i$-\textbf{residual} is the observed minus predicted:
+	\begin{tikzpicture}
+		\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+				Let $\hat{\alpha}, \hat{\beta}$ be the least-squares estimators. Then for each observation, the $i$-\textbf{residual} is the observed minus predicted:
 
-    $$R_i = Y_i - \hat{\alpha} - \hat{\beta} x_i, i = 1, 2, \dots, n$$
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
-\end{tikzpicture}
+				$$R_i = Y_i - \hat{\alpha} - \hat{\beta} x_i, \, i = 1, 2, \dots, n$$
+			\end{minipage}};
+		\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+	\end{tikzpicture}
 
-Since $\hat{\alpha}, \hat{\beta}$ are unbiased estimators, i.e. $E[\hat{\alpha}] = \alpha, E[\hat{\beta}] = \beta$, the residuals $R_i = Y_i - \hat{\alpha} - \hat{\beta} x_i$ mimic the unobservable measurement errors $U_i = Y_i - \alpha - \beta x_i$:
+	Since $\hat{\alpha}, \hat{\beta}$ are unbiased estimators, i.e. $E[\hat{\alpha}] = \alpha, E[\hat{\beta}] = \beta$, the residuals $R_i = Y_i - \hat{\alpha} - \hat{\beta} x_i$ mimic the unobservable measurement errors $U_i = Y_i - \alpha - \beta x_i$:
 
-\vspace{-10pt}
+	\vspace{-10pt}
 
-$$R_i \approx U_i$$
+	$$R_i \approx U_i$$
 
-A \textit{residual plot} can be used to check the model \textbf{assumptions}:
+	A \textit{residual plot} can be used to check the model \textbf{assumptions}:
 
-\begin{itemize}
-    \item Linearity: Is there a linear relationship?
-    \item Is $E[U_i] = 0$?
-    \item \textbf{Homoskedasticity}: Is $\text{Var}(U_i) = \sigma^2$? That is, is the variation of the residuals constant along the line?
-    \item Nearly-normal residuals: Is $U_i \sim \mathcal{N}(0, \sigma^2)$? (straight line in QQ-Plot)
-\end{itemize}
+	\begin{itemize}
+		\item Linearity: Is there a linear relationship?
+		\item Is $E[U_i] = 0$?
+		\item \textbf{Homoskedasticity}: Is $\text{Var}(U_i) = \sigma^2$? That is, is the variation of the residuals constant along the line?
+		\item Nearly-normal residuals: Is $U_i \sim \mathcal{N}(0, \sigma^2)$? (straight line in QQ-Plot)
+	\end{itemize}
 
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    The variation in $Y$ is defined as the \textbf{total sum of squares}
+	\begin{tikzpicture}
+		\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+				The variation in $Y$ is defined as the \textbf{total sum of squares}
 
-    $$\text{SS}_{\text{tot}} = \sum_{i=1}^n (y_i - \bar{y}_n)^2$$
+				$$\text{TSS} = \sum_{i=1}^n (y_i - \bar{y}_n)^2$$
 
-    The variation in $Y$ due to measurement error is quantified by the \textbf{residual sum of squares}
+				The variation in $Y$ due to measurement error is quantified by the \textbf{residual sum of squares} (which the Least Squares approach minimises):
 
-    $$\text{SS}_{\text{res}} = \sum_{i=1}^n R_i^2$$
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
-\end{tikzpicture}
+				$$\text{RSS} = \sum_{i=1}^n R_i^2 = \sum_{i=1}^n (Y_i - \hat{\alpha} - \hat{\beta} x_i)^2$$
+			\end{minipage}};
+		\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+	\end{tikzpicture}
 
-\switchcolumn
+	\switchcolumn
 
-The remaining variation in $Y$ is due to the linear relationship with $x$, and the higher its share of the total variation the better the fit of the model:
+	The remaining variation in $Y$ is due to the linear relationship with $x$, and the higher its share of the total variation the better the fit of the model:
 
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    Let $\text{SS}_\text{tot}, \text{SS}_\text{res}$ be the total sum of squares and the residual sum of squares. Then the \textbf{proportion of explained variance} is the \textbf{coefficient of determination}
+	\begin{tikzpicture}
+		\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+				Let $\text{TSS}, \text{RSS}$ be the total sum of squares and the residual sum of squares. Then the \textbf{proportion of explained variance} is the \textbf{coefficient of determination}
 
-    $$R^2 = 1 - \frac{\text{SS}_\text{tot}}{\text{SS}_\text{res}} (= r_{x, Y}^2)$$
+				$$R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{TSS}} \quad (= r_{x, Y}^2)$$
 
-    (which is equal to the squared correlation coefficient between $x$ and $Y$).
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
-\end{tikzpicture}
+				where $r$ is the correlation coefficient between $x$ and $Y$: $r_{x, Y} = \frac{\sum_{i=1}^n (x_i - \hat{x}_n)(y_i - \hat{y}_n)}{\sqrt{\sum_{i=1}^n (x_i - \hat{x}_n)^2} \sqrt{\sum_{i=1}^n (y_i - \hat{y}_n)^2}}$
+			\end{minipage}};
+		\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+	\end{tikzpicture}
 
-The least squares estimate $\hat{\sigma}^2 = \frac{1}{n-2} \sum_{i=1}^n R_i^2$, by definition.
+	The least squares estimate $\hat{\sigma}^2 = \frac{1}{n-2} \sum_{i=1}^n R_i^2$, by definition.
 
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    The \textbf{standard error} is defined as
+	\begin{tikzpicture}
+		\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+				The \textbf{residual standard error} is defined as
 
-    $$\text{SE} = \sqrt{\frac{1}{n-2} \sum_{i=1}^n R_i^2}$$
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
-\end{tikzpicture}
+				$$\text{RSE} = \sqrt{\frac{1}{n-2} \sum_{i=1}^n R_i^2} = \sqrt{\frac{1}{n-2} \text{RSS}}$$
+			\end{minipage}};
+		\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+	\end{tikzpicture}
+
+	\begin{tikzpicture}
+		\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+				The \textbf{standard error} of an estimator reflects how it varies under repeated sampling.
+
+				$$\text{SE}(\hat{\alpha})^2 = \frac{\sigma^2}{\sum_{i=1}^n (x_i - \bar{x}_n)^2}$$
+
+				$$\text{SE}(\hat{\beta})^2 = \sigma^2 \Big[ \frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i - \bar{x}_n)^2} \Big]$$
+			\end{minipage}};
+		\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+	\end{tikzpicture}
+
+	The standard errors of the estimators can be used to compute confidence intervals for the estimators.
 
 \end{paracol}
 
@@ -123,57 +140,65 @@ The least squares estimate $\hat{\sigma}^2 = \frac{1}{n-2} \sum_{i=1}^n R_i^2$, 
 
 \begin{paracol}{2}
 
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    Consider the simple linear regression model $Y_i = \alpha + \beta x_i + U_i, i = 1, 2, \dots, n$ with i.i.d. $U_i, U_2, \dots, U_n \sim \mathcal{N}(0, \sigma^2)$. Let $\hat{\alpha}, \hat{\beta}$ be the least squares estimators. Then
+	\begin{tikzpicture}
+		\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+				Consider the simple linear regression model $Y_i = \alpha + \beta x_i + U_i, i = 1, 2, \dots, n$ with i.i.d. $U_i, U_2, \dots, U_n \sim \mathcal{N}(0, \sigma^2)$. Let $\hat{\alpha}, \hat{\beta}$ be the least squares estimators. Then
 
-    $$\frac{\hat{\alpha} - \alpha}{\text{se}(\hat{\alpha})}, \frac{\hat{\beta} - \beta}{\text{se}(\hat{\beta})} \sim t(n-2)$$
+				$$\frac{\hat{\alpha} - \alpha}{\text{se}(\hat{\alpha})}, \frac{\hat{\beta} - \beta}{\text{se}(\hat{\beta})} \sim t(n-2)$$
 
-    follow a $t$-distribution with $m = n-2$ degrees of freedom.
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
-\end{tikzpicture}
+				follow a $t$-distribution with $m = n-2$ degrees of freedom.
+			\end{minipage}};
+		\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+	\end{tikzpicture}
 
-\switchcolumn
+	\switchcolumn
 
-Thus, confidence intervals can be constructed for the least squares estimators:
+	Thus, \textbf{confidence intervals} can be constructed for the least squares estimators:
 
-$$P \Bigg( -t_{n-1, \alpha / 2} \leq \frac{\hat{\beta} - \beta}{\text{se}(\hat{\beta})} \leq t_{n-2, \alpha / 2} \Bigg) = 1 - \alpha$$
+	$$P \Bigg( -t_{n-1, \alpha / 2} \leq \frac{\hat{\beta} - \beta}{\text{SE}(\hat{\beta})} \leq t_{n-2, \alpha / 2} \Bigg) = 1 - \alpha$$
 
-$$P \Bigg( \hat{\beta} - t_{n-1, \alpha / 2} \text{se}(\hat{\beta}) \leq \beta \leq \hat{\beta} + t_{n-1, \alpha / 2} \text{se}(\hat{\beta}) \Bigg) = 1 - \alpha$$
+	$$P \Bigg( \hat{\beta} - t_{n-1, \alpha / 2} \text{se}(\hat{\beta}) \leq \beta \leq \hat{\beta} + t_{n-1, \alpha / 2} \text{SE}(\hat{\beta}) \Bigg) = 1 - \alpha$$
 
 \end{paracol}
 
-Note: With just one $x$-variable the $t$-test for $\beta$ is equivalent to what is called the F-test. Both testing problems are different with multiple $x$-variables in a multiple linear regression model.
+Furthermore, standard errors can also be used to perform \textbf{hypothesis tests} on the coefficients. \textbf{Example}:
+
+$H_0$: There is no relationship between $X$ and $Y$: $\beta = 0$. (If $\beta = $, the model reduces to $Y = \alpha + U$ and $X$ is not associated to $Y$.)
+
+$H_A$: There is some relationship between $X$ and $Y$: $\beta \neq 0$.
+
+The t-statistic for the test is $t = \frac{\hat{\beta} - 0}{\text{SE}(\hat{\beta})}$ which follows a $t$-distribution with $n - 2$ degrees of freedom.
+
+Note: There is in fact a one-to-one correspondence between confidence intervals and hypothesis tests; that is, if the null hypothesis of the test is rejected and $\beta \neq 0$, the corresponding confidence interval (i.e. with the corresponding level of confidence) for the parameter will not contain $0$.
 
 \subsection{Model Selection}
 
 \begin{paracol}{2}
 
-Potential fixes if model assumptions are not satisfied:
+	Potential fixes if model assumptions are not satisfied:
 
-\begin{itemize}
-    \item A quadratic term is a potential fix for a parabola in the residual plot (and should result in a straight line).
-    \item Log-scaling the independent variable is a potential fix for heteroskedasticity (and should result in constant variance in the residual plot, i.e. homoskedasticity).
-\end{itemize}
+	\begin{itemize}
+		\item A quadratic term is a potential fix for a parabola in the residual plot (and should result in a straight line).
+		\item Log-scaling the independent variable is a potential fix for heteroskedasticity (and should result in constant variance in the residual plot, i.e. homoskedasticity).
+	\end{itemize}
 
-\quad
+	\quad
 
-Products of variables are called \textbf{interaction terms}.
+	Products of variables are called \textbf{interaction terms}.
 
-\switchcolumn
+	\switchcolumn
 
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    The \textbf{Akaike Information Criterion (AIC)} is a measure of the suitability of the dependent variables in a model:
+	\begin{tikzpicture}
+		\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+				The \textbf{Akaike Information Criterion (AIC)} is a measure of the suitability of the dependent variables in a model:
 
-    $$AIC = 2k - 2 \log(L)$$
+				$$AIC = 2k - 2 \log(L)$$
 
-    where $k$ is the number of dependent variables, and $L$ is the likelihood. Both terms increase with the number dependent variables. \\
-    
-    Therefore, you want the AIC to be as low as possible.
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
-\end{tikzpicture}
+				where $k$ is the number of dependent variables, and $L$ is the likelihood. Both terms increase with the number dependent variables. \\
+
+				Therefore, you want the AIC to be as low as possible.
+			\end{minipage}};
+		\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+	\end{tikzpicture}
 
 \end{paracol}

@@ -1,9 +1,53 @@
 \section{Generalised Linear Models (GLMs)}
 
+Generalisations of the linear model include:
+
+\begin{itemize}
+	\item Classification problems: logistic regression, support vector machines
+	\item Non-linearity: kernel smoothing, splines and generalised additive models, nearest neighbour methods
+	\item Interactions: tree-based methods, bagging, random forests and boosting
+	\item Regularised fitting: Ridge and Lasso
+\end{itemize}
+
 \begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    \textbf{Description}: Text
-    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
+	\node [rounded-box] (box){\begin{minipage}{0.975\textwidth}
+			A $n^\text{th}$-order spline with knots at $\xi_k, k = 1, \dots, K$ is a piecewise $n^\text{th}$-order polynomial with continuous derivatives up to order $n-1$ at each knot.
+
+			$$y_i = \beta_0 + \beta_1 b_1(x_i) + \beta_2 b_2(x_i) + \dots + \beta_{K+n} b_{K+n}(x_i) + \epsilon_i$$
+
+			$$b_1(x_i) = x_i, \quad b_2(x_i) = x_i^2, \quad \dots, \quad b_{k+n}(x_i) = (x_i - \xi_k)^n_+, \quad k = 1, \dots, K$$
+
+			$$(x_i - \xi_k)^n_+ = \begin{cases}
+					(x_i - \xi_k)^3 & \text{if } x_i > \xi_k \\
+					0               & \text{otherwise}
+				\end{cases}$$
+		\end{minipage}};
+	\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+A cubic spline with $K$ knots has $K + 4$ parameters, or degrees of freedom. A \textbf{natural spline} with $K$ knots has $K$ degrees of freedom.
+
+A natural cubic spline extrapolates linearly beyond the boundary knots. This adds $4 = 2 \times 2$ extra constraints, and allows us to put more internal knots for the same degrees of freedom as a regular cubic spline.
+
+\textbf{Smoothing splines} avoid the knot-selection issue, leaving a single $\lambda$ to be chosen. Consider this criterion for fitting a smooth function $g(x)$ to some data:
+
+$$\min_{g \in S} \sum_{i=1}^n (y_i - g(x_i))^2 + \lambda \int g''(t)^2 \, dt$$
+
+\begin{itemize}
+	\item The first term is the RSS, and tries to make $g(x)$ match the data at each $x_i$.
+	\item The second term is a rougness penalty, and controls how wiggly $g(x)$ is. It is modulated by the tuning parameter $\lambda \geq 0$.
+	      \begin{itemize}
+		      \item The smaller $\lambda$, the more wiggly the function, eventually interpolating $y_i$ when $\lambda = 0$.
+		      \item As $\lambda \rightarrow \infty$, the function $g(x)$ becomes linear.
+	      \end{itemize}
+\end{itemize}
+
+The solution is a natural cubic spline with a knot at every unique value of $x_i$. The roughness penalty still controls the roughness via $\lambda$.
+
+\begin{tikzpicture}
+	\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+			\textbf{Description}: Text
+			$$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
+		\end{minipage}};
+	\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
 \end{tikzpicture}
