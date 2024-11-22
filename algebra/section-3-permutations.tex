@@ -4,67 +4,138 @@
 
 \begin{tikzpicture}
 \node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    \textbf{Description}: Text
-    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
+    A \textbf{permutation} of a set $X$ is a bijection from $X$ to $X$. \\
+
+    For a set $X = \{1, 2, \dots, n\}$, the set of all permutations on $X$ is called the \textbf{symmetric group on n letters}, $S_n$.
 \end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    If $\sigma$ and $\tau$ are permutations, we will often write their \textbf{composition} $\sigma \circ \tau$ as $\sigma \tau$, and refer to it as the \textbf{product} of $\sigma$ and $\tau$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\end{paracol}
+
+\subsection{Two-row notation}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Given a permutation
+
+    $$
+    \sigma = \begin{pmatrix}
+        1 & 2 & 3 & 4 & 5 \\
+        3 & 4 & 5 & 1 & 2
+    \end{pmatrix}
+    $$
+
+    then on swapping the rows gives
+
+    $$
+    \sigma^{-1} = \begin{pmatrix}
+        3 & 4 & 5 & 1 & 2 \\
+        1 & 2 & 3 & 4 & 5
+    \end{pmatrix}
+    $$
+
+    and rearranging gives the \textbf{inverse} permutation
+
+    $$
+    \sigma^{-1} = \begin{pmatrix}
+        1 & 2 & 3 & 4 & 5 \\
+        4 & 5 & 1 & 2 & 3
+    \end{pmatrix}
+    $$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\switchcolumn
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    $$\mid S_n \mid = n!$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
+\textbf{Proof}: Induction on $n$.
+
+When $n = 1$ there is a unique bijection $\{1\} \rightarrow \{1\}$, namely the identity map, so $\mid S_1 \mid = 1 = 1!$ as required.
+
+The number of elements of $S_n$ is the number of different ways to order the elements $1, 2, \dots, n$. An ordering of $1, 2, \dots, n$ is the same thing as an ordering of $1, 2, \dots, n-1$ with $n$ inserted into one of $n$ positions, so the number of possible orderings is $n$ times the number of orderings of $1, \dots, n-1$, which is $(n-1)!$ by the inductive hypothesis.
+
+So $\mid S_n \mid = x \times (n-1)! = n!$.
+
+\end{paracol}
+
+\subsection{Cycles}
+
+\begin{paracol}{2}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $a_0, \dots, a_{m-1}$ be distinct elements of $\{1, 2, \dots, n\}$. Then $(a_0, \dots, a_{m-1})$ is the permutation in $S_n$ such that
+
+    \begin{itemize}
+        \item $a_i \mapsto a_{i+1}$ for $0 \leq i \leq m-1$, $a_{m-1} \mapsto a_0$,
+        \item and if $x \neq a_1, \dots, a_m$ then $x \mapsto x$.
+    \end{itemize}
+
+    Such a permutation is called an $m$-\textbf{cycle}.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
 \end{tikzpicture}
 
 \begin{tikzpicture}
 \node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    \textbf{Description}: Text
-    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
+    A permutation which is an $m$-cycle for some $m$ is called a cycle.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+\textbf{Counter-example}: Not every permutation is a cycle, e.g. $\begin{pmatrix}
+    1 & 2 & 3 & 4 \\
+    2 & 1 & 4 & 3
+\end{pmatrix}$.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Two cycles $(a_0, \dots, a_{m-1})$ and $(b_0, \dots, b_{m-1})$ are \textbf{disjoint} if no $a_i$ is equal to any $b_j$.
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+Any permutation can be written as a product of disjoint cycles, e.g. the permutation above is equal to $(1, 2)(3, 4)$.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    Let $m \in \mathbb{Z}$ and $\sigma \in S_n$. Then
+
+    \begin{equation*}
+        \sigma^m = \begin{cases}
+            \sigma \circ \dots \circ \sigma (m \text{ times}) & m > 0 \\
+            \text{id} & m = 0 \\
+            \sigma^{-1} \circ \dots \circ \sigma^{-1} (-m \text{ times}) & m < 0 \\
+        \end{cases}
+    \end{equation*}
+
+    and for any $a, b \in \mathbb{Z}$,
+
+    $$\sigma^a \sigma^b = \sigma^{a+b}$$
 \end{minipage}};
 \node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
 \end{tikzpicture}
 
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    \textbf{Description}: Text
-    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    \textbf{Description}: Text
-    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    \textbf{Description}: Text
-    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    \textbf{Description}: Text
-    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    \textbf{Description}: Text
-    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
-    \textbf{Description}: Text
-    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
-\end{minipage}};
-\node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
-\end{tikzpicture}
+\switchcolumn
 
 \begin{tikzpicture}
 \node [rounded-box] (box){\begin{minipage}{0.45\textwidth}

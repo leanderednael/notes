@@ -1,5 +1,43 @@
 \section{Groups}
 
+A group is a very simple mathematical object consisting of two things: (a) a \textbf{set} $G$ and (b) a way of combining two elements of the set to produce another, called the \textbf{group operation}.
+
+This group operation has to obey three rules mimicing those obeyed by the symmetries of a physical object called the group axioms.
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    A group $(G, *)$ is a set $G$ with a binary operation $*$ which contains an element $e$ such that \\
+
+    \begin{itemize}
+        \item (Identity axiom) For all $g \in G$, $e * g = g * e = g$. \\
+
+        \item (Inverses axiom) For all $g \in G$, there exists $h \in G$ such that $h * g = g * h = e$. \\
+
+        \item (Associativity axiom) For all $g, h, k \in G$, $(g * h) * k = g * (h * k)$.
+    \end{itemize}
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Definition};
+\end{tikzpicture}
+
+A binary operation on $G$ is a function that takes as input a pair of elements of $G$ and outputs a single element of $G$: that is, a function $G \times G \rightarrow G$.
+
+\textbf{Examples}:
+
+\begin{itemize}
+    \item $+$ is a binary operation on the set of integers $\mathbb{Z}$.
+    \item $-$ is a binary operation on the set of complex numbers $\mathbb{C}$.
+    \item $-$ is \textbf{not} a binary operation on the set of strictly positive integers $\mathbb{N}$, because it doesn't always output an element of $\mathbb{N}$.
+    \item $a * b = 2 \quad \forall \quad a, b \in \mathbb{R}$ is a binary operation on the real numbers $\mathbb{R}$.
+\end{itemize}
+
+\begin{tikzpicture}
+\node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
+    \textbf{Description}: Text
+    $$\mathbf{v} \cdot \mathbf{w} = 0 \iff \alpha = \frac{\pi}{2} \iff \mathbf{v} \perp \mathbf{w}$$
+\end{minipage}};
+\node[rounded-box-title, left=10pt] at (box.north east) {Theorem};
+\end{tikzpicture}
+
 \begin{tikzpicture}
 \node [rounded-box] (box){\begin{minipage}{0.45\textwidth}
     \textbf{Description}: Text
@@ -57,4 +95,3 @@
 \end{minipage}};
 \node[rounded-box-title, left=10pt] at (box.north east) {Definition | Theorem};
 \end{tikzpicture}
-
