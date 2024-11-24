@@ -1,7 +1,8 @@
-SHELL     := /usr/bin/env bash
-MAKEFLAGS += --silent
+SHELL       := /usr/bin/env bash
+MAKEFLAGS   += --silent
 
-TARGETS   := algebra calculus complex diffeqs discrete linalg probability statistics
+MD_TARGETS  := biology cognition computation knowledge language learning search uncertainty vision
+TEX_TARGETS := algebra calculus complex diffeqs discrete linalg probability statistics
 
 all: clean compile clean
 
@@ -13,12 +14,15 @@ help: ## Show the available commands
 .PHONY: install
 install: ## Install dependencies
 	brew install --cask mactex-no-gui
-	brew install pre-commit
+	brew install pandoc pre-commit
 	pre-commit install
 	pre-commit autoupdate
 
 .PHONY: compile
-compile: ## Compile the LaTeX documents
+compile: ## Compile the documents
+	for doc in $(TARGETS); do \
+		pandoc -V geometry:margin=1in -V fontfamily=helvet --pdf-engine=xelatex -o ai/$$doc.pdf ai/$$doc.md; \
+	done
 	for doc in $(TARGETS); do \
 		TEXINPUTS=$$doc:$$TEXINPUTS pdflatex -output-directory=$$doc $$doc/$$doc.tex; \
 		biber $$doc/$$doc; \
@@ -27,6 +31,7 @@ compile: ## Compile the LaTeX documents
 
 .PHONY: clean
 clean: ## Clean the repository
+	find ./ai/ -type f \( -name '*.pdf' \) -delete
 	find . -type f \( -name '*.aux' \
 		-o -name '*.lof' \
 		-o -name '*.log' \
