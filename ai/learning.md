@@ -1,26 +1,27 @@
 # Learning
 
-1. Version spaces
-2. Induction of decision trees
-3. Learning sets of rules
-4. Instance-based learning
-5. Clustering
-6. Evaluating hypotheses
-7. Computational Learning Theory
-8. Probabilistic approaches
-9. Ensembles
-10. Reinforcement learning
-11. Inductive logic programming
-12. Neural Networks
-13. Support Vector Machines
+## Inductive logic programming
+
+Deduction = general to specific (truth-preserving), induction = specific to general (falsity-preserving)
+
+Predicate vs. function: output of predicate is always true or false, output of function can be anything
+
+Clause and logical expression are the same but often more convenient to express clause in set notation.
+
+Horn clause: at most one positive literal (expressed to the left of the implication operator $\leftarrow$ in the logical notation)
+
+Inductive logic programming: need to allow for a certain level of incorrectness, else would not find anything
 
 ## 1. Neural Networks
+
+Questions to consider for different architectures: How they work, why, and how can they be improved.
 
 - Basic concepts: different architectures, learning rules, supervised and unsupervised learning. Shallow versus deep architectures. Applications in character recognition, image processing, diagnostics, associative memories, time-series prediction, modelling and control.
 - Single- and multilayer feedforward networks and backpropagation, on-line learning, perceptron learning
 - Training, validation and test set, generalization, overfitting, early stopping, regularization, double descent phenomenon
 - Fast learning algorithms and optimization: Newton method, Gauss-Newton, Levenberg-Marquardt, conjugate gradient, adam
 - Bayesian learning
+  - Introduction to Bayesian thinking for machine learning. Learning by solving a regularized problem. Illustrative example.
 - Associative memories, Hopfield networks, recurrent neural networks
 - Unsupervised learning: principal component analysis, Oja's rule, nonlinear pca analysis, vector quantization, self-organizing maps
 - Neural networks for time-series prediction, system identification and control; basics of LSTM; basics of deep reinforcement learning
@@ -35,6 +36,25 @@
 
 #### 1.1.2. Simulated Annealing
 
+**Gradient descent** is an algorithm for minimizing loss when training neural networks. As was mentioned earlier, a neural network is capable of inferring knowledge about the structure of the network itself from the data. Whereas, so far, we defined the different weights, neural networks allow us to compute these weights based on the training data. To do this, we use the gradient descent algorithm, which works the following way:
+
+- Start with a random choice of weights. This is our naive starting place, where we don’t know how much we should weight each input.
+- Repeat:
+
+  - Calculate the gradient based on all data points that will lead to decreasing loss. Ultimately, the gradient is a vector (a sequence of numbers).
+  - Update weights according to the gradient.
+
+The problem with this kind of algorithm is that it requires to calculate the gradient based on all data points, which is computationally costly. There are a multiple ways to minimize this cost. For example, in Stochastic Gradient Descent, the gradient is calculated based on one point chosen at random. This kind of gradient can be quite inaccurate, leading to the Mini-Batch Gradient Descent algorithm, which computes the gradient based on on a few points selected at random, thus finding a compromise between computation cost and accuracy. As often is the case, none of these solutions is perfect, and different solutions might be employed in different situations.
+
+**Backpropagation** is the main algorithm used for training neural networks with hidden layers. It does so by starting with the errors in the output units, calculating the gradient descent for the weights of the previous layer, and repeating the process until the input layer is reached. In pseudocode, we can describe the algorithm as follows:
+
+- Calculate error for output layer
+- For each layer, starting with output layer and moving inwards towards earliest hidden layer:
+  - Propagate error back one layer. In other words, the current layer that’s being considered sends the errors to the preceding layer.
+  - Update weights.
+
+This can be extended to any number of hidden layers, creating deep neural networks, which are neural networks that have more than one hidden layer.
+
 ## 2. Support Vector Machines
 
 - Introduction and motivation; Maximal Margin Separator
@@ -43,10 +63,13 @@
 - Maximal margin classifier, linear SVM classifiers, separable and non-separable case
 - Kernel trick and Mercer theorem, nonlinear SVM classifiers, choice of the kernel function, special kernels suitable for textmining
   - Definition of a kernel, how it relates to a feature space, The reproducing kernel Hilbert space.
+  - Learning in functional spaces: Reproducing kernel Hilbert spaces. The representer theorem. Example 1: Kernel ridge regression. Example 2: The Perceptron and the kernel Perceptron.
+  - Kernel functions in R^d: Polynomial and Gaussian kernels. General properties of kernel functions.
 - Applications: classification of microarray data in bioinformatics, classification problems in biomedicine; kernel PCA, kernel ridge regression
 - VC theory and structural risk minimisation, generalisation error versus empirical risk, estimating the VC dimension of SVM classifiers, optimal tuning of SVMs
 - SVMs for nonlinear function estimation
 - Least squares support vector machines, issues of sparseness and robustness, Bayesian framework, probabilistic interpretations, automatic relevance determination and input selection, links with Gaussian processes and regularisation networks, function estimation in RKHS.
+  - Introduction to Bayesian thinking for machine learning. Learning by solving a regularized problem. Illustrative example.
   - Distance between means in RKHS, integral probability metrics, the maximum mean discrepancy (MMD), two-sample tests.
   - Choice of kernels for distinguishing distributions, characteristic kernels.
   - Covariance operator in RKHS: proof of existence, definition of norms (including HSIC, the Hilbert-Schmidt independence criterion).
