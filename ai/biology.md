@@ -1,71 +1,79 @@
 # Biology
 
-1. **Introduction to molecular biology**
-
-   - DNA
-   - RNA
-   - Proteins
-
+1. [**Introduction to molecular biology**](#introduction-to-molecular-biology)
+   - [DNA](#dna)
+   - [RNA](#rna)
+   - [Proteins](#rna)
 2. **Sequence alignment**
-
    - Dynamic programming
    - Global and local alignment
    - BLAST
-
 3. **Introduction to Bayesian statistics**
-
    - The Cox-Jaynes axioms
    - Maximum likelihood, maximum a posteriori, and Bayesian inference
    - Dirichlet distributions and pseudocounts
-
 4. **Hidden Markov Models (HMMs)**
-
    - Viterbi decoding
    - Forward-backward algorithm
-   - HMM estimation with known paths
+   - Parameter estimation with known paths
    - Viterbi learning
    - Baum-Welch algorithm
-
 5. **Applications of HMMs**
-
    - Modeling protein families
    - Gene prediction
-
 6. **Expectation-Maximization for clustering and motif finding**
-
    - The EM algorithm
    - EM for clustering
    - EM for motif finding
-
-7. **Gibbs sampling for motif finding and biclustering**
-
-   - Markov Chain Monte Carlo methods
+7. [**Gibbs sampling for motif finding and biclustering**](#gibbs-sampling-for-motif-finding-and-biclustering)
+   - [Markov Chain Monte Carlo methods](#markov-chain-monte-carlo-methods)
    - Gibbs sampling
    - Motif finding
-
 8. **Analysis of one and two-dimensional linear systems**
-
    - autonomous systems
    - continuous vs. discrete systems
    - equilibrium points + characterisation
    - stability
-
 9. **Nonlinear system analysis**
-
    - equilibrium points
    - stability analysis
    - phase plane and phase portraits
    - linearisation
    - bifurcations
    - chaos
-
 10. **Feedback**
-
 11. **Synchronisation**
 
 ## Introduction to molecular biology
 
+**Central Dogma of Molecular Biology**: DNA makes RNA makes proteins.
+(Different mechanisms for prokaryotes and eukaryotes.)
+
+- Genes carry the information for the production of proteins.
+- Transcription (from DNA to mRNA) by RNA polymerase.
+- Translation (from mRNA to protein) by ribosomes.
+
+There are 64 codons. There is always a start and a stop codon, with 6 reading frames.
+
+Phylogeny of protein families: Genes or proteins can be related on the basis of their sequence.
+
+### DNA
+
+The DNA helix consists of Adenine, Thymine, Cytosine, Guanine.
+They take the shape of complementary / double strands, `(A-T, G-C)`, that turn "clockwise", 10 nucleotides per revolution.
+
+### RNA
+
+Probably the ancestor of DNA. Serves as information messenger from DNA to protein.
+Single strand (A-U bond weaker than A-T): Adenine - Uracil (vs. Thymine), Guanine - Cytosine.
+
+#### Functional RNA
+
+Importance of RNA as a molecule in its own right increasingly recognized (noncoding RNA).
+
 ### [Proteins](https://www.edx.org/learn/biology/rice-university-proteins-biology-s-workforce)
+
+Proteins are large polymers of 20 aminoacids.
 
 #### Basics
 
@@ -82,7 +90,7 @@
 8. **Properties of water** determined by non-covalent hydrogen bonding are important to living organisms: high melting point, high boiling point, solvent properties.
 9. An **acid** can act as a proton donor; a **base** can act as a proton acceptor; **pH** is a measure of the acidity (acid < 7) or basicity (base > 7) of an aqueous solution and is usually neutral (= 7) in living cells.
    $$pH \approx - \log[ H^+ ]$$
-10. **Prokaryotes** are single-celled organisms without a nucleus (small, e.g. bacteria, archaea); **eukaryotes** have a nucleus and can be single or multi-celled (large).
+10. **Prokaryotes** are single-celled organisms without a nucleus to protect their DNA (small, e.g. bacteria, archaea); **eukaryotes** have a nucleus and can be single or multi-celled (large).
 11. Phases of the **cell cycle**.
 
 #### Protein Structure
@@ -144,6 +152,25 @@
 3. Monomer and oligomer size determination: SDS gel electrophoresis (Weber & Osborn), 2D gels, Western blotting, gel chromatography
 4. Protein structure determination: Explain what X-ray crystallography, NMR can do
 5. Biochemical methods: Leverage the function of the protein (reaction catalyzed, inhibitors, activators) to characterize interaction networks
+
+## Gibbs sampling for Motif Finding and Biclustering
+
+### Markov Chain Monte Carlo Methods
+
+### Gibbs Sampling
+
+### Motif Finding
+
+- Initialization
+  - Sequences
+  - Random motif matrix
+- Iteration
+  - Sequence scoring
+  - Alignment update
+  - Motif instances
+  - Motif matrix
+- Termination
+  - Convergence of the alignment and of the motif matrix
 
 ## References
 
