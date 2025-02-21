@@ -69,11 +69,11 @@ Single strand (A-U bond weaker than A-T): Adenine - Uracil (vs. Thymine), Guanin
 
 #### Functional RNA
 
-Importance of RNA as a molecule in its own right increasingly recognized (noncoding RNA).
+Importance of RNA as a molecule in its own right increasingly recognised (noncoding RNA).
 
 ### [Proteins](https://www.edx.org/learn/biology/rice-university-proteins-biology-s-workforce)
 
-Proteins are large polymers of 20 aminoacids.
+Proteins are _large polymers of 20 aminoacids_.
 
 #### Basics
 
@@ -95,7 +95,7 @@ Proteins are large polymers of 20 aminoacids.
 
 #### Protein Structure
 
-1. Prokaryotic cells
+1. Prokaryotic cells:
    - Cellular **precursors** (18-44 MW): $CO_2, H_2O, N_2, NH_3$, salts
    - **Intermediates** (50-250 MW): $\alpha$-keto acids, ribose, pyruvate, malate, acetate, malonate
    - **Building blocks** (100-350 MW): amino acids, nucleotides, simple sugars, fatty acids / glycerol
@@ -103,22 +103,22 @@ Proteins are large polymers of 20 aminoacids.
    - Supramolecular **assemblies** ($10^6 - 10^9$ MW): enzyme complexes, ribosomes, contractile systems, membranes
 2. Eukaryotic cells:
    - **Organelles**: nucleus, mitochondria, chloroplasts
-3. Types of non-covalent (low energy, easily broken) bonding in biological systems:
+3. Types of **non-covalent** (_low energy, easily broken_) **bonding** in biological systems:
    - Hydrogen bonds: shared hydrogen between two molecules or parts of a molecule
    - Ionic / electrostatic interactions
    - van der Waals interactions: attraction between partially positive and partially negative atoms
    - Hydrophobic interactions / forces
    - _Large number of small forces creates flexibility of structures_.
-4. Proteins are polymers assembled from amino acid units:
+4. Proteins are **polymers** assembled from amino acid units:
    - Amino acids: acidic, basic, apolar, polar
    - Structure, properties, abbreviations of side chains for 6 assigned amino acids: Glu, Lys, Trp, Ser, Gly, Pro
    - Each amino acid provides a unique side chain
-5. Levels of protein structure:
+5. **Levels of protein structure**:
    - Primary structure: Amino acid sequence; peptide bonds link amino acids to form a polymer (backbone for protein and side chain arrangement).
    - Secondary structure: $\alpha$-helix, $\beta$-sheet structures (identified by Pauling)
    - Tertiary structure: folding into 3 dimensions
    - Quaternary (oligomeric) structure: assembly into higher oligomers
-6. Protein folding:
+6. **Protein folding**:
    - Amino acid sequence of a protein not functional without folding
    - 3-D structure is the active form of a protein
    - Non-covalent bonds between side chains (and peptide backbone interactions) create the “folded” form of the protein (IMPORTANT)
@@ -128,10 +128,26 @@ Proteins are large polymers of 20 aminoacids.
 
 #### Protein Function
 
-1. Relationship of shape to function (e.g., enzymes, structural proteins, movement)
-2. Role of binding in protein function — binding to small molecules, to each other, to other cellular components
-3. Types of proteins: Structural, binding, movement, enzymes
-4. Amphiphilic nature of membrane proteins
+1. **Shape = Function**: Proteins must fold to carry out function.
+   - Types of function: enzymes (cellular catalysts), structural proteins, regulatory proteins, et al.
+   - Similar folds can have distinct functions. Conversely, dissimilar folds can have similar functions.
+   - Individual subunits can associate to higher-order structures.
+   - Some proteins are "intrinsically disordered": At least some parts of many proteins are not well folded, which allows formation of _multiple partners_ to carry out different processes. Especially found in proteins that are regulatory, more common in eukaryotes.
+2. Proteins are essential to life:
+   - Provide **structure**: external (collagens, keratins such as skin, fur, wool, claws, etc.) and internal (some structural proteins are fibers).
+   - Most are **dynamic** (constantly in motion, not fixed in shape or position): some proteins create movement, e.g. transport (membrane proteins, muscles).
+   - Bind a variety of **ligands**.
+   - **Transport** materials: muscles, transport within cells, cell movement; transport across membranes.
+   - Are **catalysts**: for metabolic pathways (enzymes).
+   - Are **regulators** / signal carriers for cellular processes: DNA synthesis, RNA, synthesis, protein synthesis / breakdown, metabolic reactions.
+3. Proteins bind a variety of "**ligands**": water, ions, sugars, amino acids, nucleotides, DNA, lipids, membranes, each other.
+   - Strength of binding is measured by equilibrium binding constant (free energy!).
+   - Individual proteins are selective for specific ligand(s).
+4. Types of proteins: structural, binding, movement, enzymes.
+   - Enzymes are catalysts that lower the energy barrier to a specific reaction.
+5. **Amphiphilic** nature of **membrane proteins**: Membrane separates outside from inside of cell; protein exterior inside the membrane is hydrophobic, protein interior inside the membrane is hydrophilic.
+   - Hemoglobin (Hb) carries oxygen in blood to tissues.
+   - Myoglobin takes oxygen from Hb and stores for use.
 
 #### Protein Function & Purification
 
