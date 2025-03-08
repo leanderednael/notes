@@ -1,4 +1,4 @@
-# Physics
+# Statistical Mechanics
 
 ## [Boltzmann Law: Physics to Computing](https://www.edx.org/learn/engineering/purdue-university-boltzmann-law-physics-to-computing)
 
@@ -30,6 +30,8 @@ f(\varepsilon) = \frac{1}{1 + e^{\frac{\varepsilon - \mu}{kT}}},
 f(x)  = \frac{1}{1 + e^x}, \, x = \frac{\varepsilon - \mu}{kT}
 $$
 
+The Fermi function $f$ is equal to $\frac{1}{2}$ when $\varepsilon = \mu$.
+
 Each energy level represents a one-electron space that can either be occupied or unoccupied. The **state space** of the system is the set of all possible configurations of the system, of which there are $2^n$ for $n$ one-electron energy levels.
 
 With $8$ one-electron energy levels, the number of levels in state space is $2^8 = 256$.
@@ -54,6 +56,8 @@ Note: The Fermi function can be generalised to multiple energy levels in this wa
 The **Boltzmann approximation** gives a valid approximation _to the Fermi function_ for $x_1 \gg 1$ (i.e. $\varepsilon_1 \gg \mu$): $f(\varepsilon_1) \approx e^{-x_1}$.
 
 #### 1.2. The Boltzmann Law
+
+The Boltzmann law applies to systems that exchange either only energy, or only particles, or both with a reservoir. It does not apply to systems completely isolated from the reservoir.
 
 Every state $i$ is a function of the number of electrons $N_i$ and amount of energy $E_i$. In order to change states, a non-isolated system continuously exchanges particles $\Delta N$ and energy $\Delta E$ with its surroundings, called the **reservoir**, which is a function of $\mu, T$.
 
@@ -86,27 +90,108 @@ $$\frac{p_1}{p_2} = \frac{W(E_0 + \varepsilon, N_0 + n)}{W(E_0, N_0)} = e^\frac{
 
 The Boltzmann law applies to all systems irrespective of its details (such as interactions, superconduction) because it _reflects a property of the reservoir_, $W$, (not of the system, $p$):
 
-$$S(E, N) = k \ln{W(E, N)}, \quad \frac{\partial S}{\partial E} = \frac{1}{T}, \frac{\partial S}{\partial N} = \frac{-\mu}{T}$$
+$$S(E, N) = k \ln{W(E, N)}$$
+
+$$
+\frac{\partial S}{\partial E} \bigg\vert_N = \frac{1}{T},
+\quad
+\frac{\partial S}{\partial N} \bigg\vert_E = - \frac{\mu}{T}
+$$
 
 #### 1.3. Shannon Entropy
 
 Consider a reservoir composed of two-electron levels with $n$ identical non-interacting units (where the tilde is used to distinguish from the system's equilibrium values $p_0, p_1$):
 
-$$n \times \tilde{p}_0, \, n \times \tilde{p}_1, \quad \tilde{p}_0 + \tilde{p}_1 = 1, \quad N = n \tilde{p}_1, \, E = \varepsilon n \tilde{p}_1$$
+$$n \times \tilde{p}_0, \, n \times \tilde{p}_1, \quad \tilde{p}_0 + \tilde{p}_1 = 1, \quad N = n \tilde{p}_1, \, E = \varepsilon n \tilde{p}_1, \quad S = k \ln{W(\tilde{p}_1)}$$
 
 Suppose $\tilde{p}_1 = 1$, then there is only one possible state $1111111\dots$; suppose $\tilde{p}_1 = 0$, then there is only one possible state $00000000\dots$; suppose $\tilde{p}_1 = 0.5$, then there are many possible states $0101010\dots, 1010101\dots, \dots$:
 
 $$W = {}^n \mathrm{C}_{n\tilde{p}_1} = {}^n \mathrm{C}_{n\tilde{p}_0} = \frac{n!}{(n\tilde{p}_0)! (n\tilde{p}_1)!}$$
 
+Consider a collection of $8$ one-electron levels which are all full, i.e. there is one possible state. The entropy is zero: $S = k \ln{1} = 0k = 0$.
+
+That is, at $\tilde{p}_1 = 0$ and $\tilde{p}_1 = 1$ entropy $S = 0$, and it reaches its maximum value, $\ln{2}$ at $\tilde{p}_1 = 0.5$. For $n$ units, this curve is described by the following expression (which can be derived from the above using Stirling's approximation) in the limit as $n \rarr \infty$:
+
 $$\frac{S}{n} \leq -k \ln{\max{W}} = -k (\tilde{p}_0 \ln{\tilde{p}_0} + \tilde{p}_1 \ln{\tilde{p}_1})$$
 
-A collection of 8 one-electron levels are all full. The entropy is zero: $S = k \ln{1} = 0k = 0$.
+Note: in information theory, entropy is expressed in terms of the information content of a message with $n$ bits, which depends on the number of possible messages $\{100111\dots\}$: $H = - n (\tilde{p}_0 \log_2{\tilde{p}_0} + \tilde{p}_1 \log_2{\tilde{p}_1})$. It is a dimensionless number, while in thermodynamics entropy has a dimension.
 
-Consider a collection of $n$ units each having $3$ levels that are all equally probable. The entropy is $S = nk \ln{3}$.
+The generalisation for $n$ units to multiple energy levels at one point in time follows:
+
+$$
+\frac{S}{n} = - k \sum_{i=0}^{d-1}{\tilde{p}_i \ln{\tilde{p}_i}}, \quad
+\frac{E}{n} = \sum_{i=0}^{d-1}{\tilde{p}_i E_i}, \quad
+\frac{N}{n} = \sum_{i=0}^{d-1}{\tilde{p}_i N_i}
+$$
+
+Consider a collection of $n$ units each with $3$ levels that are all equally probable. The entropy is $S = n ( -3k \frac{1}{3} \ln{\frac{1}{3}} ) = nk \ln{3}$.
+
+Consider a collection of $8$ one-electron levels each with a probability of $0.5$ for being full (and for being empty, i.e. two states with the same probability). The entropy is $S = 8 ( -2k \frac{1}{2} \ln{\frac{1}{2}} ) = 8k \ln{2}$.
+
+Averaging over time gives the entropy, energy and number of particles per unit (as a time or ensemble average):
+
+$$
+S = - k \sum_{i=0}^{d-1}{\tilde{p}_i \ln{\tilde{p}_i}}, \quad
+E = \sum_{i=0}^{d-1}{\tilde{p}_i E_i}, \quad
+N = \sum_{i=0}^{d-1}{\tilde{p}_i N_i}
+$$
+
+At equilibrium, i.e. when $\tilde{p}_i = p_i$: $dS = \frac{dE}{T} - \frac{\mu dN}{T}$. This can be shown with the concept of free energy.
 
 #### 1.4. Free Energy
 
+$$F = E - \mu N - TS = - kT \ln{Z} + kT \sum_i{\tilde{p}_i \big( \ln{\frac{\tilde{p}_i}{p_i}} \big)}$$
+
+_Free energy is minimal at equilibrium_:
+
+- At equilibrium, i.e. when $\tilde{p}_i = p_i$, $\sum_i{\tilde{p}_i \big( \ln{\frac{\tilde{p}_i}{p_i}} \big)} = 0$, $F = - kT \ln{Z}$m and $dF = 0$.
+- Out of equilibrium, **Gibb's inequality** applies: $\sum_i{\tilde{p}_i \big( \ln{\frac{\tilde{p}_i}{p_i}} \big)} > 0$.
+
+In statistics, this is referred to as the **KL divergence** which indicates _how far a distribution is from another_.
+
+At equilibrium, small changes in the probabilities yield small changes in the entropy, energy and number of particles, but overall the free energy cannot change: $dF = dE - \mu dN - T \, dS = 0$; that is, $dS = \frac{dE}{T} - \frac{\mu dN}{T}$.
+
+_Entropy drives flow_:
+
+$$dF \leq 0 \qquad dF_\text{Reservoir} = 0$$
+
+$$dS \geq \frac{dE}{T} - \frac{\mu dN}{T} \qquad dS_\text{Res} = \frac{dE_\text{Res}}{T_\text{Res}} - \frac{\mu dN_\text{Res}}{T_\text{Res}}$$
+
+Note that $dE_\text{Res} = -dE, dN_\text{Res} = -dN$ since energy is always conserved in a closed system (i.e. the system and reservoir overall).
+
+Overall _entropy increases_, and _heat flows from hot to cold_:
+
+$$dS + dS_\text{Reservoir} = d(E - \mu N) \big( \frac{1}{T} - \frac{1}{T_{Res}} \big) \geq 0$$
+
+- If the system is hot and the reservoir is cold then $\frac{1}{T} - \frac{1}{T_{Res}} < 0$, and it must be that $d(E - \mu N) < 0$ also.
+  - If energy is exchanged but no electrons, then $dN = 0, dE < 0$; that is, energy flows from the hot system to the cold reservoir.
+  - If electrons are exchanged, i.e. $dN \neq 0$, then $(\varepsilon - \mu) dN < 0$ and the flow depends on the energy level $\varepsilon$ (**thermoelectric current**):
+    - If $\varepsilon > \mu$ then $dN < 0$ and the flow is from the hot system to the cold reservoir.
+    - If $\varepsilon < \mu$ then $dN > 0$ and the flow is from the cold reservoir to the hot system.
+- If the system is cold and the reservoir is hot then $\frac{1}{T} - \frac{1}{T_{Res}} > 0$, and it must be that $d(E - \mu N) > 0$ also.
+
+Consider contacts 1 and 2 held at two different temperatures $T_1 > T_2$. If an energy $\Delta E$ is transferred from 1 to 2, the overall increase in entropy is $\Delta E ( \frac{1}{T_2} - \frac{1}{T_1} )$ with $\Delta E > 0$ so that the total change in entropy is greater than or equal to zero.
+
+Consider an out-of-equilibrium system in contact with a reservoir at equilibrium. The system exchanges energy and particles with the reservoir as it comes to equilibrium. In this process
+
+- the free energy of the system goes down, and
+- the overall entropy of the system and reservoir goes up.
+
+Consider contacts 1 and 2 held at the same temperature $T$, but at two different electrochemical potentials $\mu_1 > \mu_2$. If a number of electrons $\Delta N$ is transferred from 1 to 2, the overall increase in entropy is $\Delta N \big( \frac{\mu_1 - \mu_2}{T} \big)$.
+
 #### 1.5. Self-Consistent Field
+
+The Boltzmann law applies to the state space, which for $n$ one-electron levels contains $2^n$ states. This becomes impractical for calculations as $n$ becomes larger. The Fermi function is an alternative for non-interacting electrons, but not when there are interactions.
+
+The Self-Consistent Field method makes use of the Fermi function and provides an approximation when there are interactions by solving the following two equations:
+
+$$f_r = \sigma(- \tilde{x}_r), \quad \tilde{x}_r = x_r + \sum_{q \neq r}{\frac{U_{rq}}{kT} f_q}$$
+
+$$\text{where} \quad x_r = \frac{\varepsilon_r - \mu}{kT}, \quad \tilde{\varepsilon}_r = \varepsilon_r + \sum_{q \neq r}{U f_q}$$
+
+$$\text{Photon energy} \, hv = E(n_r = 1) - E(n_r = 0)$$
+
+Consider four one-electron energy levels each of energy $\varepsilon$ with an interaction for every pair of electrons. The total energy of the state $\{0111\}$ is given by the sum of the energies of the three occupied levels and the energies of their pairs (i.e. combinations): $3 \varepsilon + 3 U$.
 
 ### 2. Boltzmann Machines
 
@@ -155,3 +240,5 @@ Consider a collection of $n$ units each having $3$ levels that are all equally p
 #### 5.4. Shor's Algorithm
 
 #### 5.5. Feynman Paths
+
+## [Statistical Mechanics: Algorithms and Computations](https://www.coursera.org/learn/statistical-mechanics)

@@ -1,4 +1,4 @@
-# Search
+# [State Space Search](https://en.wikipedia.org/wiki/State_space_search)
 
 ## 1. Agents
 
