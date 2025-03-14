@@ -183,7 +183,7 @@ Consider contacts 1 and 2 held at the same temperature $T$, but at two different
 
 The Boltzmann law applies to the state space, which for $n$ one-electron levels contains $2^n$ states. This becomes impractical for calculations as $n$ becomes larger. The Fermi function is an alternative for non-interacting electrons, but not when there are interactions.
 
-The Self-Consistent Field method makes use of the Fermi function and provides an approximation when there are interactions by solving the following two equations:
+The Self-Consistent Field method makes use of the Fermi function and provides an approximation when there are interactions by solving the following two equations (where $\sigma$ is the sigmoid function):
 
 $$f_r = \sigma(- \tilde{x}_r), \quad \tilde{x}_r = x_r + \sum_{q \neq r}{\frac{U_{rq}}{kT} f_q}$$
 
@@ -195,13 +195,141 @@ Consider four one-electron energy levels each of energy $\varepsilon$ with an in
 
 ### 2. Boltzmann Machines
 
+Upon completion of this week, you will be able to:
+
+- describe the time sampling method
+- analyze state-space response of Boltzmann machines
+- explain learning in Boltzmann machines
+
 #### 2.1. Sampling
+
+The relation between the Fermi function $f_r = \sigma(- \tilde{x}_r)$ and the electron number $n_r$, is that $P(n_r = 1) = f_r$ and $P(n_r = 0) = 1 - f_r$.
+
+If you randomly sample a number between $0$ and $1$, $R_{0, 1}$, then define $\vartheta$ as a step function such that:
+
+$$
+n_r = \vartheta(f_r - R_{0, 1}) = \begin{cases}
+  1 & \text{if } f_r - R_{0, 1} > 0 \\
+  0 & \text{if } f_r - R_{0, 1} < 0
+\end{cases}
+$$
+
+Thus, $P(n_r = 1) = P(f_r - R_{0, 1} > 0) = P(f_r > R_{0, 1}) = f_r$, e.g. if $f = 0.5$ then $n_r$ will be zero and one half of the time.
+
+Combining the **time sampling and consistent field methods** yields a series of time samples of states of neurons or energy levels (following the Boltzmann distribution), a neural network consisting of two components:
+
+- Binary stochastic neuron: $n_r = \vartheta(f_r - R_{0, 1}), \, f_r = \sigma(- \tilde{x}_r)$.
+- Synapse: $\tilde{x}_r = x_r + \sum_q{w_{rq} n_q}$.
+
+Note that the synapse function arises from interaction energy, $\tilde{x}_r = \frac{E - \mu N}{kT} = \frac{E\vert_{n_r=1} - E\vert_{n_r=0}}{kT} = \frac{\partial \tilde{E}}{\partial n_r} = x_r + \sum_q{w_{rq} n_q}$, which holds only for linear functions. Because $n_r$ is a binary variable $\in \{0, 1\}$, the functions in this system are always linear because $(n_r)^k = n_r \, \forall \, k$.
+
+It follows from the definition of the derivative $\tilde{x}_r = \frac{\partial \tilde{E}}{\partial n_r}$ that a quadratic interaction $n_r n_q$ yields a linear synapse $n_q$, and a higher-order interaction, e.g. cubic $n_r n_q n_s$ yields a quadratic synapse $n_q n_s$.
+
+If the energy of a system of three levels is given by $\tilde{E} = x_3 n_3 + n_1 n_2 n_3$, the synaptic output driving level 3 is given by $\tilde{x}_3 = x_3 + n_1 n_2$.
+
+Time sampling reproduces the Boltzmann law _if updating is_ **sequential**, not if simultaneous.
+
+The advantage of time sampling (and the consistent field method) is that it allows working in $n$ dimensions and still being able to analyse how the interactions in the $n$-dimensional space (the neurons) control or affect the response in the $2^n$ state space (the probability distribution, as defined by the Boltzmann law, over the number of possible configurations of the neurons).
 
 #### 2.2. Orchestrating Interactions
 
+In general, with a bias $x$ and symmetric weights $w_{rq} = w_{qr}$ zero on the diagonals $w_{ii} = 0 \, \forall \, i$, the energies can be written as:
+
+$$
+\begin{align*}
+  \tilde{E} & = \big( \sum_r{n_r x_r} + \frac{1}{2} \sum_{r, q}{n_r w_{rq} n_q} \big) \times E_0 \\
+  & = \big( \bm{n}^T \bm{x} + \frac{1}{2} \bm{n}^T \bm{w} \bm{n} \big) \times E_0
+\end{align*}
+$$
+
+$\bm{x}, \bm{w} \in \mathbb{R}^n$ (dictated by physics) determine the $2^n$ state space response.
+
+Consider biases and weights $\bm{x} = \begin{bmatrix}
+  -1 \\ -1 \\ -1 \\ -1
+\end{bmatrix}, \, \bm{w} = \begin{bmatrix}
+  0 & 2 & 0 & 0 \\
+  2 & 0 & 2 & 0 \\
+  0 & 2 & 0 & 2 \\
+  0 & 0 & 2 & 0 \\
+\end{bmatrix}$. Then the states with the highest probability are given by $\{0101\}, \{1010\}, \{1001\}$. The synaptic output driving level 4 is given by $\tilde{x}_4 = -1 + 2 n_3$.
+
+Going forward, the objective is to find the bias and weights $\bm{x}, \bm{w}$ that give a state space response dictated by / consisten with a given application, with $s$ a generic _binary variable_ ($0, 1$; on, off, empty, full; up, down; etc.; as opposed the number of electrons $n$).
+
 #### 2.3. Optimisation
 
+The energy of a system of $n$ classical spins (i.e. $s$ is a binary variable with two values $0$ and $1$) is given by
+
+$$\tilde{E} = \big( \bm{s}^T \bm{x} + \frac{1}{2} \bm{s}^T \bm{w} \bm{s} \big) \times E_0$$
+
+**Min-cut / max-cut problem**: how to divide into two equal groups so that they are as _weakly_ / _strongly_ connected as possible.
+
+Define $C_{qr}$ as the connection matrix, $F_{qr} = \begin{cases}
+  1 & \text{if } s_q \neq s_r \\
+  0 & \text{if } s_q = s_r
+\end{cases}$. Then
+
+$$
+\begin{align*}
+  \tilde{E} & = \sum_{r, q}{C_{rq} R_{rq}} \\
+  & = \sum_{r, q}{C_{rq} (s_r - s_q)^2} \\
+  & = \sum_{r, q}{C_{rq} (s_r^2 + s_q^2 - 2 s_r s_q)} \\
+  & = \sum_{r, q}{C_{rq} (s_r + s_q - 2 s_r s_q)} \quad \text{since } 0^2 = 0, 1^2 = 1 \\
+  & = \sum_r{\Big( s_r \sum_q{C_{rq}} \Big)} + \sum_q{\Big( s_q \sum_r{C_{rq}} \Big)} - 2 \sum_{r, q}{C_{rq} s_r s_q} \\
+  & = \sum_r{\Big( s_r \sum_q{C_{rq}} \Big)} + \sum_r{\Big( s_r \sum_q{C_{qr}} \Big)} - 2 \sum_{r, q}{C_{rq} s_r s_q} \\
+  & = \sum_r{\Big( s_r \sum_q{( C_{rq} + C_{qr} )} \Big)} - 2 \sum_{r, q}{s_r C_{rq} s_q}
+\end{align*}
+$$
+
+$$x_r = \sum_q{( C_{rq} + C_{qr} )}, \quad w_{rq} = -4 C_{rq}$$
+
+Consider a graph with a connection matrix given by $C = \begin{bmatrix}
+  0 & 1 & 0 & 0 \\
+  1 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 1 \\
+  0 & 0 & 1 & 0 \\
+\end{bmatrix}$. Suppose we choose $w_{rq} = -4 C_{rq}, x_r = 2$. The highest probability peaks are $\{0000\}, \{0011\}, \{1100\}, \{1111\}$.
+
+All zeros, and all ones, is also a solution. Therefore, an additional constraint has to be enforced that the **solution should contain equal number of zeros and ones** by adding the following term to the energy:
+
+$$
+\begin{align*}
+  \Big( \sum_r{s_r - \frac{n}{2}} \Big)^2
+  & = \frac{n^2}{4} - n \sum_r{s_r} + \sum_r{s_r} \sum_q{s_q} \\
+  & = \frac{n^2}{4} - n \sum_r{s_r} + \sum_{r, q}{s_r s_q} \\
+  & = \frac{n^2}{4} - n \sum_r{s_r} + \sum_{r}{s_r^2} + \sum_{r \neq q}{s_r s_q} \\
+  & = \frac{n^2}{4} - n \sum_r{s_r} + \sum_{r}{s_r} + \sum_{r \neq q}{s_r s_q} \quad \text{since } 0^2 = 0, 1^2 = 1 \\
+  & = \frac{n^2}{4} - (n - 1) \sum_{r}{s_r} + \sum_{r \neq q}{s_r s_q}
+\end{align*}
+$$
+
+Note the constant $\frac{n^2}{4}$ makes no difference.
+
+- Min-cut: $x_r = -K(n-1) + \sum_q{( C_{rq} + C_{qr} )}, \, w_{rq, \, r \neq q} = 2K - 4 C_{rq}$.
+- Max-cut: $x_r = -K(n-1) - \sum_q{( C_{rq} + C_{qr} )}, \, w_{rq, \, r \neq q} = 2K + 4 C_{rq}$.
+
+Depending on the value of $K$, the unwanted peaks will be partially or completely suppressed.
+
 #### 2.4. Inference
+
+The energy of a system of classical spins in bipolar notation ($m$ is a bipolar variable with values $-1$ and $+1$) is given by
+
+$$\tilde{E} = \bm{m}^T \bm{h} + \frac{1}{2} \bm{m}^T J \bm{m}$$
+
+In binary notation ($s$ is a bipolar variable with values $0$ and $1$),
+
+$$\tilde{E} = \bm{s}^T \bm{x} + \frac{1}{2} \bm{s}^T \bm{w} \bm{s}$$
+
+Suppose $\bm{h} = \begin{bmatrix}
+  0 \\ 0
+\end{bmatrix}, J = \begin{bmatrix}
+  0 & +1 \\
+  +1 & 0
+\end{bmatrix}$. The following choice of $\bm{x}, \bm{w}$ should give the same values of energy for all configurations: $\bm{x} = \begin{bmatrix}
+  -2 \\ -2
+\end{bmatrix}, \bm{w} = \begin{bmatrix}
+  0 & +4 \\
+  +4 & 0
+\end{bmatrix}$.
 
 #### 2.5. Learning
 
