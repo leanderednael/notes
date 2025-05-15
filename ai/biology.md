@@ -22,10 +22,10 @@
       - [BLOSUM (BLOCKS SUbstitution Matrix)](#blosum-blocks-substitution-matrix)
     - [Basic Local Alignment Search Tool (BLAST)](#basic-local-alignment-search-tool-blast)
   - [Introduction to Bayesian statistics](#introduction-to-bayesian-statistics)
-    - [The Cox-Jaynes axioms](#the-cox-jaynes-axioms)
-    - [Maximum likelihood, maximum a posteriori, and Bayesian inference](#maximum-likelihood-maximum-a-posteriori-and-bayesian-inference)
+    - [The Cox-Jaynes axioms: product rule, sum rule, Bayes rule](#the-cox-jaynes-axioms-product-rule-sum-rule-bayes-rule)
+    - [Probabilistic models and inference: Maximum likelihood, maximum a posteriori, and Bayesian inference](#probabilistic-models-and-inference-maximum-likelihood-maximum-a-posteriori-and-bayesian-inference)
     - [Multinomial and Dirichlet distributions](#multinomial-and-dirichlet-distributions)
-    - [Estimation of frequency matrices](#estimation-of-frequency-matrices)
+    - [Estimation of frequency matrices: pseudocounts and Dirichlet mixtures](#estimation-of-frequency-matrices-pseudocounts-and-dirichlet-mixtures)
       - [Pseudocounts](#pseudocounts)
       - [Dirichlet mixtures](#dirichlet-mixtures)
   - [Hidden Markov Models (HMMs)](#hidden-markov-models-hmms)
@@ -73,9 +73,9 @@
 ## Introduction to molecular biology
 
 **Central Dogma of Molecular Biology**: DNA makes RNA makes proteins.
-(Different mechanisms for prokaryotes and eukaryotes.)
+(Different mechanisms for prokaryotes and eukaryotes!)
 
-- Genes carry the information for the production of proteins.
+- _Genes carry the information for the production of proteins_.
 - Transcription (from DNA to mRNA) by RNA polymerase.
 - Translation (from mRNA to protein) by ribosomes.
 
@@ -86,20 +86,22 @@ Phylogeny of protein families: Genes or proteins can be related on the basis of 
 ### DNA
 
 The DNA helix consists of Adenine, Thymine, Cytosine, Guanine.
-They take the shape of complementary / double strands, `(A-T, G-C)`, that turn "clockwise", 10 nucleotides per revolution.
+They take the shape of complementary / double strands, with reverse complements `(A-T, G-C)`, that turn "clockwise", 10 nucleotides per revolution.
 
 ### RNA
 
-Probably the ancestor of DNA. Serves as information messenger from DNA to protein.
-Single strand (A-U bond weaker than A-T): Adenine - Uracil (vs. Thymine), Guanine - Cytosine.
+Probably the ancestor of DNA. Serves as _information messenger from DNA to protein_.
+Single strand (`A-U` bond weaker than `A-T`): Adenine - Uracil (vs. Thymine), Guanine - Cytosine.
 
 #### Functional RNA
 
 Importance of RNA as a molecule in its own right increasingly recognised (noncoding RNA).
 
+Also important in regulation (RNA silencing).
+
 ### [Proteins](https://www.edx.org/learn/biology/rice-university-proteins-biology-s-workforce)
 
-Proteins are _large polymers of 20 aminoacids_.
+_Large polymers of 20 aminoacids_.
 
 #### Basics
 
@@ -198,20 +200,28 @@ Proteins are _large polymers of 20 aminoacids_.
 
 ## Sequence alignment
 
-### Similarity vs. Homology
+The tree of life.
 
-Sequences are **similar** if they are sufficiently resembling at the sequence level (DNA, proteins). Similarity can arise from: homology (common ancestor), convergence (functional constraints), chance.
+Model organisms.
 
-**Molecular evolution**: natural selection, imperfect replication (point mutations), gene duplications (create gene families). The degree of similarity depends on how many mutations occurred since the "fork".
+**Molecular evolution** of genomes: natural selection, imperfect replication (point mutations), gene duplications (which create gene families). The degree of similarity depends on how many mutations occurred since the "fork".
 
 **Phylogeny** is the reconstruction of molecular evolution. Thus relationships between genes and proteins can be inferred on the basis of their sequences.
+
+### Similarity vs. Homology
+
+Sequences are **similar** if they are sufficiently resembling at the sequence level (DNA, proteins). Similarity can arise from: **homology** (_common ancestor_), convergence (functional constraints), or chance.
+
+- Strong similarity and homology.
+- Low similarity despite a common ancestor = structural homology.
+- Chance similarity.
 
 Sequences are **homologous** if they arise from a common ancestor. Homologous sequences are **paralogous** if their differences involve a gene duplication event, and **orthologous** if their differences do _not_ involve a gene duplication event.
 
 Homologous proteins have comparable structures and potentially similar functions:
 
-- ortholog: similar cellular role.
-- paralog: similar biochemical function.
+- orthologue: similar cellular role.
+- paralogue: similar biochemical function.
 
 Homology in **comparative genomics**: Conserved regions arise from evolutionary pressure and are therefore functionally important. Genes can be predicted by comparing genomes at an appropriate evolutionary distance (e.g. mouse and human; human and chimp is too close and would not work).
 
@@ -223,13 +233,17 @@ Fill in scores by looking up pairwise scores in the subsitution matrix (e.g. BLO
 
 `--P-AW-HEAE`
 
+Global alignment vs. local alignment: quality of alignment vs. looking for regions of similarity.
+
 ### Dynamic programming
 
 **"What-if" matrix (deletions, insertions, substitutions)**: Every path is an alignment. Find the minimum penalty / maximum score _path_ through the penalty table. (It is possible to have more than one best alignment, i.e. with the same maximal score.)
 
-TODO: Bellman optimality principle w.r.t. DP? Example: finding the shortest train route between two cities.
+**Bellman's optimality principle**: _Every subpath of an optimal path is itself optimal_. Example: finding the shortest train route between two cities.
 
-**No-shortcut principle**: If you know that a path is the shortest path from the start to the end node, then it is also the shortest path between any two nodes on the path.
+**No-shortcut principle**: If you know that a path is the shortest path from the start to the end node, then it is also the shortest path between any two nodes on the path. (If there were a shorter path for a subproblem of any two nodes on the path, then there would be a shorter path from the start to the end node.)
+
+Floyd's algorithm uses dynamic programming by considering each node as an intermediate point and updating the shortest path between every pair of nodes if a shorter path is found through this intermediate node. The update rule is: `Distance[i, j] = min(Distance[i, j], Distance[i, k] + Distance[k, j])`. For each node `k` (used as an intermediate node), and for every pair of nodes `i, j`, the algorithm checks if the shortest path from `i` to `j` can be improved by passing through `k`.
 
 ### Global alignment: Needleman-Wunsch algorithm
 
@@ -268,13 +282,13 @@ Traceback pointers then go from the highest score to zero (not all the way back 
 
 ### Significance Evaluation
 
-The use of such algorithms is to compare a query with a database of (randomised, i.e. shuffled) sequences, and finding the best matches, i.e. that have the maximal score.
+The use of such algorithms is to **compare a query with a database** of sequences, and finding the best matches, i.e. that have the maximal score.
 
 For an ungapped alignment, the _score_ of a match is the sum of the i.i.d. random contributions and follows a normal distribution (by the CLT). For a normal distribution, the distribution of the _maximum_ $M_N$ of a series of $N$ random samples follows the **extreme value distribution (EVD)**:
 
 $$P(M_N \geq x) = e^{ -KNe^{- \lfloor x \rfloor} }$$
 
-The parameters are derived from $P_i$ and $s(i, j)$.
+Every amino acid has a certain probability of being picked. The parameters are derived from $P_i$ and $s(i, j)$.
 
 For gapped alignments the EVD has the following form (even though the random contributions are not normally distributed; where $S$ = the score, $m$ = size of the database, $n$ = length of the query):
 
@@ -308,84 +322,123 @@ Problems: Garbage data in, garbage out:
 PAM1 matrix: 1% Point Accepted Mutations (PAM1); that is, only sequences that are 99% identical.
 
 PAM250 is 250% Point Accepted Mutations (~20%
-similarity) = 250ste power of PAM1
+similarity) = 250 time the power of PAM1 (taking powers of 2).
+
+PAM works well at small evolutionary distances.
 
 #### BLOSUM (BLOCKS SUbstitution Matrix)
 
-PAM does not work so well at large evolutionary
-distances.
+PAM does not work so well at large evolutionary distances. BLOSUM only considers a subselection of alignments for the substitution matrix.
 
-- Ungapped alignments of protein families from the
-  BLOCKS database.
+- Ungapped alignments of protein families from the BLOCKS database.
 - Group sequences with more than $L\%$ identical amino acids (e.g., BLOSUM62).
 - Use the substitution frequency of amino acids between the different groups (with correction for the group size) to derive the substitution matrix.
 
+You can have a great model - but the data is crucial!
+
 ### Basic Local Alignment Search Tool (BLAST)
 
-For large databases, Smith-Waterman local alignment is too slow. Basic Local Alignment Search Tool (BLAST) is a fast heuristic algorithm for local alignment.
+The vast majority of DB targets will not be homologues for a given query.
 
-- BLASTN – nucleotide query on nucleotide database
-- BLASTX – translated nucleotide query on protein database (translation into the six reading frames)
-- TBLASTN – protein query on translated nucleotide db
-- TBLASTX – translated nucleotide query on translated nucleotide db
-- BLASTP – protein query on protein database
+For large databases, Smith-Waterman local alignment is too slow. Basic Local Alignment Search Tool (BLAST) is a (family of) **fast heuristic algorithm(s) for local alignment**. Idea: find out quickly if a target is promising or not.
+
+- BLASTP – protein query on protein database:
   1. Find all words of length $w$ (e.g. $w = 3$) for which there is a match in the query sequence with score at least $T$ (e.g. $T = 11$) for the chosen substitution matrix (e.g. BLOSUM62 with gap penalty $10 + g$).
   2. Use a finite state automaton to find all matches (_hits_) with the word list in the database.
-  3. Check which hits have another hit without overlap within a distance of $A$ (e.g. $A = 40$; two-hits); the distance must be identical on the query and on the target.
-  4. Extend the left hit of the two-hits in both directions by ungapped alignment; stop the extension when the score drops by $X_g$ (e.g. $X_g = 40$) under the best score so far (high scoring segment pair HSP).
-  5. Extend the HSPs with normalized score above $S_g$ ($S_g = 22$ bits) by gapped alignment; stop the extension when the score drops by $X_g$ (e.g., $X_g = 40$) under the best score so far; select the best gapped local alignment.
-  6. Compute the significance of the alignments ; for the significant alignments, repeat the gapped alignment with a higher dropoff parameter $X_g$ for more accuracy.
+  3. Check which hits have another hit without overlap within a distance of $A$ (e.g. $A = 40$; two-hits).
+     - The distance must be identical on the query and on the target.
+  4. Extend the left hit of the two-hits in both directions by ungapped alignment.
+     - Stop the extension when the score drops by $X_g$ (e.g. $X_g = 40$) under the best score so far (high scoring segment pair HSP).
+  5. Extend the HSPs with normalized score above $S_g$ ($S_g = 22$ bits) by gapped alignment.
+     - Stop the extension when the score drops by $X_g$ (e.g., $X_g = 40$) under the best score so far.
+     - Select the best gapped local alignment, and now use dynamic programming (after having identified).
+  6. Compute the significance of the alignments.
+     - For the significant alignments, repeat the gapped alignment with a higher dropoff parameter $X_g$ for more accuracy.
+- BLASTN – nucleotide query on nucleotide database
+- BLASTX – translated nucleotide query on protein database (translation into the six _reading frames_)
+- TBLASTN – protein query on translated nucleotide database
+- TBLASTX – translated nucleotide query on translated nucleotide database
 
 ## Introduction to Bayesian statistics
 
-### The Cox-Jaynes axioms
+### The Cox-Jaynes axioms: product rule, sum rule, Bayes rule
 
-The **frequentist** view of probability (the limit of relative frequencies in repeated trials) is somewhat circular because of the dependence on the CLT (which itself is proven using probability theory that already assumes the frequentist interpretation is valid).
+Two main views of probability: repeated events, uncertainty about outcomes as you collect information.
 
-The **Bayesian** approach views probabilities as models of the uncertainty regarding propositions within a given domain:
+- **Frequentist** view of probability: the limit of relative frequencies in repeated trials - the Riemann integral.
+  - This is somewhat circular because of the dependence on the CLT (which itself is proven using probability theory that already assumes the frequentist interpretation is valid).
+- Measure theory point of view: probabilities satisfy Kolmogorov's $\sigma$-algebra axioms, a rigorous definition which fits well within measure and integration theory (Riemann integral).
+  - This does not always hold - e.g. for fractal functions (that look like the coast of England) such as Brownian motion (with Lebesgue integral).
+- **Bayesian** view: probabilities are models of the uncertainty regarding propositions within a given domain:
+  - Deduction (the scientific method): $\text{if} \, ( A \Rarr B \cap A = \text{true} ) \, \text{then} \, B = \text{true}$.
+  - Induction / abduction: $\text{if} \, \big( ( B = \text{true} ) \cap ( A \Rarr B ) \big) \, \text{then} \, A \, \text{becomes more plausible}$.
+  - Probabilities satisfy Bayes' rule - which allows updating conditional probabilities given the conditional information.
 
-- Deduction: $\text{if} \, ( A \Rarr B \cap A = \text{true} ) \, \text{then} \, B = \text{true}$.
-- Induction / abduction: $\text{if} \, ( A \Rarr B \cap B = \text{true} ) \, \text{then} \, A \, \text{becomes more plausible}$.
-- Probabilities satisfy Bayes' rule.
+The Cox-Jaynes axioms allow the buildup of a probabilistic framework, consistent with _both_ Bayesian and frequentist views, with the following minimal assumptions:
 
-A **proposition** $A$ may be true or false. A **domain** $\mathcal{D}$ contains the available information about a situation. Then define $\angle(A = \text{true} \mid \mathcal{D})$ as a **belief** regarding proposition $A$ given the domain knowledge $\mathcal{D}$.
+0. Beliefs regarding propositions in a domain:
+   - A **proposition** $A$ may be true or false.
+   - A **domain** $\mathcal{D}$ contains the available information about a situation.
+   - Then define a **belief** regarding proposition $A$ given the domain knowledge $\mathcal{D}$ as $\pi(A = \text{true} \mid \mathcal{D})$.
+1. Beliefs can be compared, numerically by an ordering relation:
+   - Suppose we can compare beliefs, and suppose the comparison is transitive (i.e. $\big( \pi(A \mid \mathcal{D}) > \pi(B \mid \mathcal{D}) \big) \land \big( \pi(B \mid \mathcal{D}) > \pi(C \mid \mathcal{D}) \big) \Rarr \big( \pi(A \mid \mathcal{D}) > \pi(C \mid \mathcal{D}) \big)$).
+   - Then there exists an **ordering relation**.
+   - Since there exists an ordering relation, a belief $\pi$ can be represented as a number.
+2. If you know how strongly you believe that $A$ is true given the information, you should be able to tell how strongly you believe that $A$ is not true from that number:
+   - Suppose there exists a fixed relation between the belief in a proposition and the belief in its negation, $\pi(\bar{A} \mid \mathcal{D}) = f\big( \pi(A \mid \mathcal{D}) \big)$.
+   - Then $\pi(A \mid \mathcal{D}) = \pi(B \mid \mathcal{D}) \Rarr \pi(\bar{A} \mid \mathcal{D}) = \pi(\bar{B} \mid \mathcal{D})$.
+3. If $A$ is true, i.e. $\pi(A \mid \mathcal{D})$, and $A \Rightarrow B$, i.e. $\pi(B \mid A, \mathcal{D})$, then it follows logically that $A, B$ are both true, i.e. $\pi(A, B \mid \mathcal{D})$:
+   - Suppose there exists a fixed relation between the belief in the union of two propositions and the belief in the first proposition and the belief in the second proposition given the first one, $\pi(A, B \mid \mathcal{D}) = g\big( \pi(A \mid \mathcal{D}), \pi(B \mid A, \mathcal{D}) \big)$.
+   - Then, rescaling the beliefs yields the sum and product rules:
+     $$P(A \mid \mathcal{D}) + P(\bar{A} \mid \mathcal{D}) = 1$$
+     $$P(A, B \mid \mathcal{D}) = P(B \mid A, \mathcal{D}) P(A \mid \mathcal{D})$$
 
-The Cox-Jaynes axioms allow the buildup of a probabilistic framework, consistent with both Bayesian and frequentist views, with the following minimal assumptions:
+Thus, under the Cox-Jaynes axioms, Bayes' rule can always be applied - independently of the specific definition of the probabilities - to talk about the _probability of the cause given the consequence_.
 
-1. Suppose we can compare beliefs, and suppose the comparison is transitive (i.e. $\big( \angle(A \mid \mathcal{D}) > \angle(B \mid \mathcal{D}) \big) \land \big( \angle(B \mid \mathcal{D}) > \angle(C \mid \mathcal{D}) \big) \Rarr \big( \angle(A \mid \mathcal{D}) > \angle(C \mid \mathcal{D}) \big)$). Then there exists an ordering relation, and so $\angle$ is a number.
-2. Suppose there exists a fixed relation between the belief in a proposition and the belief in its negation, $\angle(\bar{A} \mid \mathcal{D}) = f\big( \angle(A \mid \mathcal{D}) \big)$. Then $\angle(A \mid \mathcal{D}) = \angle(B \mid \mathcal{D}) \Rarr \angle(\bar{A} \mid \mathcal{D}) = \angle(\bar{B} \mid \mathcal{D})$.
-3. Suppose there exists a fixed relation between the belief in the union of two propositions and the belief in the first proposition and the belief in the second proposition given the first one, $\angle(A, B \mid \mathcal{D}) = g\big( \angle(A \mid \mathcal{D}), \angle(B \mid A, \mathcal{D}) \big)$. Then, after rescaling the beliefs,
-
-   $$P(A \mid \mathcal{D}) + P(\bar{A} \mid \mathcal{D}) = 1$$
-
-   $$P(A, B \mid \mathcal{D}) = P(B \mid A, \mathcal{D}) P(A \mid \mathcal{D})$$
-
-Thus, under the Cox-Jaynes axioms, Bayes' rule can always be applied - independently of the specific definition of the probabilities.
+$$P(A \mid B, \mathcal{D}) P(B \mid \mathcal{D}) = P(B, A \mid \mathcal{D}) = P(A, B \mid \mathcal{D}) = P(B \mid A, \mathcal{D}) P(A \mid \mathcal{D})$$
 
 - Bayes' rule holds for any distribution: $P(Y \mid X, \mathcal{D}) = \frac{P(X \mid Y, \mathcal{D}) P(Y \mid \mathcal{D})}{P(X \mid \mathcal{D})}$.
-- Bayes' rule holds for specific realisations: $P(Y = y \mid X = x, \mathcal{D}) = \frac{P(X = x \mid Y = y, \mathcal{D}) P(Y = y \mid \mathcal{D})}{P(X = x \mid \mathcal{D})}$.
+- Bayes' rule holds for specific realisations: $p(Y = y \mid X = x, \mathcal{D}) = \frac{p(X = x \mid Y = y, \mathcal{D}) p(Y = y \mid \mathcal{D})}{p(X = x \mid \mathcal{D})}$ (in the continuous case, with probability densities lower-case $p$s).
 
-It is important to set up the problem within the right domain $\mathcal{D}$!
+It is important to set up the problem within the right domain $\mathcal{D}$, i.e. $P(X \mid \mathcal{D})$!
 
-### Maximum likelihood, maximum a posteriori, and Bayesian inference
+### Probabilistic models and inference: Maximum likelihood, maximum a posteriori, and Bayesian inference
 
-Consider a domain $\mathcal{D}$, observational data $D$, and a model $M$ with parameters $\bm{\theta}$.
+Consider
 
-Bayes' rule: posterior is proportional to likelihood of the data times prior, $P(\theta \mid D, M) = \frac{P(D \mid \theta, M) P(\theta \mid M)}{P(D \mid M)}$.
+- a domain $\mathcal{D}$ (e.g. the genome of an organism),
+- observational data $D$ (e.g. a DNA sequence `S = 'ACCTGATCACCCT'`), and
+- a model $M$ with parameters $\bm{\theta}$, i.e. $P(D \mid M, \theta)$, e.g. a discrete distribution of individual nucleotides - that is, parameters $\theta = (\theta_A, \theta_C, \theta_G, \theta_T)$ s.t. $\theta_A + \theta_C + \theta_G + \theta_T = 1$.
 
-Generative models (of the likelihood of the data): $P(D \mid M, \theta) = \prod_{i=1}^L{\theta_{D_i}}$. We want to find the model that describes our observations:
+Generative models - likelihood of the data / observations having been generated by the model:
 
-$$\theta^\text{MLE} = \argmax_\theta{P(D \mid \theta, M)}$$
+$$P(D \mid M, \theta) = \prod_{i=1}^L{\theta_{D_i}}$$
+
+$$\theta^\text{MLE} = \argmax_\theta{P(D \mid \theta, M)} = \argmax_\theta{\mathcal{L}(\theta)}$$
+
+- parameter $\theta \in \Theta$ that maximises the likelihood
+- MLE is consistent: if the observations were generated by the model $M$ with parameters $\theta^*$, then $\theta^\text{ML}$ _converges to_ $\theta^*$ when the number of observations goes to infinity. Note that the data might not be generated by any instance of the model. Or if the dataset is small, there might be a large difference between $\theta^\text{MLE}$ and $\theta^*$.
 
 $$\theta^\text{MAP} = \argmax_\theta{P(\theta \mid D, M)} \propto \argmax_\theta{P(D \mid \theta, M) P(\theta \mid M)}$$
 
-$$\theta^\text{PME} = \int{\theta P(\theta \mid D, M) \, d\theta}$$
+- parameter $\theta \in \Theta$ that is most probable (incl. given prior)
+- Bayes' rule: posterior is proportional to likelihood of the data times prior, $P(\theta \mid D, M) = \frac{P(D \mid \theta, M) P(\theta \mid M)}{P(D \mid M)}$.
+- MAP: introduce a priori knowledge (if $P(\theta \mid M)$$ is constant, then same as MLE).
+
+$$\theta_i^\text{PME} = \int{\theta P(\theta \mid M, D) \, d\theta}$$
+
+- no point estimate but entire posterior distribution of how good each $\theta \in \Theta$ is
+- PME: mean estimate of posterior distribution
+- note: $D$ is fixed and integrating over $\theta$, so integral not equal to one - this is not a probability distribution!
+- need entire posterior distribution (unlike MAP), therefore need a way to express the evidence => Bayesian inference!
 
 Updating the probability of the parameters with new observations $D$:
 
 $$P(\theta \mid D, M) = \frac{P(D \mid \theta, M) P(\theta \mid M)}{P(D \mid M)} = \frac{P(D \mid \theta, M) P(\theta \mid M)}{\int_\omega{ P(D \mid \omega, M) P(\omega \mid M) \, d\omega }}$$
 
-1. Choose a reasonable prior $P(\theta \mid M)$.
+1. Choose a reasonable prior $P(\theta \mid M)$ (i.e. with correct assumptions, to guide the model to a good posterior).
+   - Consider a model of the average height of a population, e.g. of a country. The probability of someone being two meters tall is very low. But then consider the "population" of NBA players - the prior would not match and guide the model to a bad solution!
+   - Extreme case: if the prior is zero, the posterior is zero!
 2. Add the information from the data $\frac{P(D \mid \theta, M)}{\int_\omega{ P(D \mid \omega, M) P(\omega \mid M) \, d\omega }}$.
 3. Get the updated distributions of the parameters $P(\theta \mid D, M)$ (often log-based).
 
@@ -395,29 +448,40 @@ $$\sum_{y=1}^Y{P(Y = y)} = 1, \qquad \sum_{y=1}^Y{P(X, Y = y)} = P(X)$$
 
 $$\int_{y \in Y}^K{P(Y = y)} = 1, \qquad \int_{y \in Y}^K{P(X, Y = y)} = P(X)$$
 
-**Inference**: if $K$ is not too large, can compute all the likelihoods and prior probabilities
+**Inference**: if $K$ is not too large, for a discrete distribution, can sum the **likelihoods by their prior probabilities**, to compute the evidence:
 
 $$P(\theta = i \mid D, M) = \frac{P(D \mid \theta = i, M) P(\theta = i \mid M)}{\sum_{j=1}^K{P(D \mid \theta = j, M) P(\theta = j \mid M)}}$$
 
 ### Multinomial and Dirichlet distributions
 
-Consider $K$ independent outcomes with probabilities $P(X = i) = \theta_i, \, i = 1, \dots, K$ (for $K = 2$, Bernoulli variable with binomial distribution).
+Note:
+
+- Multinomial distribution: with replacement, i.e. each trial is independent and the probabilities of each outcome remain constant throughout the sampling process.
+- Multivariate hypergeometric distribution: without replacement, i.e. the probabilities change after each draw because items are not returned to the population.
+
+Consider $K$ independent outcomes with probabilities $P(X = i) = \theta_i, \, i = 1, \dots, K$ (for $K = 2$, Bernoulli variable with **binomial distribution**).
 
 The multinomial distribution is used to model biological sequences. It gives the number of times different outcomes are observed:
 
 $$\mathcal{M}(n; \theta) = P(N_1 = n_1, N_2 = n_2, \dots, N_K = n_K) = \frac{1}{M((n_1, n_2, \dots, n_K))} \prod_{i=1}^K{\theta_i^{n_i}}$$
 
+with normalisation factor
+
 $$M((n_1, n_2, \dots, n_K)) = \frac{\prod_{k=1}^K{n_k!}}{\Big( \sum_{k=1}^K{n_k} \Big)!}$$
 
-The Dirichlet distribution gives the probability of the $P(X = i)$ s for $a_i > 0, \, i = 1, \dots, K$:
+Then the MLE is $\arg\max_{\theta \in \Theta}{\frac{1}{M((n_1, n_2, \dots, n_K))} \prod_{i=1}^K{\theta_i^{n_i}}}$ s.t. $\theta_i^\text{MLE} = \frac{n_i}{N}$. Constrained optimisation problem with Lagrangean multiplier for $\sum_i{\theta_i} - 1 = 0$.
 
-$$\mathcal{D}(\theta; a) = \frac{1}{Z(a)} \prod_{i=1}^K{\theta_i^{(a_i - 1)}}, \qquad Z(a) = \int_{\theta \in \Theta}{\prod_{i=1}^K{\theta_i^{(a - 1)}} \, d\theta} = \frac{\prod_{i=1}^K{\Gamma(a_i)}}{\Gamma\Big( \sum_{k=1}^K{a_i} \Big)} \text{ s.t. } \int_\theta{P(\theta \mid a) \, d\theta} = 1$$
+The Dirichlet distribution gives the probability of the prior $P(X = i)$ for $\alpha_i > 0, \, i = 1, \dots, K$:
+
+$$\mathcal{D}(\theta; \alpha) = \frac{1}{Z(\alpha)} \prod_{i=1}^K{\theta_i^{(\alpha_i - 1)}}$$
+
+$$Z(\alpha) = \int_{\theta \in \Theta}{\prod_{i=1}^K{\theta_i^{(\alpha - 1)}} \, d\theta} = \frac{\prod_{i=1}^K{\Gamma(\alpha_i)}}{\Gamma\Big( \sum_{k=1}^K{\alpha_i} \Big)} \text{ s.t. } \int_\theta{P(\theta \mid \alpha) \, d\theta} = 1$$
 
 The Gamma function is the generalisation of the factorial function to real numbers: $\Gamma(n) = (n-1)!, \, \Gamma(x + 1) = x \Gamma(x)$.
 
 The Dirichlet distribution is the natural prior for sequence analysis because it is conjugate to the multinomial distribution; that is, given a Dirichlet prior and multinomial observations, the posterior also follows a Dirichlet distribution.
 
-### Estimation of frequency matrices
+### Estimation of frequency matrices: pseudocounts and Dirichlet mixtures
 
 Estimation on the basis of counts (e.g., Position-Specific Scoring Matrix in PSI-BLAST): count the number of instances in each column, if $N \gg$: $\theta_A = \frac{n_A}{N}, \, \theta_C = \frac{n_C}{N}, \, \theta_T = \frac{n_T}{N}, \, \theta_G = \frac{n_G}{N}$.
 
@@ -448,11 +512,11 @@ $$
 \end{align*}
 $$
 
-- The prior contributes to the estimation through pseudo- observations
+- The prior contributes to the estimation through pseudo- observations -> faster convergence with a better prior!
 - If few observations are available, then the prior plays an important role
 - If many observations are available, then the pseudocounts play a negligible role
 
-With uniform prior, ML = MAP.
+With uniform prior that has the least possible information, ML = MAP.
 
 $$\theta_i = \frac{n_i + a - 1}{N + A - K}$$
 
@@ -479,11 +543,11 @@ $$
 \begin{align*}
   P(x) & = P(x_L \mid x_{L-1}, \dots, x_1) P(x_{L-1} \mid x_{L-2}, \dots, x_1) \dots P(x_1) \\
   & = P(x_L \mid x_{L-1}) P(x_{L-1} \mid x_{L-2}) \dots P(x_1) \\
-  & = P(x_1) \prod_{i=2}^L{a_{x_{i-1} x_i}}
+  & = P(x_1) \prod_{i=2}^L{P(x_i \mid x_{i-1})} = P(x_1) \prod_{i=2}^L{a_{x_{i-1} x_i}}
 \end{align*}
 $$
 
-The length distribution is not modelled, i.e. $P(\text{length} = L)$ is undefined. Solution: Define sequence: $a, x_1, \dots, x_L, \omega$. Then $a_{as} = P(x_1 = s), a_{t\omega} = P(\omega \mid x_L = t)$. _The probability to observe a sequence of a given length decreases with the length of the sequence_.
+The length distribution is not modelled, i.e. $P(\text{length} = L)$ is undefined. Solution: Define sequence: $\alpha, x_1, \dots, x_L, \omega$. Then $a_{\alpha s} = P(x_1 = s), a_{t \omega} = P(\omega \mid x_L = t)$. _The probability to observe a sequence of a given length decreases with the length of the sequence_.
 
 A casino uses mostly a fair die but switches sometimes to a loaded die. We observe the outcome $x$ of the successive throws but want to know when the die was fair or loaded.
 
@@ -634,7 +698,7 @@ If the sequences are not aligned, it is possible to train a profile HMM to align
   - Statistical measure of codon bias
   - Template matches to functional sites (e.g., splice site)
   - Similarity to features not likely to overlap coding sequence (e.g., Alu repeats)
-- The structure must respect the biological grammar (promoter, exon, intron, ...)
+- The structure must respect the biological grammar (promoter, exon, intron, ...) - there is a bias for certain triplets
 
 Search by signal vs. search by content:
 
@@ -659,9 +723,9 @@ Problems for prokaryotes:
 - Operons
 - Overlapping genes
 
-Amino-acids and the genetic code: 64 codons, start & stop codon, 6 reading frames.
+Amino-acids and the genetic code: 64 codons, start & stop codon, 6 **reading frames**.
 
-- Sequence can be translated into the six possible reading frames to check for start and stop codons.
+- Sequence can be _translated into the six possible reading frames to check for start and stop codons_.
 - **Codon bias**: In coding sequences, genomes have specific biases for the use of codons encoding the same amino acid.
 - **Coding potential**:
   - Most coding potentials are based on analysis of codon usage
@@ -669,6 +733,19 @@ Amino-acids and the genetic code: 64 codons, start & stop codon, 6 reading frame
   - The increase and decreae of the coding potential will “push” the HMM in and out of the exons
 - **Promoter region** contains the elements that control the expression of the gene. Its prediction is difficult.
 - **Intron-exon splicing**
+
+Forward and Backward (Reverse) Reading Frames
+
+- On a single strand of DNA, there are three possible reading frames, depending on whether translation starts at the first, second, or third nucleotide.
+- DNA is double-stranded and antiparallel. The complementary (reverse) strand can also be read in three frames, but in the opposite direction (5’→3’ on the reverse complement, which corresponds to 3’→5’ on the original strand).
+  This results in a total of six possible reading frames for any double-stranded DNA sequence:
+- Three forward reading frames (on the original strand, 5’→3’)
+- Three reverse reading frames (on the reverse complement strand, also read 5’→3’ but in the opposite direction relative to the original strand)
+  Why Both Directions Matter
+  Bioinformaticians analyze both forward and reverse reading frames because:
+- Genes can be encoded on either DNA strand, so both must be examined to identify all possible protein-coding regions.
+- Some genes or functional elements (including non-coding RNAs) are found on the reverse strand.
+- Overlapping and nested reading frames can occur, especially in viral genomes or compact genomes, where different proteins are encoded in different frames of the same DNA segment
 
 #### Gene prediction by homology
 
@@ -911,6 +988,12 @@ Motif Sampler (extended Gibbs sampling):
 - Gapped motifs
 
 ## Analysis of one and two-dimensional linear systems
+
+A dynamical system is a mathematical model in which a function describes how the state of a system evolves over time within a given space. At any moment, the system has a state (often represented as a point in a state or phase space), and the evolution rule (usually a set of equations) determines how the state changes as time progresses. The evolution can be deterministic (future states are uniquely determined by the current state) or stochastic (randomness influences the evolution).
+Formally, a dynamical system is often defined as a tuple $(T, X, \Phi)$, where:
+• $T$ is the set representing time (e.g., real numbers for continuous time, integers for discrete time),
+• $X$ is the state space,
+• $\Phi$ is the evolution function that describes how the state changes with time
 
 ### Autonomous systems
 
